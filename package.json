@@ -1,0 +1,36 @@
+{
+  "name": "@lzwme/auto-build-deploy",
+  "description": "根据配置拉取指定仓库代码，自动构建并部署到 gh-pages 分支",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": "https://github.com/renxia/auto-build-deploy.git",
+  "author": {
+    "name": "renxia",
+    "email": "lzwy0820@qq.com",
+    "url": "https://lzw.me"
+  },
+  "keywords": [
+    "node"
+  ],
+  "scripts": {
+    "start": "node scripts/start.cjs",
+    "build": "npm run start",
+    "version": "standard-version",
+    "release": "run-s test build doc:html",
+    "release-version": "run-s release version",
+    "clean": "flh rm -f ./docs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "commander": "13.1.0",
+    "@lzwme/fe-utils": "^1.8.2",
+    "console-log-colors": "^0.5.0",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@lzwme/fed-lint-helper": "^2.6.6",
+    "standard-version": "^9.5.0"
+  }
+}
