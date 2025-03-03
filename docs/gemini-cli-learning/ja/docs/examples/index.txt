@@ -1,0 +1,420 @@
+1:"$Sreact.fragment"
+2:I[3043,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+3:I[9800,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+4:I[5244,[],""]
+5:I[3866,[],""]
+6:I[5330,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+9:I[6213,[],"OutletBoundary"]
+b:I[6213,[],"MetadataBoundary"]
+d:I[6213,[],"ViewportBoundary"]
+f:I[4835,[],""]
+:HL["/docs/gemini-cli-learning/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","style"]
+0:{"P":null,"b":"build","p":"/docs/gemini-cli-learning","c":["","ja","docs","examples",""],"i":false,"f":[[["",{"children":[["locale","ja","d"],{"children":["docs",{"children":["examples",{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","script",null,{"async":true,"src":"https://www.googletagmanager.com/gtag/js?id=G-NEQETT0ENG"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n                window.dataLayer = window.dataLayer || [];\n                function gtag(){dataLayer.push(arguments);}\n                gtag('js', new Date());\n                gtag('config', 'G-NEQETT0ENG');\n              "}}]]}],["$","body",null,{"className":"__variable_5c0482 __variable_1dcb7b antialiased","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Gemini CLI Learning Platform\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"url\":\"https://www.geminicli.cloud\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://www.geminicli.cloud/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://www.geminicli.cloud/next.svg\"}}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":\"https://www.geminicli.cloud/next.svg\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"sameAs\":[\"https://github.com/google-gemini/gemini-cli\",\"https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Gemini CLI\",\"description\":\"An open-source AI agent that brings the power of Gemini directly into your terminal for AI-powered workflows and code generation.\",\"url\":\"https://github.com/google-gemini/gemini-cli\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":[\"Windows\",\"macOS\",\"Linux\"],\"programmingLanguage\":\"Python\",\"author\":{\"@type\":\"Organization\",\"name\":\"Google\",\"url\":\"https://google.com\"},\"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\"},\"downloadUrl\":\"https://github.com/google-gemini/gemini-cli\",\"softwareVersion\":\"Latest\",\"releaseNotes\":\"https://github.com/google-gemini/gemini-cli/releases\"}"}}],["$","$L2",null,{"children":["$","div",null,{"className":"min-h-screen flex flex-col","children":[["$","$L3",null,{}],["$","main",null,{"className":"flex-1 pt-20","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","$L6",null,{}]]}]}]]}]]}]]}],{"children":[["locale","ja","d"],["$","$1","c",{"children":[null,"$L7"]}],{"children":["docs",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","$0:f:0:1:2:children:0","children","docs","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["examples",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","$0:f:0:1:2:children:0","children","docs","children","examples","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":["$L8",null,["$","$L9",null,{"children":"$La"}]]}],{},null,false]},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","YlJlBiucbaeB9aJwjOpgW",{"children":[["$","$Lb",null,{"children":"$Lc"}],["$","$Ld",null,{"children":"$Le"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]]}],false]],"m":"$undefined","G":["$f","$undefined"],"s":false,"S":true}
+15:I[8173,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","9681","static/chunks/app/%5Blocale%5D/docs/examples/page-b485d75f18e7b415.js"],""]
+7:["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","$0:f:0:1:2:children:0","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]
+10:T715,name: AIコードレビュー
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Node.jsセットアップ
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Gemini CLIインストール
+        run: npm install -g @google/generative-ai-cli
+
+      - name: Gemini CLI設定
+        run: |
+          gemini config set api-key \$\{\{ secrets.GEMINI_API_KEY \}\}
+          gemini config set model gemini-pro
+
+      - name: 変更されたファイルを取得
+        id: changed-files
+        run: |
+          echo "files=\$(git diff --name-only HEAD~1 | tr '\n' ' ')" >> $GITHUB_OUTPUT
+
+      - name: AIコードレビュー
+        run: |
+          for file in \$\{\{ steps.changed-files.outputs.files \}\}; do
+            if [[ $file == *.js || $file == *.ts || $file == *.py ]]; then
+              gemini analyze "$file" \
+                --type code-review \
+                --output "review-$file.md"
+            fi
+          done
+
+      - name: PRにコメント
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const reviews = fs.readdirSync('.').filter(f => f.startsWith('review-'));
+
+            let comment = '## 🤖 AIコードレビュー\n\n';
+            reviews.forEach(file => {
+              const content = fs.readFileSync(file, 'utf8');
+              comment += `### ${file}\n${content}\n\n`;
+            });
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });11:T9f9,// extension.js - Gemini CLI用VS Code拡張機能
+const vscode = require('vscode');
+const { exec } = require('child_process');
+
+function activate(context) {
+  // コマンド：コードを説明
+  let explainCommand = vscode.commands.registerCommand(
+    'gemini.explainCode',
+    async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) return;
+
+      const selection = editor.selection;
+      const text = editor.document.getText(selection);
+
+      if (!text) {
+        vscode.window.showErrorMessage('説明するコードを選択してください');
+        return;
+      }
+
+      // 進行状況を表示
+      vscode.window.withProgress({
+        location: vscode.ProgressLocation.Notification,
+        title: "Geminiでコードを説明中...",
+        cancellable: false
+      }, async () => {
+        return new Promise((resolve, reject) => {
+          exec(`echo "${text}" | gemini ask "このコードを説明してください"`,
+            (error, stdout, stderr) => {
+              if (error) {
+                vscode.window.showErrorMessage(`エラー: ${error.message}`);
+                reject(error);
+                return;
+              }
+
+              // 新しいドキュメントで説明を表示
+              vscode.workspace.openTextDocument({
+                content: stdout,
+                language: 'markdown'
+              }).then(doc => {
+                vscode.window.showTextDocument(doc);
+                resolve();
+              });
+            });
+        });
+      });
+    }
+  );
+
+  // コマンド：テストを生成
+  let testCommand = vscode.commands.registerCommand(
+    'gemini.generateTests',
+    async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) return;
+
+      const filePath = editor.document.fileName;
+      const testPath = filePath.replace(/\.(js|ts)$/, '.test.$1');
+
+      exec(`gemini analyze "${filePath}" --prompt "ユニットテストを生成" --output "${testPath}"`,
+        (error, stdout, stderr) => {
+          if (error) {
+            vscode.window.showErrorMessage(`エラー: ${error.message}`);
+            return;
+          }
+
+          vscode.window.showInformationMessage(`テストが生成されました: ${testPath}`);
+          vscode.workspace.openTextDocument(testPath).then(doc => {
+            vscode.window.showTextDocument(doc);
+          });
+        });
+    }
+  );
+
+  context.subscriptions.push(explainCommand, testCommand);
+}
+
+function deactivate() {}
+
+module.exports = { activate, deactivate };12:T953,// custom-tools.js - カスタムツール定義
+const tools = {
+  // データベースクエリツール
+  database_query: {
+    name: 'database_query',
+    description: 'データベースでSQLクエリを実行',
+    parameters: {
+      query: { type: 'string', required: true },
+      database: { type: 'string', default: 'main' }
+    },
+    execute: async ({ query, database }) => {
+      const db = require('./db-connection');
+      try {
+        const result = await db.query(query, database);
+        return JSON.stringify(result, null, 2);
+      } catch (error) {
+        return `エラー: ${error.message}`;
+      }
+    }
+  },
+
+  // APIテストツール
+  api_test: {
+    name: 'api_test',
+    description: 'APIエンドポイントをテスト',
+    parameters: {
+      url: { type: 'string', required: true },
+      method: { type: 'string', default: 'GET' },
+      headers: { type: 'object', default: {} },
+      body: { type: 'object', default: null }
+    },
+    execute: async ({ url, method, headers, body }) => {
+      const fetch = require('node-fetch');
+      try {
+        const response = await fetch(url, {
+          method,
+          headers,
+          body: body ? JSON.stringify(body) : undefined
+        });
+
+        const data = await response.text();
+        return `ステータス: ${response.status}\nレスポンス: ${data}`;
+      } catch (error) {
+        return `エラー: ${error.message}`;
+      }
+    }
+  },
+
+  // コードフォーマッターツール
+  format_code: {
+    name: 'format_code',
+    description: 'prettierを使用してコードをフォーマット',
+    parameters: {
+      code: { type: 'string', required: true },
+      language: { type: 'string', default: 'javascript' }
+    },
+    execute: async ({ code, language }) => {
+      const prettier = require('prettier');
+      try {
+        const formatted = prettier.format(code, {
+          parser: language === 'typescript' ? 'typescript' : 'babel',
+          semi: true,
+          singleQuote: true,
+          tabWidth: 2
+        });
+        return formatted;
+      } catch (error) {
+        return `エラー: ${error.message}`;
+      }
+    }
+  }
+};
+
+// Gemini CLIにツールを登録
+Object.values(tools).forEach(tool => {
+  process.env.GEMINI_TOOLS = JSON.stringify([
+    ...(JSON.parse(process.env.GEMINI_TOOLS || '[]')),
+    tool
+  ]);
+});
+
+module.exports = tools;13:T6cc,#!/bin/bash
+# batch-process.sh - Gemini CLIを使用したバッチ処理
+
+BATCH_SIZE=5
+CONCURRENT_JOBS=3
+
+# 単一ファイルを処理する関数
+process_file() {
+  local file=$1
+  local task=$2
+
+  echo "🔄 処理中: $file"
+
+  case $task in
+    "translate")
+      gemini ask "このコードコメントを英語に翻訳" \
+        --file "$file" \
+        --output "${file%.js}.en.js"
+      ;;
+    "optimize")
+      gemini analyze "$file" \
+        --prompt "このコードのパフォーマンスを最適化" \
+        --output "${file%.js}.optimized.js"
+      ;;
+    "document")
+      gemini analyze "$file" \
+        --prompt "包括的なJSDocコメントを追加" \
+        --output "${file%.js}.documented.js"
+      ;;
+  esac
+
+  echo "✅ 完了: $file"
+}
+
+# メインバッチ処理関数
+batch_process() {
+  local task=$1
+  shift
+  local files=("$@")
+
+  echo "🚀 バッチ処理開始: $task"
+  echo "📁 処理するファイル数: ${#files[@]}"
+
+  # ファイルをバッチで処理
+  for ((i=0; i<${#files[@]}; i+=BATCH_SIZE)); do
+    batch=("${files[@]:i:BATCH_SIZE}")
+
+    echo "📦 バッチ $((i/BATCH_SIZE + 1)) を処理中"
+
+    # 制限された並行性でバッチを処理
+    for file in "${batch[@]}"; do
+      (($(jobs -r | wc -l) >= CONCURRENT_JOBS)) && wait
+      process_file "$file" "$task" &
+    done
+
+    wait # 現在のバッチの完了を待機
+  done
+
+  echo "🎉 バッチ処理完了！"
+}
+
+# 使用例
+case $1 in
+  "translate")
+    batch_process "translate" src/**/*.js
+    ;;
+  "optimize")
+    batch_process "optimize" src/**/*.js
+    ;;
+  "document")
+    batch_process "document" src/**/*.js
+    ;;
+  *)
+    echo "使用法: $0 {translate|optimize|document}"
+    exit 1
+    ;;
+esac14:Tae7,// plugin-system.js - プラグインシステムの例
+const { GeminiCLI } = require('@google/generative-ai-cli');
+
+class PluginManager {
+  constructor() {
+    this.cli = new GeminiCLI();
+    this.plugins = new Map();
+  }
+
+  // プラグインを登録
+  registerPlugin(plugin) {
+    if (!plugin.name || !plugin.version) {
+      throw new Error('プラグインには名前とバージョンが必要です');
+    }
+
+    this.plugins.set(plugin.name, plugin);
+
+    // プラグインコマンドを登録
+    if (plugin.commands) {
+      Object.entries(plugin.commands).forEach(([cmd, handler]) => {
+        this.cli.registerCommand(`${plugin.name}:${cmd}`, handler);
+      });
+    }
+
+    // プラグインツールを登録
+    if (plugin.tools) {
+      plugin.tools.forEach(tool => {
+        this.cli.registerTool(tool);
+      });
+    }
+
+    console.log(`✅ プラグイン ${plugin.name} v${plugin.version} が登録されました`);
+  }
+
+  // プラグイン情報を取得
+  getPlugin(name) {
+    return this.plugins.get(name);
+  }
+
+  // すべてのプラグインをリスト
+  listPlugins() {
+    return Array.from(this.plugins.values());
+  }
+}
+
+// サンプルプラグイン：コード品質チェッカー
+const codeQualityPlugin = {
+  name: 'code-quality',
+  version: '1.0.0',
+  description: 'コード品質チェックプラグイン',
+
+  commands: {
+    'check': async (args) => {
+      const files = args.files || ['src/'];
+      console.log(`🔍 コード品質をチェック中: ${files.join(', ')}`);
+
+      // コード品質チェックロジックを実装
+      return 'コード品質チェック完了';
+    },
+
+    'metrics': async (args) => {
+      console.log('📊 コードメトリクスを生成中...');
+
+      // コードメトリクス生成ロジックを実装
+      return {
+        complexity: 'low',
+        maintainability: 'high',
+        coverage: '85%'
+      };
+    }
+  },
+
+  tools: [
+    {
+      name: 'complexity_analyzer',
+      description: 'コードの複雑さを分析',
+      parameters: {
+        file: { type: 'string', required: true }
+      },
+      execute: async ({ file }) => {
+        // 複雑さ分析を実装
+        return `ファイル ${file} の複雑さ: 中程度`;
+      }
+    }
+  ]
+};
+
+// 使用例
+async function main() {
+  const manager = new PluginManager();
+
+  // プラグインを登録
+  manager.registerPlugin(codeQualityPlugin);
+
+  // プラグインコマンドを使用
+  const result = await manager.cli.executeCommand('code-quality:check', {
+    files: ['src/main.js', 'src/utils.js']
+  });
+
+  console.log('チェック結果:', result);
+
+  // すべてのプラグインをリスト
+  console.log('インストール済みプラグイン:', manager.listPlugins());
+}
+
+main().catch(console.error);8:["$","div",null,{"className":"bg-white","children":[["$","div",null,{"className":"bg-gradient-to-r from-blue-600 to-purple-600 py-16 sm:py-20","children":["$","div",null,{"className":"mx-auto max-w-7xl px-6 lg:px-8","children":["$","div",null,{"className":"mx-auto max-w-3xl text-center","children":[["$","h1",null,{"className":"text-4xl font-bold tracking-tight text-white sm:text-5xl","children":"コード例"}],["$","p",null,{"className":"mt-6 text-xl leading-8 text-blue-100","children":"Gemini CLIを最大限に活用するための実用的なコード例とテンプレート。基本的な使用法から高度な自動化と統合パターンまで。"}]]}]}]}],["$","div",null,{"className":"py-16 sm:py-20","children":["$","div",null,{"className":"mx-auto max-w-7xl px-6 lg:px-8","children":[["$","div",null,{"className":"mx-auto max-w-2xl text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl","children":"例のカテゴリ"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"関連する例を探索するためのカテゴリを選択してください"}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6","children":[["$","a","basic-usage",{"href":"#basic-usage","className":"bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors group","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"}]]}]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors","children":"基本的な使用法"}],["$","p",null,{"className":"mt-2 text-sm text-gray-600","children":"Gemini CLIを始めるための簡単な例"}]]}],["$","a","automation",{"href":"#automation","className":"bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors group","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"}]]}]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors","children":"自動化スクリプト"}],["$","p",null,{"className":"mt-2 text-sm text-gray-600","children":"開発タスクを自動化するスクリプト"}]]}],["$","a","integration",{"href":"#integration","className":"bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors group","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors","children":"統合例"}],["$","p",null,{"className":"mt-2 text-sm text-gray-600","children":"Gemini CLIを他のツールやワークフローと統合"}]]}],["$","a","advanced",{"href":"#advanced","className":"bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors group","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-red-600 text-white mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"}]]}]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors","children":"高度な使用法"}],["$","p",null,{"className":"mt-2 text-sm text-gray-600","children":"複雑なシナリオと高度な機能"}]]}]]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16 sm:py-20","children":["$","div",null,{"className":"mx-auto max-w-7xl px-6 lg:px-8","children":["$","div",null,{"className":"space-y-16","children":[["$","div","basic-usage",{"id":"basic-usage","className":"bg-white rounded-2xl p-8 shadow-sm","children":[["$","div",null,{"className":"flex items-center mb-8","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 text-white","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"}]]}]}],["$","div",null,{"className":"ml-4","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"基本的な使用法"}],["$","p",null,{"className":"text-gray-600","children":"Gemini CLIを始めるための簡単な例"}]]}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"シンプルチャット"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"Geminiとの基本的な会話を開始"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"# インタラクティブチャットを開始\ngemini chat\n\n# 質問をする\ngemini ask \"機械学習とは何ですか？\"\n\n# 特定のモデルで質問\ngemini ask \"量子コンピューティングを説明して\" --model gemini-pro"}]}]]}]]}],["$","div","1",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"ファイル分析"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"AIアシスタンスでコードファイルを分析"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"# 単一ファイルを分析\ngemini analyze src/main.js\n\n# 複数ファイルを分析\ngemini analyze src/*.js --type code-review\n\n# コード提案を取得\ngemini analyze package.json --suggest-improvements"}]}]]}]]}],["$","div","2",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"設定管理"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"基本的な設定管理"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"# 現在の設定を表示\ngemini config list\n\n# デフォルトモデルを設定\ngemini config set model gemini-pro\n\n# 温度を設定\ngemini config set temperature 0.7\n\n# デフォルトにリセット\ngemini config reset"}]}]]}]]}]]}]]}],["$","div","automation",{"id":"automation","className":"bg-white rounded-2xl p-8 shadow-sm","children":[["$","div",null,{"className":"flex items-center mb-8","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"}]]}]}],["$","div",null,{"className":"ml-4","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"自動化スクリプト"}],["$","p",null,{"className":"text-gray-600","children":"開発タスクを自動化するスクリプト"}]]}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"コードレビュースクリプト"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"プルリクエストの自動化されたコードレビュー"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"#!/bin/bash\n# code-review.sh - 自動化されたコードレビュースクリプト\n\n# 変更されたファイルを取得\nCHANGED_FILES=\\$(git diff --name-only HEAD~1)\n\necho \"🔍 自動化されたコードレビューを開始しています...\"\n\nfor file in $CHANGED_FILES; do\n  if [[ $file == *.js || $file == *.ts || $file == *.py ]]; then\n    echo \"📝 レビュー中: $file\"\n\n    # ファイルを分析\n    gemini analyze \"$file\" \\\n      --type code-review \\\n      --prompt \"このコードのエラー、パフォーマンスの問題、ベストプラクティスをレビューしてください\" \\\n      --output review-$file.md\n  fi\ndone\n\necho \"✅ コードレビュー完了！review-*.mdファイルを確認してください\""}]}]]}]]}],["$","div","1",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"ドキュメントジェネレーター"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"コードからドキュメントを生成"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"#!/bin/bash\n# generate-docs.sh - 自動ドキュメント生成\n\necho \"📚 ドキュメントを生成中...\"\n\n# APIドキュメントを生成\ngemini analyze src/api/*.js \\\n  --prompt \"例を含む包括的なAPIドキュメントを生成\" \\\n  --output docs/api.md\n\n# READMEを生成\ngemini ask \"このプロジェクトのコードベースに基づいてREADME.mdを作成\" \\\n  --context src/ \\\n  --output README.md\n\n# 変更履歴を生成\ngit log --oneline --since=\"1 month ago\" | \\\n  gemini ask \"これらのgitコミットを変更履歴に変換\" \\\n  --output CHANGELOG.md\n\necho \"✅ ドキュメント生成完了！\""}]}]]}]]}],["$","div","2",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"テストジェネレーター"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"自動的にユニットテストを生成"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"#!/bin/bash\n# generate-tests.sh - 自動ユニットテスト生成\n\nSOURCE_DIR=\"src\"\nTEST_DIR=\"tests\"\n\necho \"🧪 ユニットテストを生成中...\"\n\nfind $SOURCE_DIR -name \"*.js\" -o -name \"*.ts\" | while read file; do\n  # 相対パスを取得\n  rel_path=\\$\\{file#\\$SOURCE_DIR/\\}\n  test_file=\"\\$TEST_DIR/\\$\\{rel_path%.*\\}.test.\\$\\{file##*.\\}\"\n\n  echo \"📝 テストを生成中: $file\"\n\n  gemini analyze \"$file\" \\\n    --prompt \"境界ケースを含む包括的なユニットテストを生成\" \\\n    --template jest \\\n    --output \"$test_file\"\ndone\n\necho \"✅ テスト生成完了！\""}]}]]}]]}]]}]]}],["$","div","integration",{"id":"integration","className":"bg-white rounded-2xl p-8 shadow-sm","children":[["$","div",null,{"className":"flex items-center mb-8","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}]}],["$","div",null,{"className":"ml-4","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"統合例"}],["$","p",null,{"className":"text-gray-600","children":"Gemini CLIを他のツールやワークフローと統合"}]]}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"GitHub Actionsワークフロー"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"GitHub ActionsとのCI/CD統合"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"yaml"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"$10"}]}]]}]]}],["$","div","1",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"VS Code拡張機能"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"カスタムVS Code拡張機能統合"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"javascript"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"$11"}]}]]}]]}],["$","div","2",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"Docker統合"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"コンテナでGemini CLIを使用"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"dockerfile"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"# Dockerfile - Gemini CLIコンテナ\nFROM node:18-alpine\n\n# Gemini CLIをインストール\nRUN npm install -g @google/generative-ai-cli\n\n# 作業ディレクトリを設定\nWORKDIR /app\n\n# プロジェクトファイルをコピー\nCOPY . .\n\n# 環境変数を設定\nENV GEMINI_API_KEY=\"\"\n\n# 分析スクリプトを作成\nRUN echo '#!/bin/sh' > /usr/local/bin/analyze-project && \\\n    echo 'gemini analyze src/ --output analysis.md' >> /usr/local/bin/analyze-project && \\\n    chmod +x /usr/local/bin/analyze-project\n\n# デフォルトコマンド\nCMD [\"analyze-project\"]"}]}]]}]]}]]}]]}],["$","div","advanced",{"id":"advanced","className":"bg-white rounded-2xl p-8 shadow-sm","children":[["$","div",null,{"className":"flex items-center mb-8","children":[["$","div",null,{"className":"flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-orange-500 to-red-600 text-white","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"}]]}]}],["$","div",null,{"className":"ml-4","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"高度な使用法"}],["$","p",null,{"className":"text-gray-600","children":"複雑なシナリオと高度な機能"}]]}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"カスタムツール開発"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"特定のタスク用のカスタムツールを作成"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"javascript"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"$12"}]}]]}]]}],["$","div","1",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"バッチ処理"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"複数のファイルやタスクをバッチ処理"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"bash"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"$13"}]}]]}]]}],["$","div","2",{"className":"border-l-4 border-blue-500 pl-6","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-2","children":"プラグインシステム"}],["$","p",null,{"className":"text-gray-700 mb-4","children":"拡張可能なプラグインアーキテクチャを作成"}],["$","div",null,{"className":"relative","children":[["$","div",null,{"className":"flex items-center justify-between bg-gray-800 text-gray-300 px-4 py-2 rounded-t-lg","children":[["$","span",null,{"className":"text-sm font-medium","children":"javascript"}],["$","span",null,{"className":"text-xs bg-gray-700 px-2 py-1 rounded","children":"コード"}]]}],["$","pre",null,{"className":"bg-gray-900 text-gray-100 p-4 rounded-b-lg overflow-x-auto text-sm","children":["$","code",null,{"children":"$14"}]}]]}]]}]]}]]}]]}]}]}],["$","div",null,{"className":"bg-blue-50 py-16 sm:py-20","children":["$","div",null,{"className":"mx-auto max-w-7xl px-6 lg:px-8","children":["$","div",null,{"className":"mx-auto max-w-2xl text-center","children":[["$","h2",null,{"className":"text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl","children":"さらにヘルプが必要ですか？"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"より多くのリソースとドキュメントを探索する"}],["$","div",null,{"className":"mt-8 flex flex-col sm:flex-row items-center justify-center gap-4","children":[["$","$L15",null,{"href":"/ja/docs/api-reference","className":"rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors","children":"APIリファレンス"}],["$","$L15",null,{"href":"/ja/guides","className":"rounded-lg border border-blue-600 px-6 py-3 text-base font-semibold text-blue-600 hover:bg-blue-50 transition-colors","children":"ユーザーガイド"}],["$","$L15",null,{"href":"/ja/docs","className":"rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-colors","children":"ドキュメントに戻る"}]]}]]}]}]}]]}]
+e:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+c:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"コード例 - Gemini CLI ドキュメント"}],["$","meta","2",{"name":"description","content":"基本的な使用法、高度な機能、自動化スクリプト、統合パターンを含む実用的なコード例とテンプレート。"}],["$","link","3",{"rel":"author","href":"https://www.geminicli.cloud"}],["$","meta","4",{"name":"author","content":"Gemini CLI Learning Platform"}],["$","meta","5",{"name":"keywords","content":"Gemini CLI examples, code samples, templates, automation, integration, scripts"}],["$","meta","6",{"name":"creator","content":"Gemini CLI Learning Platform"}],["$","meta","7",{"name":"publisher","content":"Gemini CLI Learning Platform"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","10",{"name":"category","content":"Technology"}],["$","link","11",{"rel":"canonical","href":"https://www.geminicli.cloud/ja/"}],["$","link","12",{"rel":"alternate","hrefLang":"en","href":"https://www.geminicli.cloud/"}],["$","link","13",{"rel":"alternate","hrefLang":"zh","href":"https://www.geminicli.cloud/zh/"}],["$","link","14",{"rel":"alternate","hrefLang":"ru","href":"https://www.geminicli.cloud/ru/"}],["$","link","15",{"rel":"alternate","hrefLang":"hi","href":"https://www.geminicli.cloud/hi/"}],["$","link","16",{"rel":"alternate","hrefLang":"de","href":"https://www.geminicli.cloud/de/"}],["$","link","17",{"rel":"alternate","hrefLang":"fr","href":"https://www.geminicli.cloud/fr/"}],["$","link","18",{"rel":"alternate","hrefLang":"ja","href":"https://www.geminicli.cloud/ja/"}],["$","link","19",{"rel":"alternate","hrefLang":"ko","href":"https://www.geminicli.cloud/ko/"}],["$","link","20",{"rel":"alternate","hrefLang":"es","href":"https://www.geminicli.cloud/es/"}],["$","meta","21",{"name":"google-site-verification","content":"your-google-verification-code"}],["$","meta","22",{"property":"og:title","content":"コード例 - Gemini CLI ドキュメント"}],["$","meta","23",{"property":"og:description","content":"基本的な使用法、高度な機能、自動化スクリプト、統合パターンを含む実用的なコード例とテンプレート。"}],["$","meta","24",{"property":"og:type","content":"article"}],["$","meta","25",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","26",{"name":"twitter:title","content":"Gemini CLI 学習プラットフォーム - AI コマンドラインツールチュートリアル"}],["$","meta","27",{"name":"twitter:description","content":"包括的なチュートリアル、ガイド、ドキュメントで強力なAIコマンドラインインターフェースをマスターしましょう。"}],["$","link","28",{"rel":"icon","href":"/docs/gemini-cli-learning/favicon.ico","type":"image/x-icon","sizes":"16x16"}]]
+a:null
