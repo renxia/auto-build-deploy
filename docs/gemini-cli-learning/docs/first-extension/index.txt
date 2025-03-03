@@ -1,0 +1,196 @@
+1:"$Sreact.fragment"
+2:I[3043,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+3:I[9800,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+4:I[5244,[],""]
+5:I[3866,[],""]
+6:I[5330,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+a:I[8173,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","6177","static/chunks/app/docs/first-extension/page-f81c13580e265f70.js"],""]
+b:I[6213,[],"OutletBoundary"]
+d:I[6213,[],"MetadataBoundary"]
+f:I[6213,[],"ViewportBoundary"]
+11:I[4835,[],""]
+:HL["/docs/gemini-cli-learning/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","style"]
+7:T4f2,// src/index.ts - 扩展入口点
+import { ExtensionContext, commands } from '@gemini-cli/extension-api'
+import { HelloCommand } from './commands/hello'
+
+export function activate(context: ExtensionContext) {
+  console.log('我的第一个扩展已激活')
+  
+  // 注册 Hello 命令
+  const helloCommand = new HelloCommand()
+  const disposable = commands.registerCommand(
+    'my-first-extension.hello',
+    helloCommand.execute.bind(helloCommand)
+  )
+  
+  // 将命令添加到上下文中，以便在扩展停用时清理
+  context.subscriptions.push(disposable)
+  
+  // 注册其他功能
+  registerProviders(context)
+  setupEventListeners(context)
+}
+
+export function deactivate() {
+  console.log('我的第一个扩展已停用')
+  // 清理资源
+}
+
+function registerProviders(context: ExtensionContext) {
+  // 注册代码补全提供者
+  // const completionProvider = new MyCompletionProvider()
+  // context.subscriptions.push(
+  //   languages.registerCompletionItemProvider(
+  //     'typescript',
+  //     completionProvider
+  //   )
+  // )
+}
+
+function setupEventListeners(context: ExtensionContext) {
+  // 设置事件监听器
+  // workspace.onDidChangeTextDocument((event) => {
+  //   console.log('文档已更改:', event.document.fileName)
+  // })
+}8:T7e0,// src/commands/hello.ts - Hello 命令实现
+import { window, workspace } from '@gemini-cli/extension-api'
+
+export class HelloCommand {
+  async execute(...args: any[]): Promise<void> {
+    try {
+      // 获取当前工作区信息
+      const workspaceFolder = workspace.getWorkspaceFolder()
+      const projectName = workspaceFolder?.name || '未知项目'
+      
+      // 显示问候消息
+      const message = `Hello from Gemini CLI Extension! 当前项目: ${projectName}`
+      await window.showInformationMessage(message)
+      
+      // 获取用户输入
+      const userInput = await window.showInputBox({
+        prompt: '请输入你的名字',
+        placeholder: '输入名字...'
+      })
+      
+      if (userInput) {
+        await window.showInformationMessage(`你好, ${userInput}! 欢迎使用 Gemini CLI!`)
+        
+        // 记录到输出通道
+        this.logToOutput(`用户输入: ${userInput}`)
+      }
+      
+      // 执行一些文件操作
+      await this.demonstrateFileOperations()
+      
+    } catch (error) {
+      await window.showErrorMessage(`命令执行失败: ${error.message}`)
+    }
+  }
+  
+  private async demonstrateFileOperations(): Promise<void> {
+    try {
+      // 读取当前目录下的文件
+      const files = await workspace.findFiles('**/*.{ts,js,json}', '**/node_modules/**', 10)
+      
+      if (files.length > 0) {
+        const fileList = files.map(file => file.path).join('\n')
+        await window.showInformationMessage(
+          `找到 ${files.length} 个文件:\n${fileList}`,
+          { modal: false }
+        )
+      } else {
+        await window.showInformationMessage('当前目录下没有找到相关文件')
+      }
+      
+    } catch (error) {
+      console.error('文件操作失败:', error)
+    }
+  }
+  
+  private logToOutput(message: string): void {
+    const outputChannel = window.createOutputChannel('My First Extension')
+    outputChannel.appendLine(`[${new Date().toISOString()}] ${message}`)
+    outputChannel.show()
+  }
+}9:T88d,// test/commands/hello.test.ts - 测试示例
+import { HelloCommand } from '../../src/commands/hello'
+import { window, workspace } from '@gemini-cli/extension-api'
+
+// Mock Gemini CLI API
+jest.mock('@gemini-cli/extension-api', () => ({
+  window: {
+    showInformationMessage: jest.fn(),
+    showInputBox: jest.fn(),
+    showErrorMessage: jest.fn(),
+    createOutputChannel: jest.fn(() => ({
+      appendLine: jest.fn(),
+      show: jest.fn()
+    }))
+  },
+  workspace: {
+    getWorkspaceFolder: jest.fn(),
+    findFiles: jest.fn()
+  }
+}))
+
+describe('HelloCommand', () => {
+  let helloCommand: HelloCommand
+  
+  beforeEach(() => {
+    helloCommand = new HelloCommand()
+    jest.clearAllMocks()
+  })
+  
+  it('应该显示问候消息', async () => {
+    // 设置 mock
+    ;(workspace.getWorkspaceFolder as jest.Mock).mockReturnValue({
+      name: 'test-project'
+    })
+    ;(window.showInputBox as jest.Mock).mockResolvedValue('张三')
+    ;(workspace.findFiles as jest.Mock).mockResolvedValue([
+      { path: '/test/file1.ts' },
+      { path: '/test/file2.js' }
+    ])
+    
+    // 执行命令
+    await helloCommand.execute()
+    
+    // 验证结果
+    expect(window.showInformationMessage).toHaveBeenCalledWith(
+      'Hello from Gemini CLI Extension! 当前项目: test-project'
+    )
+    expect(window.showInformationMessage).toHaveBeenCalledWith(
+      '你好, 张三! 欢迎使用 Gemini CLI!'
+    )
+  })
+  
+  it('应该处理用户取消输入的情况', async () => {
+    ;(workspace.getWorkspaceFolder as jest.Mock).mockReturnValue({
+      name: 'test-project'
+    })
+    ;(window.showInputBox as jest.Mock).mockResolvedValue(undefined)
+    ;(workspace.findFiles as jest.Mock).mockResolvedValue([])
+    
+    await helloCommand.execute()
+    
+    expect(window.showInformationMessage).toHaveBeenCalledTimes(2) // 只有初始消息和文件消息
+  })
+  
+  it('应该处理错误情况', async () => {
+    ;(workspace.getWorkspaceFolder as jest.Mock).mockImplementation(() => {
+      throw new Error('测试错误')
+    })
+    
+    await helloCommand.execute()
+    
+    expect(window.showErrorMessage).toHaveBeenCalledWith(
+      '命令执行失败: 测试错误'
+    )
+  })
+})0:{"P":null,"b":"build","p":"/docs/gemini-cli-learning","c":["","docs","first-extension",""],"i":false,"f":[[["",{"children":["docs",{"children":["first-extension",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","script",null,{"async":true,"src":"https://www.googletagmanager.com/gtag/js?id=G-NEQETT0ENG"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n                window.dataLayer = window.dataLayer || [];\n                function gtag(){dataLayer.push(arguments);}\n                gtag('js', new Date());\n                gtag('config', 'G-NEQETT0ENG');\n              "}}]]}],["$","body",null,{"className":"__variable_5c0482 __variable_1dcb7b antialiased","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Gemini CLI Learning Platform\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"url\":\"https://www.geminicli.cloud\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://www.geminicli.cloud/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://www.geminicli.cloud/next.svg\"}}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":\"https://www.geminicli.cloud/next.svg\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"sameAs\":[\"https://github.com/google-gemini/gemini-cli\",\"https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Gemini CLI\",\"description\":\"An open-source AI agent that brings the power of Gemini directly into your terminal for AI-powered workflows and code generation.\",\"url\":\"https://github.com/google-gemini/gemini-cli\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":[\"Windows\",\"macOS\",\"Linux\"],\"programmingLanguage\":\"Python\",\"author\":{\"@type\":\"Organization\",\"name\":\"Google\",\"url\":\"https://google.com\"},\"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\"},\"downloadUrl\":\"https://github.com/google-gemini/gemini-cli\",\"softwareVersion\":\"Latest\",\"releaseNotes\":\"https://github.com/google-gemini/gemini-cli/releases\"}"}}],["$","$L2",null,{"children":["$","div",null,{"className":"min-h-screen flex flex-col","children":[["$","$L3",null,{}],["$","main",null,{"className":"flex-1 pt-20","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","$L6",null,{}]]}]}]]}]]}]]}],{"children":["docs",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","docs","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["first-extension",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","docs","children","first-extension","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"bg-white","children":[["$","div",null,{"className":"bg-gradient-to-r from-purple-500 to-pink-600 py-12","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":["$","div",null,{"className":"text-center","children":[["$","div",null,{"className":"flex justify-center mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-12 w-12 text-white","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"}]]}]}],["$","h1",null,{"className":"text-3xl font-bold tracking-tight text-white sm:text-4xl","children":"创建第一个扩展"}],["$","p",null,{"className":"mt-4 text-lg text-purple-100","children":"从零开始创建 Gemini CLI 扩展"}],["$","div",null,{"className":"mt-6 flex items-center justify-center space-x-4 text-sm text-purple-100","children":[["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 mr-1","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"实践教程"]}],["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 mr-1","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"30 分钟完成"]}]]}]]}]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"准备工作"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"开始之前，请确保你已经准备好以下环境"}]]}],["$","div",null,{"className":"bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-8 border border-purple-200","children":[["$","h3",null,{"className":"text-xl font-bold text-purple-900 mb-6","children":"环境要求"}],["$","ul",null,{"className":"space-y-3","children":[["$","li","0",{"className":"text-purple-800 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"Node.js 18+ 和 npm 8+"]}],["$","li","1",{"className":"text-purple-800 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"TypeScript 基础知识"]}],["$","li","2",{"className":"text-purple-800 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"Gemini CLI 已安装"]}],["$","li","3",{"className":"text-purple-800 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-5 w-5 text-purple-600 mr-3 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"代码编辑器（推荐 VS Code）"]}]]}]]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"项目结构"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"了解扩展项目的标准目录结构"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"my-first-extension/\n├── package.json              # 项目配置\n├── tsconfig.json            # TypeScript 配置\n├── src/\n│   ├── index.ts            # 扩展入口点\n│   ├── commands/           # 命令实现\n│   │   └── hello.ts\n│   ├── providers/          # 服务提供者\n│   │   └── completion.ts\n│   └── utils/              # 工具函数\n│       └── helpers.ts\n├── test/                   # 测试文件\n│   ├── commands/\n│   └── providers/\n├── docs/                   # 文档\n│   └── README.md\n└── dist/                   # 编译输出"}]}]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"项目设置"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"按照以下步骤创建和配置扩展项目"}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"relative","children":[["$","div",null,{"className":"absolute left-4 top-16 h-full w-0.5 bg-purple-200"}],["$","div",null,{"className":"flex items-start","children":[["$","div",null,{"className":"flex h-8 w-8 items-center justify-center rounded-full bg-purple-500 text-white text-sm font-semibold","children":1}],["$","div",null,{"className":"ml-6 flex-1","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-2","children":"创建项目"}],["$","p",null,{"className":"text-gray-600 mb-4","children":"使用 Gemini CLI 脚手架创建扩展项目"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"gemini-cli create extension my-first-extension"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"cd my-first-extension"}],["$","div","2",{"className":"text-green-400 text-sm font-mono","children":"npm install"}]]}]]}]]}]]}],["$","div","1",{"className":"relative","children":[["$","div",null,{"className":"absolute left-4 top-16 h-full w-0.5 bg-purple-200"}],["$","div",null,{"className":"flex items-start","children":[["$","div",null,{"className":"flex h-8 w-8 items-center justify-center rounded-full bg-purple-500 text-white text-sm font-semibold","children":2}],["$","div",null,{"className":"ml-6 flex-1","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-2","children":"配置项目"}],["$","p",null,{"className":"text-gray-600 mb-4","children":"设置 package.json 和 TypeScript 配置"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"npm init -y"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"npm install --save-dev typescript @types/node"}],["$","div","2",{"className":"text-green-400 text-sm font-mono","children":"npx tsc --init"}]]}]]}]]}]]}],["$","div","2",{"className":"relative","children":[false,["$","div",null,{"className":"flex items-start","children":[["$","div",null,{"className":"flex h-8 w-8 items-center justify-center rounded-full bg-purple-500 text-white text-sm font-semibold","children":3}],["$","div",null,{"className":"ml-6 flex-1","children":[["$","h3",null,{"className":"text-xl font-bold text-gray-900 mb-2","children":"安装依赖"}],["$","p",null,{"className":"text-gray-600 mb-4","children":"安装 Gemini CLI 扩展 API 和开发工具"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"npm install @gemini-cli/extension-api"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"npm install --save-dev @gemini-cli/extension-dev-tools"}],["$","div","2",{"className":"text-green-400 text-sm font-mono","children":"npm install --save-dev jest @types/jest"}]]}]]}]]}]]}]]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"配置文件"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"设置 package.json 文件"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"{\n  \"name\": \"my-first-extension\",\n  \"version\": \"1.0.0\",\n  \"description\": \"我的第一个 Gemini CLI 扩展\",\n  \"main\": \"dist/index.js\",\n  \"types\": \"dist/index.d.ts\",\n  \"scripts\": {\n    \"build\": \"tsc\",\n    \"watch\": \"tsc --watch\",\n    \"test\": \"jest\",\n    \"package\": \"gemini-cli package\",\n    \"publish\": \"gemini-cli publish\"\n  },\n  \"geminiExtension\": {\n    \"type\": \"command\",\n    \"activationEvents\": [\n      \"onCommand:my-first-extension.hello\"\n    ],\n    \"contributes\": {\n      \"commands\": [\n        {\n          \"command\": \"my-first-extension.hello\",\n          \"title\": \"Hello World\",\n          \"category\": \"示例\"\n        }\n      ]\n    },\n    \"permissions\": [\n      \"file:read\"\n    ]\n  },\n  \"dependencies\": {\n    \"@gemini-cli/extension-api\": \"^1.0.0\"\n  },\n  \"devDependencies\": {\n    \"@types/node\": \"^18.0.0\",\n    \"typescript\": \"^4.9.0\",\n    \"jest\": \"^29.0.0\",\n    \"@types/jest\": \"^29.0.0\"\n  }\n}"}]}]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"扩展入口"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"实现扩展的主入口文件"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$7"}]}]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"命令实现"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"创建你的第一个命令"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$8"}]}]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"测试代码"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"为扩展编写单元测试"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$9"}]}]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"构建和测试"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"编译、测试和打包你的扩展"}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-8","children":[["$","div","0",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-purple-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"构建"}]]}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"编译 TypeScript 代码"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"npm run build"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"# 或者使用监视模式"}],["$","div","2",{"className":"text-green-400 text-sm font-mono","children":"npm run watch"}]]}]]}],["$","div","1",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-purple-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"测试"}]]}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"运行单元测试"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"npm test"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"# 或者使用监视模式"}],["$","div","2",{"className":"text-green-400 text-sm font-mono","children":"npm test -- --watch"}]]}]]}],["$","div","2",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-purple-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"打包"}]]}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"打包扩展为可分发格式"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"npm run package"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"# 生成 .vsix 文件"}]]}]]}],["$","div","3",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-purple-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"安装测试"}]]}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"本地安装测试扩展"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3","children":[["$","div","0",{"className":"text-green-400 text-sm font-mono","children":"gemini-cli extension install ./my-first-extension-1.0.0.vsix"}],["$","div","1",{"className":"text-green-400 text-sm font-mono","children":"gemini-cli hello"}]]}]]}]]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"调试技巧"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"扩展开发中的调试和故障排除"}]]}],["$","div",null,{"className":"space-y-6","children":[["$","div","0",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-lg font-semibold text-gray-900 mb-2","children":"使用输出通道"}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"创建输出通道来记录调试信息"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"const outputChannel = window.createOutputChannel('My Extension')\noutputChannel.appendLine('调试信息: ' + JSON.stringify(data))\noutputChannel.show()"}]}]]}],["$","div","1",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-lg font-semibold text-gray-900 mb-2","children":"错误处理"}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"正确处理和显示错误信息"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"try {\n  await riskyOperation()\n} catch (error) {\n  await window.showErrorMessage(`操作失败: ${error.message}`)\n  console.error('详细错误:', error)\n}"}]}]]}],["$","div","2",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-lg font-semibold text-gray-900 mb-2","children":"配置验证"}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"验证扩展配置和用户输入"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"const config = workspace.getConfiguration('myExtension')\nconst apiKey = config.get<string>('apiKey')\n\nif (!apiKey) {\n  await window.showWarningMessage('请配置 API 密钥')\n  return\n}"}]}]]}],["$","div","3",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-lg font-semibold text-gray-900 mb-2","children":"性能监控"}],["$","p",null,{"className":"text-gray-600 text-sm mb-4","children":"监控扩展性能和资源使用"}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-3 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"const startTime = Date.now()\nawait longRunningOperation()\nconst duration = Date.now() - startTime\nconsole.log(`操作耗时: ${duration}ms`)"}]}]]}]]}]]}]}],["$","div",null,{"className":"bg-purple-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":["$","div",null,{"className":"text-center","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 mb-4","children":"下一步"}],["$","p",null,{"className":"text-lg text-gray-600 mb-8","children":"恭喜！你已经创建了第一个扩展。现在可以学习更多高级功能"}],["$","div",null,{"className":"flex flex-col sm:flex-row items-center justify-center gap-4","children":[["$","$La",null,{"href":"/docs/extension-publishing","className":"rounded-lg bg-purple-600 px-6 py-3 text-base font-semibold text-white hover:bg-purple-500 transition-colors","children":"扩展发布指南"}],["$","$La",null,{"href":"/docs/extension-architecture","className":"rounded-lg border border-purple-600 px-6 py-3 text-base font-semibold text-purple-600 hover:bg-purple-50 transition-colors","children":"扩展架构"}],["$","$La",null,{"href":"/docs","className":"rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-colors","children":"返回文档首页"}]]}]]}]}]}]]}],null,["$","$Lb",null,{"children":"$Lc"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","kRH17TTBRmapIR1kEFnUI",{"children":[["$","$Ld",null,{"children":"$Le"}],["$","$Lf",null,{"children":"$L10"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]]}],false]],"m":"$undefined","G":["$11","$undefined"],"s":false,"S":true}
+10:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+e:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"创建第一个扩展 | Gemini CLI 开发者文档"}],["$","meta","2",{"name":"description","content":"从零开始创建你的第一个 Gemini CLI 扩展，包括项目设置、代码实现、测试和发布的完整指南。"}],["$","link","3",{"rel":"author","href":"https://www.geminicli.cloud"}],["$","meta","4",{"name":"author","content":"Gemini CLI Learning Platform"}],["$","meta","5",{"name":"keywords","content":"创建扩展, Gemini CLI 扩展开发, 第一个扩展, 扩展教程, 插件开发"}],["$","meta","6",{"name":"creator","content":"Gemini CLI Learning Platform"}],["$","meta","7",{"name":"publisher","content":"Gemini CLI Learning Platform"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","10",{"name":"category","content":"Technology"}],["$","link","11",{"rel":"canonical","href":"https://www.geminicli.cloud/"}],["$","meta","12",{"name":"google-site-verification","content":"your-google-verification-code"}],["$","meta","13",{"property":"og:title","content":"创建第一个扩展 - Gemini CLI 开发者文档"}],["$","meta","14",{"property":"og:description","content":"从零开始创建 Gemini CLI 扩展"}],["$","meta","15",{"property":"og:type","content":"article"}],["$","meta","16",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","17",{"name":"twitter:creator","content":"@google"}],["$","meta","18",{"name":"twitter:title","content":"Gemini CLI Learning Platform"}],["$","meta","19",{"name":"twitter:description","content":"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation."}],["$","meta","20",{"name":"twitter:image","content":"https://www.geminicli.cloud/next.svg"}],["$","link","21",{"rel":"icon","href":"/docs/gemini-cli-learning/favicon.ico","type":"image/x-icon","sizes":"16x16"}]]
+c:null

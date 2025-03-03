@@ -1,0 +1,393 @@
+1:"$Sreact.fragment"
+2:I[3043,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+3:I[9800,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+4:I[5244,[],""]
+5:I[3866,[],""]
+6:I[5330,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","1925","static/chunks/1925-eb5bd2b4eb61491c.js","7177","static/chunks/app/layout-31d97e0cbbab1aa3.js"],"default"]
+b:I[8173,["8173","static/chunks/8173-cbbc8e7944fcb9f2.js","5973","static/chunks/app/docs/mcp-client/page-e01738608b6c8880.js"],""]
+c:I[6213,[],"OutletBoundary"]
+e:I[6213,[],"MetadataBoundary"]
+10:I[6213,[],"ViewportBoundary"]
+12:I[4835,[],""]
+:HL["/docs/gemini-cli-learning/_next/static/media/4cf2300e9c8272f7-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/media/93f479601ee12b01-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","style"]
+7:Tb57,// MCP 客户端基础实现
+import { MCPClient, ClientOptions } from '@gemini-cli/mcp-client'
+
+class GeminiMCPClient {
+  private client: MCPClient
+  private isConnected: boolean = false
+  
+  constructor(options: ClientOptions) {
+    this.client = new MCPClient({
+      transport: {
+        type: 'websocket',
+        url: options.serverUrl,
+        timeout: 30000
+      },
+      auth: {
+        type: 'apikey',
+        key: options.apiKey
+      },
+      retry: {
+        maxAttempts: 3,
+        backoffMs: 1000
+      }
+    })
+    
+    this.setupEventHandlers()
+  }
+  
+  private setupEventHandlers() {
+    this.client.on('connected', () => {
+      console.log('MCP client connected')
+      this.isConnected = true
+    })
+    
+    this.client.on('disconnected', () => {
+      console.log('MCP client disconnected')
+      this.isConnected = false
+    })
+    
+    this.client.on('error', (error) => {
+      console.error('MCP client error:', error)
+    })
+    
+    this.client.on('resource:changed', (uri) => {
+      console.log('Resource changed:', uri)
+      this.handleResourceChange(uri)
+    })
+  }
+  
+  async connect(): Promise<void> {
+    try {
+      await this.client.connect()
+      
+      // 初始化协议
+      const initResult = await this.client.initialize({
+        protocolVersion: '2024-11-05',
+        capabilities: {
+          roots: { listChanged: true },
+          sampling: {}
+        },
+        clientInfo: {
+          name: 'gemini-cli',
+          version: '1.0.0'
+        }
+      })
+      
+      console.log('MCP client initialized:', initResult)
+    } catch (error) {
+      console.error('Failed to connect to MCP server:', error)
+      throw error
+    }
+  }
+  
+  async disconnect(): Promise<void> {
+    if (this.isConnected) {
+      await this.client.disconnect()
+    }
+  }
+  
+  async getResources(): Promise<Resource[]> {
+    const result = await this.client.listResources()
+    return result.resources
+  }
+  
+  async readResource(uri: string): Promise<ResourceContent> {
+    const result = await this.client.readResource({ uri })
+    return result.contents[0]
+  }
+  
+  async getTools(): Promise<Tool[]> {
+    const result = await this.client.listTools()
+    return result.tools
+  }
+  
+  async callTool(name: string, args: any): Promise<ToolResult> {
+    const result = await this.client.callTool({
+      name,
+      arguments: args
+    })
+    return result
+  }
+  
+  private async handleResourceChange(uri: string) {
+    // 处理资源变更通知
+    try {
+      const updatedContent = await this.readResource(uri)
+      // 更新本地缓存或通知应用
+      this.notifyResourceUpdate(uri, updatedContent)
+    } catch (error) {
+      console.error('Failed to handle resource change:', error)
+    }
+  }
+  
+  private notifyResourceUpdate(uri: string, content: ResourceContent) {
+    // 通知应用层资源已更新
+    this.emit('resourceUpdated', { uri, content })
+  }
+}8:T6fe,// 资源管理和缓存
+class ResourceManager {
+  private cache: Map<string, CachedResource> = new Map()
+  private client: MCPClient
+  
+  constructor(client: MCPClient) {
+    this.client = client
+    this.setupResourceWatching()
+  }
+  
+  async getResource(uri: string, useCache: boolean = true): Promise<ResourceContent> {
+    // 检查缓存
+    if (useCache && this.cache.has(uri)) {
+      const cached = this.cache.get(uri)!
+      if (!this.isCacheExpired(cached)) {
+        return cached.content
+      }
+    }
+    
+    // 从服务器获取
+    try {
+      const result = await this.client.readResource({ uri })
+      const content = result.contents[0]
+      
+      // 更新缓存
+      this.cache.set(uri, {
+        content,
+        timestamp: Date.now(),
+        ttl: 300000 // 5 minutes
+      })
+      
+      return content
+    } catch (error) {
+      // 如果有缓存，返回过期的缓存
+      if (this.cache.has(uri)) {
+        console.warn('Using expired cache due to error:', error)
+        return this.cache.get(uri)!.content
+      }
+      throw error
+    }
+  }
+  
+  async refreshResource(uri: string): Promise<void> {
+    this.cache.delete(uri)
+    await this.getResource(uri, false)
+  }
+  
+  private setupResourceWatching() {
+    this.client.on('resource:changed', (uri: string) => {
+      // 清除缓存，强制下次获取最新数据
+      this.cache.delete(uri)
+      this.emit('resourceChanged', uri)
+    })
+  }
+  
+  private isCacheExpired(cached: CachedResource): boolean {
+    return Date.now() - cached.timestamp > cached.ttl
+  }
+  
+  clearCache(): void {
+    this.cache.clear()
+  }
+  
+  getCacheStats(): CacheStats {
+    return {
+      size: this.cache.size,
+      hitRate: this.calculateHitRate(),
+      memoryUsage: this.calculateMemoryUsage()
+    }
+  }
+}9:Ta9b,// 工具执行和管理
+class ToolManager {
+  private client: MCPClient
+  private toolCache: Map<string, Tool> = new Map()
+  
+  constructor(client: MCPClient) {
+    this.client = client
+  }
+  
+  async discoverTools(): Promise<Tool[]> {
+    try {
+      const result = await this.client.listTools()
+      
+      // 缓存工具定义
+      result.tools.forEach(tool => {
+        this.toolCache.set(tool.name, tool)
+      })
+      
+      return result.tools
+    } catch (error) {
+      console.error('Failed to discover tools:', error)
+      return []
+    }
+  }
+  
+  async executeTool(name: string, args: any): Promise<ToolResult> {
+    // 验证工具存在
+    const tool = this.toolCache.get(name)
+    if (!tool) {
+      throw new Error(`Tool '${name}' not found`)
+    }
+    
+    // 验证参数
+    const validationResult = this.validateArguments(tool, args)
+    if (!validationResult.valid) {
+      throw new Error(`Invalid arguments: ${validationResult.errors.join(', ')}`)
+    }
+    
+    try {
+      const result = await this.client.callTool({
+        name,
+        arguments: args
+      })
+      
+      return result
+    } catch (error) {
+      console.error(`Tool execution failed for '${name}':`, error)
+      throw error
+    }
+  }
+  
+  async executeToolWithRetry(
+    name: string, 
+    args: any, 
+    maxRetries: number = 3
+  ): Promise<ToolResult> {
+    let lastError: Error
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        return await this.executeTool(name, args)
+      } catch (error) {
+        lastError = error as Error
+        
+        if (attempt < maxRetries) {
+          const delay = Math.pow(2, attempt) * 1000
+          console.log(`Tool execution failed, retrying in ${delay}ms (attempt ${attempt})`)
+          await this.sleep(delay)
+        }
+      }
+    }
+    
+    throw lastError!
+  }
+  
+  private validateArguments(tool: Tool, args: any): ValidationResult {
+    // 实现参数验证逻辑
+    const schema = tool.inputSchema
+    const errors: string[] = []
+    
+    // 检查必需参数
+    if (schema.required) {
+      for (const required of schema.required) {
+        if (!(required in args)) {
+          errors.push(`Missing required parameter: ${required}`)
+        }
+      }
+    }
+    
+    // 检查参数类型
+    for (const [key, value] of Object.entries(args)) {
+      const propSchema = schema.properties?.[key]
+      if (propSchema && !this.validateType(value, propSchema)) {
+        errors.push(`Invalid type for parameter ${key}`)
+      }
+    }
+    
+    return {
+      valid: errors.length === 0,
+      errors
+    }
+  }
+  
+  private sleep(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+}a:T8e3,// 完整的集成示例
+import { GeminiMCPClient } from './mcp-client'
+
+class GeminiCLI {
+  private mcpClient: GeminiMCPClient
+  private resourceManager: ResourceManager
+  private toolManager: ToolManager
+  
+  constructor() {
+    this.mcpClient = new GeminiMCPClient({
+      serverUrl: process.env.MCP_SERVER_URL!,
+      apiKey: process.env.MCP_API_KEY!
+    })
+    
+    this.resourceManager = new ResourceManager(this.mcpClient)
+    this.toolManager = new ToolManager(this.mcpClient)
+  }
+  
+  async initialize(): Promise<void> {
+    try {
+      // 连接到 MCP 服务器
+      await this.mcpClient.connect()
+      
+      // 发现可用工具
+      await this.toolManager.discoverTools()
+      
+      console.log('Gemini CLI initialized with MCP support')
+    } catch (error) {
+      console.error('Failed to initialize MCP client:', error)
+      throw error
+    }
+  }
+  
+  async analyzeCode(filePath: string): Promise<string> {
+    try {
+      // 读取文件内容
+      const fileContent = await this.resourceManager.getResource(`file://${filePath}`)
+      
+      // 调用代码分析工具
+      const result = await this.toolManager.executeTool('analyze_code', {
+        file_path: filePath,
+        analysis_type: 'quality',
+        options: {
+          include_suggestions: true,
+          severity_level: 'medium'
+        }
+      })
+      
+      return this.formatAnalysisResult(result)
+    } catch (error) {
+      console.error('Code analysis failed:', error)
+      throw error
+    }
+  }
+  
+  async getProjectContext(): Promise<ProjectContext> {
+    try {
+      // 获取项目文件列表
+      const projectFiles = await this.resourceManager.getResource('file://.')
+      
+      // 获取 Git 信息
+      const gitInfo = await this.resourceManager.getResource('git://status')
+      
+      return {
+        files: JSON.parse(projectFiles.text),
+        git: JSON.parse(gitInfo.text)
+      }
+    } catch (error) {
+      console.error('Failed to get project context:', error)
+      throw error
+    }
+  }
+  
+  async shutdown(): Promise<void> {
+    await this.mcpClient.disconnect()
+  }
+  
+  private formatAnalysisResult(result: ToolResult): string {
+    // 格式化分析结果
+    return result.content
+      .map(content => content.text)
+      .join('\n')
+  }
+}0:{"P":null,"b":"build","p":"/docs/gemini-cli-learning","c":["","docs","mcp-client",""],"i":false,"f":[[["",{"children":["docs",{"children":["mcp-client",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],["",["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/docs/gemini-cli-learning/_next/static/css/bdc99e997e85b9a6.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]],["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":[["$","head",null,{"children":[["$","script",null,{"async":true,"src":"https://www.googletagmanager.com/gtag/js?id=G-NEQETT0ENG"}],["$","script",null,{"dangerouslySetInnerHTML":{"__html":"\n                window.dataLayer = window.dataLayer || [];\n                function gtag(){dataLayer.push(arguments);}\n                gtag('js', new Date());\n                gtag('config', 'G-NEQETT0ENG');\n              "}}]]}],["$","body",null,{"className":"__variable_5c0482 __variable_1dcb7b antialiased","children":[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"name\":\"Gemini CLI Learning Platform\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"url\":\"https://www.geminicli.cloud\",\"potentialAction\":{\"@type\":\"SearchAction\",\"target\":{\"@type\":\"EntryPoint\",\"urlTemplate\":\"https://www.geminicli.cloud/search?q={search_term_string}\"},\"query-input\":\"required name=search_term_string\"},\"publisher\":{\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"https://www.geminicli.cloud/next.svg\"}}}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Gemini CLI Learning Platform\",\"url\":\"https://www.geminicli.cloud\",\"logo\":\"https://www.geminicli.cloud/next.svg\",\"description\":\"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation.\",\"sameAs\":[\"https://github.com/google-gemini/gemini-cli\",\"https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/\"]}"}}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Gemini CLI\",\"description\":\"An open-source AI agent that brings the power of Gemini directly into your terminal for AI-powered workflows and code generation.\",\"url\":\"https://github.com/google-gemini/gemini-cli\",\"applicationCategory\":\"DeveloperApplication\",\"operatingSystem\":[\"Windows\",\"macOS\",\"Linux\"],\"programmingLanguage\":\"Python\",\"author\":{\"@type\":\"Organization\",\"name\":\"Google\",\"url\":\"https://google.com\"},\"offers\":{\"@type\":\"Offer\",\"price\":\"0\",\"priceCurrency\":\"USD\"},\"downloadUrl\":\"https://github.com/google-gemini/gemini-cli\",\"softwareVersion\":\"Latest\",\"releaseNotes\":\"https://github.com/google-gemini/gemini-cli/releases\"}"}}],["$","$L2",null,{"children":["$","div",null,{"className":"min-h-screen flex flex-col","children":[["$","$L3",null,{}],["$","main",null,{"className":"flex-1 pt-20","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[],[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","$L6",null,{}]]}]}]]}]]}]]}],{"children":["docs",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","docs","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["mcp-client",["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","docs","children","mcp-client","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["__PAGE__",["$","$1","c",{"children":[["$","div",null,{"className":"bg-white","children":[["$","div",null,{"className":"bg-gradient-to-r from-cyan-500 to-blue-600 py-12","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":["$","div",null,{"className":"text-center","children":[["$","div",null,{"className":"flex justify-center mb-4","children":["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-12 w-12 text-white","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"}]]}]}],["$","h1",null,{"className":"text-3xl font-bold tracking-tight text-white sm:text-4xl","children":"MCP 客户端集成"}],["$","p",null,{"className":"mt-4 text-lg text-cyan-100","children":"在应用中集成 MCP 客户端功能"}],["$","div",null,{"className":"mt-6 flex items-center justify-center space-x-4 text-sm text-cyan-100","children":[["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 mr-1","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"客户端开发"]}],["$","span",null,{"className":"flex items-center","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 mr-1","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"35 分钟阅读"]}]]}]]}]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"客户端架构"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"MCP 客户端采用异步架构，支持多种传输协议和连接管理策略"}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-8","children":[["$","div","0",{"className":"bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-cyan-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-cyan-900","children":"Connection Manager"}]]}],["$","p",null,{"className":"text-cyan-800 text-sm mb-4","children":"管理与 MCP 服务器的连接"}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-cyan-900 mb-2","children":"核心功能："}],["$","ul",null,{"className":"space-y-1","children":[["$","li","0",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"连接建立"]}],["$","li","1",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"心跳检测"]}],["$","li","2",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"自动重连"]}],["$","li","3",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"连接池管理"]}]]}]]}]]}],["$","div","1",{"className":"bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-cyan-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-cyan-900","children":"Protocol Handler"}]]}],["$","p",null,{"className":"text-cyan-800 text-sm mb-4","children":"处理 MCP 协议消息"}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-cyan-900 mb-2","children":"核心功能："}],["$","ul",null,{"className":"space-y-1","children":[["$","li","0",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"消息序列化"]}],["$","li","1",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"请求响应映射"]}],["$","li","2",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"错误处理"]}],["$","li","3",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"超时管理"]}]]}]]}]]}],["$","div","2",{"className":"bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-cyan-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-cyan-900","children":"Resource Client"}]]}],["$","p",null,{"className":"text-cyan-800 text-sm mb-4","children":"访问服务器资源"}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-cyan-900 mb-2","children":"核心功能："}],["$","ul",null,{"className":"space-y-1","children":[["$","li","0",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"资源发现"]}],["$","li","1",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"内容获取"]}],["$","li","2",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"缓存管理"]}],["$","li","3",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"变更监听"]}]]}]]}]]}],["$","div","3",{"className":"bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-cyan-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-cyan-900","children":"Tool Client"}]]}],["$","p",null,{"className":"text-cyan-800 text-sm mb-4","children":"调用服务器工具"}],["$","div",null,{"children":[["$","h4",null,{"className":"font-medium text-cyan-900 mb-2","children":"核心功能："}],["$","ul",null,{"className":"space-y-1","children":[["$","li","0",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"工具发现"]}],["$","li","1",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"参数验证"]}],["$","li","2",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"调用执行"]}],["$","li","3",{"className":"text-sm text-cyan-700 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-cyan-600 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"}]]}],"结果处理"]}]]}]]}]]}]]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"客户端实现"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"MCP 客户端的基础实现代码"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$7"}]}]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"连接策略"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"不同场景下的连接管理策略"}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-start justify-between mb-4","children":[["$","div",null,{"children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900","children":"Single Connection"}],["$","p",null,{"className":"text-gray-600 text-sm mt-1","children":"单一连接策略"}]]}],["$","span",null,{"className":"bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full","children":"简单应用，资源需求较少"}]]}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"class SingleConnectionClient {\n  private client: MCPClient\n  \n  constructor(serverUrl: string, apiKey: string) {\n    this.client = new MCPClient({\n      transport: { type: 'websocket', url: serverUrl },\n      auth: { type: 'apikey', key: apiKey }\n    })\n  }\n  \n  async initialize() {\n    await this.client.connect()\n    await this.client.initialize({\n      protocolVersion: '2024-11-05',\n      capabilities: { roots: { listChanged: true } },\n      clientInfo: { name: 'app', version: '1.0.0' }\n    })\n  }\n  \n  async getResource(uri: string) {\n    return await this.client.readResource({ uri })\n  }\n}"}]}]]}],["$","div","1",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-start justify-between mb-4","children":[["$","div",null,{"children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900","children":"Connection Pool"}],["$","p",null,{"className":"text-gray-600 text-sm mt-1","children":"连接池策略"}]]}],["$","span",null,{"className":"bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full","children":"高并发应用，多个服务器"}]]}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"class ConnectionPoolClient {\n  private pools: Map<string, MCPClient[]> = new Map()\n  private poolSize: number = 5\n  \n  async getConnection(serverUrl: string): Promise<MCPClient> {\n    if (!this.pools.has(serverUrl)) {\n      await this.createPool(serverUrl)\n    }\n    \n    const pool = this.pools.get(serverUrl)!\n    const client = pool.find(c => c.isIdle())\n    \n    if (!client) {\n      throw new Error('No available connections')\n    }\n    \n    return client\n  }\n  \n  private async createPool(serverUrl: string) {\n    const pool: MCPClient[] = []\n    \n    for (let i = 0; i < this.poolSize; i++) {\n      const client = new MCPClient({\n        transport: { type: 'websocket', url: serverUrl }\n      })\n      await client.connect()\n      pool.push(client)\n    }\n    \n    this.pools.set(serverUrl, pool)\n  }\n}"}]}]]}],["$","div","2",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-start justify-between mb-4","children":[["$","div",null,{"children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900","children":"Auto Reconnect"}],["$","p",null,{"className":"text-gray-600 text-sm mt-1","children":"自动重连策略"}]]}],["$","span",null,{"className":"bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full","children":"网络不稳定环境"}]]}],["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"class AutoReconnectClient {\n  private client: MCPClient\n  private reconnectAttempts: number = 0\n  private maxReconnectAttempts: number = 5\n  \n  constructor(options: ClientOptions) {\n    this.client = new MCPClient(options)\n    this.setupReconnectLogic()\n  }\n  \n  private setupReconnectLogic() {\n    this.client.on('disconnected', async () => {\n      if (this.reconnectAttempts < this.maxReconnectAttempts) {\n        this.reconnectAttempts++\n        const delay = Math.pow(2, this.reconnectAttempts) * 1000\n        \n        console.log(`Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts})`)\n        \n        setTimeout(async () => {\n          try {\n            await this.client.connect()\n            this.reconnectAttempts = 0\n          } catch (error) {\n            console.error('Reconnection failed:', error)\n          }\n        }, delay)\n      }\n    })\n  }\n}"}]}]]}]]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"资源管理"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"高效的资源访问和缓存管理"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$8"}]}]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"工具执行"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"安全可靠的工具调用管理"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$9"}]}]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"错误处理"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"常见错误类型和处理方案"}]]}],["$","div",null,{"className":"space-y-8","children":[["$","div","0",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-6","children":"连接错误"}],["$","div",null,{"className":"overflow-x-auto","children":["$","table",null,{"className":"min-w-full","children":[["$","thead",null,{"children":["$","tr",null,{"className":"border-b border-gray-200","children":[["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"错误码"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"描述"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"解决方案"}]]}]}],["$","tbody",null,{"children":[["$","tr","0",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"CONNECTION_FAILED"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"无法连接到服务器"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查服务器地址和网络连接"}]]}],["$","tr","1",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"AUTH_FAILED"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"身份验证失败"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"验证 API 密钥或认证信息"}]]}],["$","tr","2",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"TIMEOUT"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"连接超时"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"增加超时时间或检查网络延迟"}]]}],["$","tr","3",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"PROTOCOL_ERROR"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"协议版本不兼容"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"更新客户端或服务器版本"}]]}]]}]]}]}]]}],["$","div","1",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-6","children":"资源错误"}],["$","div",null,{"className":"overflow-x-auto","children":["$","table",null,{"className":"min-w-full","children":[["$","thead",null,{"children":["$","tr",null,{"className":"border-b border-gray-200","children":[["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"错误码"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"描述"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"解决方案"}]]}]}],["$","tbody",null,{"children":[["$","tr","0",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"RESOURCE_NOT_FOUND"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"资源不存在"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查资源 URI 是否正确"}]]}],["$","tr","1",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"ACCESS_DENIED"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"访问被拒绝"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查权限设置"}]]}],["$","tr","2",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"RESOURCE_TOO_LARGE"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"资源过大"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"分块读取或增加限制"}]]}],["$","tr","3",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"INVALID_URI"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"URI 格式错误"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"使用正确的 URI 格式"}]]}]]}]]}]}]]}],["$","div","2",{"className":"bg-white rounded-xl p-8 shadow-sm border border-gray-200","children":[["$","h3",null,{"className":"text-xl font-semibold text-gray-900 mb-6","children":"工具错误"}],["$","div",null,{"className":"overflow-x-auto","children":["$","table",null,{"className":"min-w-full","children":[["$","thead",null,{"children":["$","tr",null,{"className":"border-b border-gray-200","children":[["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"错误码"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"描述"}],["$","th",null,{"className":"text-left py-3 px-4 font-semibold text-gray-900","children":"解决方案"}]]}]}],["$","tbody",null,{"children":[["$","tr","0",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"TOOL_NOT_FOUND"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"工具不存在"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查工具名称是否正确"}]]}],["$","tr","1",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"INVALID_ARGUMENTS"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"参数无效"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查参数类型和必需字段"}]]}],["$","tr","2",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"EXECUTION_FAILED"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"工具执行失败"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"检查工具实现和参数"}]]}],["$","tr","3",{"className":"border-b border-gray-100","children":[["$","td",null,{"className":"py-3 px-4","children":["$","code",null,{"className":"text-sm font-mono text-red-600","children":"TOOL_TIMEOUT"}]}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"工具执行超时"}],["$","td",null,{"className":"py-3 px-4 text-sm text-gray-600","children":"增加超时时间或优化工具"}]]}]]}]]}]}]]}]]}]]}]}],["$","div",null,{"className":"py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"完整集成示例"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"在 Gemini CLI 中集成 MCP 客户端"}]]}],["$","div",null,{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":["$","div",null,{"className":"bg-gray-900 rounded-lg p-4 overflow-x-auto","children":["$","pre",null,{"className":"text-green-400 text-sm font-mono whitespace-pre","children":"$a"}]}]}]]}]}],["$","div",null,{"className":"bg-gray-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-6xl px-6 lg:px-8","children":[["$","div",null,{"className":"text-center mb-12","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900","children":"最佳实践"}],["$","p",null,{"className":"mt-4 text-lg text-gray-600","children":"MCP 客户端开发的最佳实践"}]]}],["$","div",null,{"className":"grid grid-cols-1 md:grid-cols-2 gap-8","children":[["$","div","0",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-blue-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"连接管理"}]]}],["$","ul",null,{"className":"space-y-2","children":[["$","li","0",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"使用连接池管理多个连接"]}],["$","li","1",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现自动重连机制"]}],["$","li","2",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"设置合适的超时时间"]}],["$","li","3",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"监控连接状态和健康度"]}]]}]]}],["$","div","1",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-blue-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"资源访问"}]]}],["$","ul",null,{"className":"space-y-2","children":[["$","li","0",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现智能缓存策略"]}],["$","li","1",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"监听资源变更通知"]}],["$","li","2",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"处理大文件的分块读取"]}],["$","li","3",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现资源访问权限检查"]}]]}]]}],["$","div","2",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-blue-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"工具调用"}]]}],["$","ul",null,{"className":"space-y-2","children":[["$","li","0",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"验证工具参数"]}],["$","li","1",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现重试机制"]}],["$","li","2",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"处理长时间运行的工具"]}],["$","li","3",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"缓存工具定义"]}]]}]]}],["$","div","3",{"className":"bg-white rounded-xl p-6 shadow-sm border border-gray-200","children":[["$","div",null,{"className":"flex items-center mb-4","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-6 w-6 text-blue-500 mr-3","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"}]]}],["$","h3",null,{"className":"text-lg font-semibold text-gray-900","children":"错误处理"}]]}],["$","ul",null,{"className":"space-y-2","children":[["$","li","0",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现分类错误处理"]}],["$","li","1",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"提供有意义的错误信息"]}],["$","li","2",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"实现降级策略"]}],["$","li","3",{"className":"text-sm text-gray-600 flex items-start","children":[["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","fill":"none","viewBox":"0 0 24 24","strokeWidth":1.5,"stroke":"currentColor","aria-hidden":"true","data-slot":"icon","ref":"$undefined","aria-labelledby":"$undefined","className":"h-4 w-4 text-blue-500 mr-2 flex-shrink-0 mt-0.5","children":[null,["$","path",null,{"strokeLinecap":"round","strokeLinejoin":"round","d":"M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"}]]}],"记录详细的错误日志"]}]]}]]}]]}]]}]}],["$","div",null,{"className":"bg-cyan-50 py-16","children":["$","div",null,{"className":"mx-auto max-w-4xl px-6 lg:px-8","children":["$","div",null,{"className":"text-center","children":[["$","h2",null,{"className":"text-3xl font-bold text-gray-900 mb-4","children":"继续学习"}],["$","p",null,{"className":"text-lg text-gray-600 mb-8","children":"探索扩展开发和架构设计"}],["$","div",null,{"className":"flex flex-col sm:flex-row items-center justify-center gap-4","children":[["$","$Lb",null,{"href":"/docs/extension-architecture","className":"rounded-lg bg-cyan-600 px-6 py-3 text-base font-semibold text-white hover:bg-cyan-500 transition-colors","children":"扩展架构"}],["$","$Lb",null,{"href":"/docs/first-extension","className":"rounded-lg border border-cyan-600 px-6 py-3 text-base font-semibold text-cyan-600 hover:bg-cyan-50 transition-colors","children":"创建第一个扩展"}],["$","$Lb",null,{"href":"/docs","className":"rounded-lg border border-gray-300 px-6 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 transition-colors","children":"返回文档首页"}]]}]]}]}]}]]}],null,["$","$Lc",null,{"children":"$Ld"}]]}],{},null,false]},null,false]},null,false]},null,false],["$","$1","h",{"children":[null,["$","$1","N8K6GDuHcqWkSA4nGDyVj",{"children":[["$","$Le",null,{"children":"$Lf"}],["$","$L10",null,{"children":"$L11"}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]]}],false]],"m":"$undefined","G":["$12","$undefined"],"s":false,"S":true}
+11:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+f:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"MCP 客户端集成 | Gemini CLI 开发者文档"}],["$","meta","2",{"name":"description","content":"详细指南：如何在应用中集成 MCP 客户端，包括连接管理、资源访问、工具调用和错误处理。"}],["$","link","3",{"rel":"author","href":"https://www.geminicli.cloud"}],["$","meta","4",{"name":"author","content":"Gemini CLI Learning Platform"}],["$","meta","5",{"name":"keywords","content":"MCP 客户端, Model Context Protocol 客户端, 客户端集成, 连接管理, 资源访问"}],["$","meta","6",{"name":"creator","content":"Gemini CLI Learning Platform"}],["$","meta","7",{"name":"publisher","content":"Gemini CLI Learning Platform"}],["$","meta","8",{"name":"robots","content":"index, follow"}],["$","meta","9",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","10",{"name":"category","content":"Technology"}],["$","link","11",{"rel":"canonical","href":"https://www.geminicli.cloud/"}],["$","meta","12",{"name":"google-site-verification","content":"your-google-verification-code"}],["$","meta","13",{"property":"og:title","content":"MCP 客户端集成 - Gemini CLI 开发者文档"}],["$","meta","14",{"property":"og:description","content":"在应用中集成 MCP 客户端功能"}],["$","meta","15",{"property":"og:type","content":"article"}],["$","meta","16",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","17",{"name":"twitter:creator","content":"@google"}],["$","meta","18",{"name":"twitter:title","content":"Gemini CLI Learning Platform"}],["$","meta","19",{"name":"twitter:description","content":"Master Google's Gemini CLI - the open-source AI agent that brings powerful AI workflows directly to your terminal. Learn installation, commands, and advanced usage with comprehensive tutorials, examples, and documentation."}],["$","meta","20",{"name":"twitter:image","content":"https://www.geminicli.cloud/next.svg"}],["$","link","21",{"rel":"icon","href":"/docs/gemini-cli-learning/favicon.ico","type":"image/x-icon","sizes":"16x16"}]]
+d:null

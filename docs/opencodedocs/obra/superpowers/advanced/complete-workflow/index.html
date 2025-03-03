@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Complete Development Workflow: Seven Steps from Design to Deployment | Superpowers Tutorial | OpenCodeDocs</title>
+    <meta name="description" content="Master Superpowers' complete development workflow with seven core steps from requirements to deployment. This tutorial combines brainstorming, TDD, code review, and other skills to demonstrate a full development workflow in real-world scenarios.">
+    <meta name="generator" content="VitePress v1.6.4">
+    <link rel="preload stylesheet" href="/docs/opencodedocs/assets/style.CMD2ao8V.css" as="style">
+    <link rel="preload stylesheet" href="/docs/opencodedocs/vp-icons.css" as="style">
+    <script type="module" src="/docs/opencodedocs/assets/chunks/metadata.664e72dc.js"></script>
+    <script type="module" src="/docs/opencodedocs/assets/app.B3xzmAod.js"></script>
+    <link rel="preload" href="/docs/opencodedocs/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+                                                                                                                                    <meta name="author" content="OpenCodeDocs Team">
+    <meta name="keywords" content="开源教程, OpenCode 开发文档, 编程教程, 开发者文档">
+    <meta property="og:site_name" content="OpenCode Docs">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+    <link rel="alternate" hreflang="en" href="https://lzw.me/docs/opencodedocs/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="x-default" href="https://lzw.me/docs/opencodedocs/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="zh" href="https://lzw.me/docs/opencodedocs/zh/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="zh-tw" href="https://lzw.me/docs/opencodedocs/zh-tw/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="ja" href="https://lzw.me/docs/opencodedocs/ja/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="ko" href="https://lzw.me/docs/opencodedocs/ko/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="es" href="https://lzw.me/docs/opencodedocs/es/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="fr" href="https://lzw.me/docs/opencodedocs/fr/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="de" href="https://lzw.me/docs/opencodedocs/de/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="pt" href="https://lzw.me/docs/opencodedocs/pt/obra/superpowers/advanced/complete-workflow/">
+    <link rel="alternate" hreflang="ru" href="https://lzw.me/docs/opencodedocs/ru/obra/superpowers/advanced/complete-workflow/">
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-1603937c><!--[--><!--]--><!--[--><span tabindex="-1" data-v-0b0ada53></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0b0ada53>Skip to content</a><!--]--><!----><header class="VPNav" data-v-1603937c data-v-51629c00><div class="VPNavBar" data-v-51629c00 data-v-1ceec7c8><div class="wrapper" data-v-1ceec7c8><div class="container" data-v-1ceec7c8><div class="title" data-v-1ceec7c8><div class="VPNavBarTitle has-sidebar" data-v-1ceec7c8 data-v-1168a8e4><a class="title" href="/docs/opencodedocs/" data-v-1168a8e4><!--[--><!--]--><!----><span data-v-1168a8e4>OpenCodeDocs</span><!--[--><!--]--></a></div></div><div class="content" data-v-1ceec7c8><div class="content-body" data-v-1ceec7c8><!--[--><!--]--><div class="VPNavBarSearch search" data-v-1ceec7c8><!----></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-1ceec7c8 data-v-dc692963><span id="main-nav-aria-label" class="visually-hidden" data-v-dc692963> Main Navigation </span><!--[--><!--]--></nav><div class="VPFlyout VPNavBarTranslations translations" data-v-1ceec7c8 data-v-88af2de4 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language" data-v-cf11d7a2><span class="text" data-v-cf11d7a2><span class="vpi-languages option-icon" data-v-cf11d7a2></span><!----><span class="vpi-chevron-down text-icon" data-v-cf11d7a2></span></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><!----><!--[--><!--[--><div class="items" data-v-88af2de4><p class="title" data-v-88af2de4>English</p><!--[--><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>简体中文</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh-tw/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>繁體中文</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ja/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>日本語</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ko/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>한국어</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/es/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Español</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/fr/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Français</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/de/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Deutsch</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/pt/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Português</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ru/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Русский</span><!--]--></a></div><!--]--></div><!--]--><!--]--></div></div></div><div class="VPNavBarAppearance appearance" data-v-1ceec7c8 data-v-6c893767><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-6c893767 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-1ceec7c8 data-v-0394ad82 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/vbgate/opencodedocs" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-1ceec7c8 data-v-bb2aa2f0 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-cf11d7a2><span class="vpi-more-horizontal icon" data-v-cf11d7a2></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><!----><!--[--><!--[--><div class="group translations" data-v-bb2aa2f0><p class="trans-title" data-v-bb2aa2f0>English</p><!--[--><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>简体中文</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh-tw/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>繁體中文</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ja/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>日本語</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ko/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>한국어</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/es/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Español</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/fr/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Français</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/de/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Deutsch</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/pt/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Português</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ru/obra/superpowers/advanced/complete-workflow/" data-v-35975db6><!--[--><span data-v-35975db6>Русский</span><!--]--></a></div><!--]--></div><div class="group" data-v-bb2aa2f0><div class="item appearance" data-v-bb2aa2f0><p class="label" data-v-bb2aa2f0>Theme</p><div class="appearance-action" data-v-bb2aa2f0><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-bb2aa2f0 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div></div></div><div class="group" data-v-bb2aa2f0><div class="item social-links" data-v-bb2aa2f0><div class="VPSocialLinks social-links-list" data-v-bb2aa2f0 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/vbgate/opencodedocs" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-1ceec7c8 data-v-e5dd9c1c><span class="container" data-v-e5dd9c1c><span class="top" data-v-e5dd9c1c></span><span class="middle" data-v-e5dd9c1c></span><span class="bottom" data-v-e5dd9c1c></span></span></button></div></div></div></div><div class="divider" data-v-1ceec7c8><div class="divider-line" data-v-1ceec7c8></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-1603937c data-v-a6f0e41e><div class="container" data-v-a6f0e41e><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-a6f0e41e><span class="vpi-align-left menu-icon" data-v-a6f0e41e></span><span class="menu-text" data-v-a6f0e41e>Menu</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-a6f0e41e data-v-8a42e2b4><button data-v-8a42e2b4>Back to top</button><!----></div></div></div><aside class="VPSidebar" data-v-1603937c data-v-319d5ca6><div class="curtain" data-v-319d5ca6></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-319d5ca6><span class="visually-hidden" id="sidebar-aria-label" data-v-319d5ca6> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="no-transition group" data-v-c40bc020><section class="VPSidebarItem level-0 is-link has-active" data-v-c40bc020 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/./" data-v-b3fd67f8><!--[--><h2 class="text" data-v-b3fd67f8>🏠 Project Home</h2><!--]--></a><!----></div><div class="items" data-v-b3fd67f8><!--[--><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Quick Start</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/superpowers-intro/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>What is Superpowers</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/quick-start/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>5 Minute Quick Start</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/installation/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Installation Guide</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/verification/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Verify Installation Success</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/start/using-skills/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Master Skill Calls</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/platforms/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Platform Integration</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/platforms/claude-code/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Using in Claude Code</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/platforms/opencode/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Using in OpenCode</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/platforms/codex/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Using in Codex</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/platforms/platform-comparison/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Platform Selection</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Core Workflows</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/design-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Design Before Coding</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/planning-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Write Plans Before Coding</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/tdd-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Write Tests First</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/debugging-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Systematic Debugging</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/core-workflows/verification-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Evidence First</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link has-active" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Advanced Workflows</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/subagent-development/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Rapid Multi Task Iteration</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/code-review-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Build Review Habits</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/git-worktrees/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Isolated Development Environment</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/parallel-agents/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>3x Faster Bug Fixes</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/branch-completion/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Graceful Development End</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/advanced/complete-workflow/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>From Design to Deployment</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/extending/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Extending</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/extending/writing-skills/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Writing Custom Skills</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/extending/testing-skills/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Verify Skills Actually Work</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/extending/contributing/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Share Your Skills</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/faq/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>FAQ</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/faq/troubleshooting/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Troubleshooting Guide</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/faq/best-practices/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Pitfall Avoidance Guide</p><!--]--></a><!----></div><!----></div><!--]--></div></section><section class="VPSidebarItem level-1 collapsible is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" tabindex="0" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/appendix/index.html" data-v-b3fd67f8><!--[--><h3 class="text" data-v-b3fd67f8>Appendix</h3><!--]--></a><div class="caret" role="button" aria-label="toggle section" tabindex="0" data-v-b3fd67f8><span class="vpi-chevron-right caret-icon" data-v-b3fd67f8></span></div></div><div class="items" data-v-b3fd67f8><!--[--><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/appendix/skills-reference/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Skills Complete Reference</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/appendix/commands-reference/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Commands Quick Reference</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/appendix/agents-reference/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Agent Reference</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-2 is-link" data-v-b3fd67f8 data-v-b3fd67f8><div class="item" data-v-b3fd67f8><div class="indicator" data-v-b3fd67f8></div><a class="VPLink link link" href="/docs/opencodedocs/obra/superpowers/appendix/architecture/index.html" data-v-b3fd67f8><!--[--><p class="text" data-v-b3fd67f8>Understanding System Design</p><!--]--></a><!----></div><!----></div><!--]--></div></section><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-1603937c data-v-1428d186><div class="VPDoc has-sidebar has-aside" data-v-1428d186 data-v-39a288b8><!--[--><!--]--><div class="container" data-v-39a288b8><div class="aside" data-v-39a288b8><div class="aside-curtain" data-v-39a288b8></div><div class="aside-container" data-v-39a288b8><div class="aside-content" data-v-39a288b8><div class="VPDocAside" data-v-39a288b8 data-v-3f215769><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-3f215769 data-v-a5bbad30><div class="content" data-v-a5bbad30><div class="outline-marker" data-v-a5bbad30></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-a5bbad30>On this page</div><ul class="VPDocOutlineItem root" data-v-a5bbad30 data-v-b933a997><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-3f215769></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-39a288b8><div class="content-container" data-v-39a288b8><!--[--><!--]--><main class="main" data-v-39a288b8><div style="position:relative;" class="vp-doc _docs_opencodedocs_obra_superpowers_advanced_complete-workflow_" data-v-39a288b8><div><h1 id="complete-development-workflow-in-practice-from-design-to-deployment" tabindex="-1">Complete Development Workflow in Practice: From Design to Deployment <a class="header-anchor" href="#complete-development-workflow-in-practice-from-design-to-deployment" aria-label="Permalink to &quot;Complete Development Workflow in Practice: From Design to Deployment&quot;">​</a></h1><div class="warning custom-block"><p class="custom-block-title">Prerequisites</p><p>This tutorial assumes you understand the following:</p><ul><li><a href="./../../start/using-skills/">How to Use Skills</a></li><li><a href="./../../core-workflows/design-workflow/">Design Workflow: Brainstorming</a></li><li><a href="./../../core-workflows/planning-workflow/">Planning Workflow: Writing Plans</a></li><li><a href="./../../core-workflows/tdd-workflow/">Test-Driven Development: TDD Iron Law</a></li><li><a href="./../subagent-development/">Subagent-Driven Development</a> ::</li></ul><h2 id="what-you-ll-learn" tabindex="-1">What You&#39;ll Learn <a class="header-anchor" href="#what-you-ll-learn" aria-label="Permalink to &quot;What You&#39;ll Learn&quot;">​</a></h2><ul><li>Master Superpowers&#39; seven core steps for a complete workflow from requirements to deployment</li><li>Understand the purpose and trigger conditions for each step</li><li>Learn to choose the right execution approach at key decision points</li><li>Practice the complete development workflow through real-world scenarios</li><li>Avoid common workflow shortcuts and wrong decisions</li></ul><h2 id="your-current-dilemma" tabindex="-1">Your Current Dilemma <a class="header-anchor" href="#your-current-dilemma" aria-label="Permalink to &quot;Your Current Dilemma&quot;">​</a></h2><p><strong>AI agent development easily &quot;goes off track&quot;</strong></p><p>Have you encountered this situation: You ask an AI agent to implement a feature, and it starts writing code directly, only to find halfway through that it misunderstood the requirements, or the code doesn&#39;t follow project standards, or lacks tests and needs rework.</p><p>Common problems:</p><ul><li>❌ Jump straight to implementation without design thinking</li><li>❌ No isolated environment, polluting the main branch</li><li>❌ Tasks too large, progress untrackable</li><li>❌ No test-driven development, quality can&#39;t be guaranteed</li><li>❌ No code review, issues discovered late</li><li>❌ Don&#39;t know how to merge or clean up after completion</li></ul><p>These problems lead to: long development cycles, unstable code quality, frequent rework.</p><p><strong>Core problem</strong>: Lack of a systematic development workflow.</p><div class="info custom-block"><p class="custom-block-title">What is the Complete Development Workflow?</p><p>The complete development workflow is the core of Superpowers, defining seven steps from requirements to deployment, ensuring AI agents follow best practices at every step.</p><p><strong>Seven Core Steps</strong>:</p><ol><li><strong>Brainstorming (Design)</strong> - Understand requirements, explore solutions, present design</li><li><strong>Using Git Worktrees (Isolation)</strong> - Create isolated workspace, protect main branch</li><li><strong>Writing Plans (Planning)</strong> - Break down into small tasks, write detailed implementation plan</li><li><strong>Subagent-Driven / Executing Plans (Execution)</strong> - Two-phase review or batch execution</li><li><strong>Test-Driven Development (Testing)</strong> - RED-GREEN-REFACTOR cycle</li><li><strong>Requesting Code Review (Review)</strong> - Review after each task to ensure quality</li><li><strong>Finishing a Development Branch (Completion)</strong> - Verify tests, choose merge method, clean up environment</li></ol><p><strong>Core principle</strong>: Each step is mandatory, not optional. ::</p><h2 id="when-to-use-this-approach" tabindex="-1">When to Use This Approach <a class="header-anchor" href="#when-to-use-this-approach" aria-label="Permalink to &quot;When to Use This Approach&quot;">​</a></h2><p>The complete development workflow applies to the following scenarios:</p><table tabindex="0"><thead><tr><th>Condition</th><th>Description</th></tr></thead><tbody><tr><td><strong>New Feature Development</strong></td><td>Implementing new features or components</td></tr><tr><td><strong>Bug Fixes</strong></td><td>Fixing complex bugs or issues</td></tr><tr><td><strong>Code Refactoring</strong></td><td>Refactoring existing code or architecture</td></tr><tr><td><strong>Integration Work</strong></td><td>Integrating third-party services or modules</td></tr></tbody></table><div class="tip custom-block"><p class="custom-block-title">Workflow vs. Single Skill</p><p><strong>Complete Workflow</strong>: Applicable to the entire development cycle, from requirements to deployment <strong>Single Skill</strong>: Applicable to specific stages, such as debugging, review, etc.</p><p>If you just need to debug an issue, use the <code>systematic-debugging</code> skill. If you need to complete the entire development cycle, use the complete workflow. ::</p><h2 id="core-approach" tabindex="-1">Core Approach <a class="header-anchor" href="#core-approach" aria-label="Permalink to &quot;Core Approach&quot;">​</a></h2><p>The core flow of the complete development workflow:</p><div class="language-mermaid vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">mermaid</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">graph TB</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    A[User request: Build new feature] --&gt; B[Step 1: Brainstorming&lt;br/&gt;Design phase]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    B --&gt; C{Design approved?}</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    C --&gt;|No| B</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    C --&gt;|Yes| D[Step 2: Using Git Worktrees&lt;br/&gt;Isolated environment]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    D --&gt; E[Step 3: Writing Plans&lt;br/&gt;Write implementation plan]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    E --&gt; F{Choose execution method}</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    F --&gt;|Quick iteration in current session| G[Option 1: Subagent-Driven&lt;br/&gt;Two-phase review]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    F --&gt;|Independent session batch execution| H[Option 2: Executing Plans&lt;br/&gt;Batch execution]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    G --&gt; I[Step 5: TDD cycle&lt;br/&gt;RED → GREEN → REFACTOR]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    H --&gt; I</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    I --&gt; J[Step 6: Code Review&lt;br/&gt;Review after each task]</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    J --&gt; K{All tasks completed?}</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    K --&gt;|No| I</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    K --&gt;|Yes| L[Step 7: Finishing Branch&lt;br/&gt;Verify → Merge/PR → Clean up]</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    style A fill:#f3e5f5</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    style L fill:#e8f5e9</span></span></code></pre></div><h3 id="seven-steps-overview" tabindex="-1">Seven Steps Overview <a class="header-anchor" href="#seven-steps-overview" aria-label="Permalink to &quot;Seven Steps Overview&quot;">​</a></h3><table tabindex="0"><thead><tr><th>Step</th><th>Skill</th><th>Purpose</th><th>Time</th></tr></thead><tbody><tr><td><strong>1. Design</strong></td><td>brainstorming</td><td>Understand requirements, explore solutions</td><td>10-30 min</td></tr><tr><td><strong>2. Isolation</strong></td><td>using-git-worktrees</td><td>Create isolated workspace</td><td>2-5 min</td></tr><tr><td><strong>3. Planning</strong></td><td>writing-plans</td><td>Break down into small tasks</td><td>10-20 min</td></tr><tr><td><strong>4. Execution</strong></td><td>subagent-driven or executing-plans</td><td>Two-phase review or batch execution</td><td>Varies</td></tr><tr><td><strong>5. Testing</strong></td><td>test-driven-development</td><td>RED-GREEN-REFACTOR</td><td>Continuous</td></tr><tr><td><strong>6. Review</strong></td><td>requesting-code-review</td><td>Review after each task</td><td>Per task</td></tr><tr><td><strong>7. Completion</strong></td><td>finishing-a-development-branch</td><td>Verify, merge, clean up</td><td>5-10 min</td></tr></tbody></table><h3 id="key-decision-points" tabindex="-1">Key Decision Points <a class="header-anchor" href="#key-decision-points" aria-label="Permalink to &quot;Key Decision Points&quot;">​</a></h3><p><strong>Decision Point 1: Execution Method Selection</strong></p><p>At Step 4, you need to choose an execution method:</p><table tabindex="0"><thead><tr><th>Dimension</th><th>Subagent-Driven</th><th>Executing Plans</th></tr></thead><tbody><tr><td><strong>Session</strong></td><td>Current session (no switching)</td><td>Independent session (switching required)</td></tr><tr><td><strong>Context</strong></td><td>Controller managed</td><td>Independent for each task</td></tr><tr><td><strong>Review</strong></td><td>Automatic two-phase</td><td>Manual or single-phase</td></tr><tr><td><strong>Task count</strong></td><td>Few (&lt; 10)</td><td>Many (&gt; 10)</td></tr><tr><td><strong>Speed</strong></td><td>Fast (no waiting)</td><td>Medium (switching required)</td></tr></tbody></table><p><strong>Selection recommendations</strong>:</p><ul><li>Few tasks (&lt; 10) → Subagent-Driven Development</li><li>Many tasks (&gt; 10) → Executing Plans (batch execution)</li></ul><div class="tip custom-block"><p class="custom-block-title">View detailed tutorials</p><ul><li><strong>Subagent-Driven Development</strong> → <a href="./../subagent-development/">Subagent-Driven Development</a></li><li><strong>Executing Plans</strong> → <a href="./../../core-workflows/planning-workflow/">Planning Workflow</a> ::</li></ul><h2 id="follow-along" tabindex="-1">Follow Along <a class="header-anchor" href="#follow-along" aria-label="Permalink to &quot;Follow Along&quot;">​</a></h2><h3 id="scenario-building-a-user-comment-system" tabindex="-1">Scenario: Building a User Comment System <a class="header-anchor" href="#scenario-building-a-user-comment-system" aria-label="Permalink to &quot;Scenario: Building a User Comment System&quot;">​</a></h3><p>Assume you need to add a user comment feature to a blog system, including:</p><ul><li>Users can post comments</li><li>Comments need moderation</li><li>Support replies and likes</li></ul><h3 id="step-1-brainstorming-design-phase" tabindex="-1">Step 1: Brainstorming - Design Phase <a class="header-anchor" href="#step-1-brainstorming-design-phase" aria-label="Permalink to &quot;Step 1: Brainstorming - Design Phase&quot;">​</a></h3><p><strong>Why</strong> Before implementation, you must understand requirements, explore solutions, present design to avoid later rework.</p><p><strong>Example</strong></p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>You: I want to add a user comment feature to the blog system, including posting, moderation, replies, and likes.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Okay, I need to understand some details.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Question 1: Do users need to log in to post comments?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Yes, login is required.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Understood.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Question 2: Is comment moderation done manually by administrators, or automatically filtered for sensitive words?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Manual moderation.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Understood.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Question 3: Do replies support unlimited nesting, or only one-level replies?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Support unlimited nesting, but display at most 3 levels.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Got it. I understand your requirements now. Here&#39;s my design proposal:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Design Document - Part 1: Data Model]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The comment system needs the following data models:</span></span>
+<span class="line"><span>- Comment: id, content, userId, postId, parentId, status, createdAt</span></span>
+<span class="line"><span>- User: id, name, email</span></span>
+<span class="line"><span>- Post: id, title</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The status field has three values: pending (awaiting moderation), approved (moderated), rejected (rejected).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Does this look correct so far?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Yes, continue.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: [Design Document - Part 2: API Endpoints]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The following API endpoints are needed:</span></span>
+<span class="line"><span>- POST /api/posts/:postId/comments - Create comment</span></span>
+<span class="line"><span>- GET /api/posts/:postId/comments - Get comment list</span></span>
+<span class="line"><span>- PUT /api/comments/:id/approve - Approve moderation</span></span>
+<span class="line"><span>- PUT /api/comments/:id/reject - Reject moderation</span></span>
+<span class="line"><span>- POST /api/comments/:id/replies - Reply to comment</span></span>
+<span class="line"><span>- POST /api/comments/:id/like - Like comment</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Does this look correct so far?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Yes, continue.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: [Design Document - Part 3: Frontend Components]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The following React components are needed:</span></span>
+<span class="line"><span>- CommentForm - Comment form</span></span>
+<span class="line"><span>- CommentList - Comment list</span></span>
+<span class="line"><span>- CommentItem - Single comment</span></span>
+<span class="line"><span>- AdminPanel - Admin moderation panel</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Does this look correct so far?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Yes, continue.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: [Design Document - Part 4: Permission Control]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- Only logged-in users can post comments and like</span></span>
+<span class="line"><span>- Only administrators can moderate comments</span></span>
+<span class="line"><span>- Authors can delete their own comments</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Does this look correct so far?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You: Yes, that&#39;s good.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Good, I&#39;ll now save the design document.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Save to: docs/plans/2026-02-01-comment-system-design.md]</span></span>
+<span class="line"><span>[Commit design document]</span></span></code></pre></div><p><strong>You should see</strong>: AI asks questions, presents design in sections for confirmation, and finally saves the design document.</p><div class="warning custom-block"><p class="custom-block-title">Checkpoint</p><p>After Brainstorming, you must:</p><ul><li>[ ] Requirements are clear (all key questions answered)</li><li>[ ] Design presented in sections and confirmed</li><li>[ ] Design document saved to <code>docs/plans/</code></li><li>[ ] Design document committed to git</li></ul><p>If any of the above is missing, don&#39;t continue—complete it first. ::</p><h3 id="step-2-using-git-worktrees-isolated-environment" tabindex="-1">Step 2: Using Git Worktrees - Isolated Environment <a class="header-anchor" href="#step-2-using-git-worktrees-isolated-environment" aria-label="Permalink to &quot;Step 2: Using Git Worktrees - Isolated Environment&quot;">​</a></h3><p><strong>Why</strong> Create an isolated workspace to protect the main branch and avoid pollution.</p><p><strong>Example</strong></p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>You: Ready to start implementation.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>AI: Good, I&#39;ll create an isolated workspace now.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Use using-git-worktrees skill]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Creating worktree...</span></span>
+<span class="line"><span>Worktree created successfully: /path/to/project-worktree</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Switching to worktree...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Running project setup...</span></span>
+<span class="line"><span>npm install</span></span>
+<span class="line"><span>npm run setup</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Verifying test baseline...</span></span>
+<span class="line"><span>npm test</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Test baseline passed: 100/100</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Workspace is ready.</span></span></code></pre></div><p><strong>You should see</strong>:</p><ul><li>New worktree created</li><li>Project set up (dependencies installed)</li><li>Test baseline passed (ensuring existing functionality isn&#39;t broken)</li></ul><div class="warning custom-block"><p class="custom-block-title">Checkpoint</p><p>After Git Worktrees, you must:</p><ul><li>[ ] Worktree created</li><li>[ ] Switched to worktree</li><li>[ ] Project setup completed (dependencies installed)</li><li>[ ] Test baseline passed</li></ul><p>If the test baseline fails, it must be fixed before continuing. ::</p><h3 id="step-3-writing-plans-writing-implementation-plan" tabindex="-1">Step 3: Writing Plans - Writing Implementation Plan <a class="header-anchor" href="#step-3-writing-plans-writing-implementation-plan" aria-label="Permalink to &quot;Step 3: Writing Plans - Writing Implementation Plan&quot;">​</a></h3><p><strong>Why</strong> Break down large features into small tasks (each 2-5 minutes), write detailed implementation plans to ensure even engineers without context can execute.</p><p><strong>Example</strong></p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>AI: Good, I&#39;ll now write a detailed implementation plan.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Use writing-plans skill]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Save to: docs/plans/2026-02-01-comment-system-implementation.md]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>```markdown</span></span>
+<span class="line"><span># User Comment System Implementation Plan</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Goal:** Implement user comment system, including posting, moderation, replies, and likes.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Architecture:** Use RESTful API, data stored in PostgreSQL, frontend uses React components.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Tech Stack:** Node.js + Express + PostgreSQL + React</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Task List</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 1: Create comment data model</span></span>
+<span class="line"><span>- Create `models/Comment.js`</span></span>
+<span class="line"><span>- Define fields: id, content, userId, postId, parentId, status, createdAt</span></span>
+<span class="line"><span>- Define status enum: pending, approved, rejected</span></span>
+<span class="line"><span>- Migrate to database</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 2: Create comment API endpoints</span></span>
+<span class="line"><span>- Create `routes/comments.js`</span></span>
+<span class="line"><span>- Implement POST /api/posts/:postId/comments</span></span>
+<span class="line"><span>- Implement GET /api/posts/:postId/comments</span></span>
+<span class="line"><span>- Add parameter validation</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 3: Implement comment moderation API</span></span>
+<span class="line"><span>- Implement PUT /api/comments/:id/approve</span></span>
+<span class="line"><span>- Implement PUT /api/comments/:id/reject</span></span>
+<span class="line"><span>- Add permission check (admin only)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 4: Implement reply and like APIs</span></span>
+<span class="line"><span>- Implement POST /api/comments/:id/replies</span></span>
+<span class="line"><span>- Implement POST /api/comments/:id/like</span></span>
+<span class="line"><span>- Handle nesting logic</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 5: Create comment form component</span></span>
+<span class="line"><span>- Create `components/CommentForm.jsx`</span></span>
+<span class="line"><span>- Implement form validation</span></span>
+<span class="line"><span>- Integrate comment API</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 6: Create comment list component</span></span>
+<span class="line"><span>- Create `components/CommentList.jsx`</span></span>
+<span class="line"><span>- Implement comment display</span></span>
+<span class="line"><span>- Support nested display (max 3 levels)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Task 7: Create admin moderation panel</span></span>
+<span class="line"><span>- Create `components/AdminPanel.jsx`</span></span>
+<span class="line"><span>- Display pending comments</span></span>
+<span class="line"><span>- Implement moderation buttons</span></span></code></pre></div><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: Detailed implementation plan saved to `docs/plans/`.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>::: warning Checkpoint</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>After Writing Plans, you must:</span></span>
+<span class="line"><span>- [ ] Implementation plan saved to `docs/plans/`</span></span>
+<span class="line"><span>- [ ] Each task is small enough (2-5 min to complete)</span></span>
+<span class="line"><span>- [ ] Each task includes complete code and test steps</span></span>
+<span class="line"><span>- [ ] Implementation plan committed to git</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>If tasks are too large, continue breaking them down.</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 4: Choose Execution Method</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Choose the appropriate execution method based on task count and scenario.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span></code></pre></div><p>AI: Implementation plan completed with 7 tasks.</p><p>There are now two execution methods:</p><p><strong>Option 1: Subagent-Driven Development (current session)</strong></p><ul><li>Dispatch a new subagent for each task</li><li>Automatic two-phase review (spec compliance + code quality)</li><li>Suitable for few tasks (&lt; 10)</li><li>No session switching required</li></ul><p><strong>Option 2: Executing Plans (independent session)</strong></p><ul><li>Batch execute tasks</li><li>Need to switch to independent session</li><li>Suitable for many tasks (&gt; 10)</li><li>Manual review checkpoints</li></ul><p>Which method would you like to use?</p><p>You: Use Option 1, Subagent-Driven Development.</p><p>AI: Good, I&#39;ll use Subagent-Driven Development to execute this plan.</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: tip How to choose?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Choose Subagent-Driven Development, if**:</span></span>
+<span class="line"><span>- Few tasks (&lt; 10)</span></span>
+<span class="line"><span>- Want to complete in current session</span></span>
+<span class="line"><span>- Need automatic two-phase review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Choose Executing Plans, if**:</span></span>
+<span class="line"><span>- Many tasks (&gt; 10)</span></span>
+<span class="line"><span>- Can switch to independent session</span></span>
+<span class="line"><span>- Need to batch process tasks</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 5: Subagent-Driven Development - Two-Phase Review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Dispatch a new subagent for each task to avoid context pollution, execute two-phase review to ensure quality.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span></code></pre></div><p>AI: Starting to execute task 1: Create comment data model.</p><p>[Dispatch implementer subagent]</p><p>Task: Create comment data model</p><p>Requirements:</p><ul><li>Create <code>models/Comment.js</code></li><li>Define fields: id, content, userId, postId, parentId, status, createdAt</li><li>Define status enum: pending, approved, rejected</li><li>Migrate to database</li><li>Strictly follow TDD (RED-GREEN-REFACTOR)</li></ul><p>[After some time]</p><p>Implementer subagent:</p><ul><li>✅ Created <code>models/Comment.js</code></li><li>✅ Defined all fields and enums</li><li>✅ Added 5 tests, all passing</li><li>✅ Migration script created and executed</li><li>✅ Self-review: Found missing index, added it</li><li>✅ Committed: abc123</li></ul><p>[Dispatch spec review subagent]</p><p>Spec review subagent: ✅ Spec compliant</p><ul><li>Implemented all required fields</li><li>Defined status enum</li><li>Migration script created</li><li>No extra features</li><li>No spec details missed</li></ul><p>[Dispatch code quality review subagent]</p><p>Code quality review subagent: Strengths:</p><ul><li>Good test coverage (5/5)</li><li>Clear code, reasonable structure</li><li>Added necessary indexes</li></ul><p>Issues: None</p><p>Result: ✅ Approved</p><p>[Mark task 1 as complete]</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: Each task goes through implement → spec review → code quality review.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>::: tip View detailed tutorial</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Complete Subagent-Driven Development flow → [Subagent-Driven Development](../subagent-development/)</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 6: Test-Driven Development - TDD Cycle</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Enforce RED-GREEN-REFACTOR cycle to ensure every feature has tests, avoiding writing untested code.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>During implementation, subagents will automatically follow the TDD process:</span></span></code></pre></div><p>Implementer subagent: Now starting to implement task 1: Create comment data model.</p><p>[Step 1: RED - Write failing test]</p><p>Create <code>tests/Comment.test.js</code>:</p><div class="language-javascript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">javascript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">describe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;Comment Model&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  it</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;should create a comment with required fields&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">    const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> comment</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Comment.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">create</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">({</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      content: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;Test comment&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      userId: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      postId: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">1</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    });</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(comment.content).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">toBe</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;Test comment&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  });</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">});</span></span></code></pre></div><p>Run tests:</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>npm test</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Test failed: ReferenceError: Comment is not defined</span></span></code></pre></div><p>[Step 2: GREEN - Write minimum code to make tests pass]</p><p>Create <code>models/Comment.js</code>:</p><div class="language-javascript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">javascript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">const</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> { </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">DataTypes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;sequelize&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> Comment</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> sequelize.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">define</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;Comment&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, {</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  content: DataTypes.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">TEXT</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  userId: DataTypes.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">INTEGER</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  postId: DataTypes.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">INTEGER</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  status: DataTypes.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ENUM</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;pending&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;approved&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;rejected&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">module</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">exports</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> Comment;</span></span></code></pre></div><p>Run tests:</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>npm test</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Tests passed: ✅</span></span></code></pre></div><p>[Step 3: REFACTOR - Refactor code]</p><p>Code is already clean, no refactoring needed.</p><p>[Commit]</p><p>git commit -m &quot;Create Comment model with required fields&quot;</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: Subagents strictly follow the RED-GREEN-REFACTOR cycle.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>::: tip View detailed tutorial</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Complete TDD flow → [Test-Driven Development: TDD Iron Law](../../core-workflows/tdd-workflow/)</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 7: Requesting Code Review - Code Review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Perform code review after each task completion to ensure code quality and spec compliance.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span></code></pre></div><p>AI: Task 1 completed, now performing code review.</p><p>[Use requesting-code-review skill]</p><p>Review task: Create comment data model</p><p>Commit: abc123</p><p>Spec review: ✅ Spec compliant</p><ul><li>Implemented all required fields</li><li>Defined status enum</li><li>Migration script created</li></ul><p>Code quality review: Strengths:</p><ul><li>Test coverage 100% (5/5)</li><li>Clear code structure</li><li>Added necessary indexes (userId, postId)</li></ul><p>Suggestions: None</p><p>Result: ✅ Approved</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: Detailed code review after each task completion.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>::: tip View detailed tutorial</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Complete code review flow → [Code Review Workflow](../code-review-workflow/)</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 8: Repeat Process, Complete All Tasks</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Repeat the same process for each task until all tasks are complete.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span></code></pre></div><p>Task 2: Create comment API endpoints [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>Task 3: Implement comment moderation API [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>Task 4: Implement reply and like APIs [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>Task 5: Create comment form component [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>Task 6: Create comment list component [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>Task 7: Create admin moderation panel [Implementer subagent] → [Spec review] → [Code quality review] → ✅ Complete</p><p>All tasks completed.</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: All tasks passed two-phase review.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Step 9: Finishing a Development Branch - Complete Branch</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Why**</span></span>
+<span class="line"><span>Verify all tests pass, choose to merge or create PR, clean up worktree.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Example**</span></span></code></pre></div><p>AI: All tasks completed, now using finishing-a-development-branch skill to finish the work.</p><p>[Use finishing-a-development-branch skill]</p><p>Verifying tests...</p><p>npm test</p><p>Test results: ✅ 100% passed (150/150)</p><p>All tests passed.</p><p>[Step 1: Determine base branch]</p><p>Current branch: feature/comment-system Base branch: main</p><p>[Step 2: Present options]</p><p>Please choose next action:</p><ol><li><p><strong>Merge to main branch</strong></p><ul><li>Directly merge to main branch</li><li>Suitable for small projects or personal projects</li></ul></li><li><p><strong>Create Pull Request</strong></p><ul><li>Create PR for review</li><li>Suitable for team projects or open source projects</li></ul></li><li><p><strong>Keep branch for further work</strong></p><ul><li>Keep branch to continue working</li><li>Suitable when more development is needed</li></ul></li><li><p><strong>Discard branch</strong></p><ul><li>Delete branch and worktree</li><li>Suitable when abandoning this feature</li></ul></li></ol><p>You: Choose 2, create Pull Request.</p><p>AI: Good, creating Pull Request...</p><p>PR created: <a href="https://github.com/your-repo/pull/123" target="_blank" rel="noreferrer">https://github.com/your-repo/pull/123</a></p><p>[Step 3: Clean up worktree]</p><p>Worktree cleaned up.</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**You should see**: Options to merge or create PR, worktree cleaned up.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>::: tip View detailed tutorial</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Complete Finishing a Development Branch flow → [Branch Completion Workflow](../branch-completion/)</span></span>
+<span class="line"><span>::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Checkpoints ✅</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Verify if the complete development workflow is complete**</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- [ ] **Step 1: Brainstorming** - Requirements clear, design saved</span></span>
+<span class="line"><span>- [ ] **Step 2: Using Git Worktrees** - Worktree created, test baseline passed</span></span>
+<span class="line"><span>- [ ] **Step 3: Writing Plans** - Implementation plan saved, tasks small enough</span></span>
+<span class="line"><span>- [ ] **Step 4: Execution method** - Appropriate execution method chosen</span></span>
+<span class="line"><span>- [ ] **Step 5: Subagent-Driven / Executing Plans** - All tasks completed</span></span>
+<span class="line"><span>- [ ] **Step 6: TDD** - Every feature has tests, follows RED-GREEN-REFACTOR</span></span>
+<span class="line"><span>- [ ] **Step 7: Code Review** - Review after each task</span></span>
+<span class="line"><span>- [ ] **Step 8: Repeat process** - All tasks passed review</span></span>
+<span class="line"><span>- [ ] **Step 9: Finishing Branch** - Tests verified, merged or PR created, worktree cleaned</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>If any of the above doesn&#39;t meet requirements, the workflow is incomplete and needs to be supplemented.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Pitfall Alerts</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Skipping Brainstorming</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Starting implementation directly without understanding requirements and design.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- May misunderstand requirements, leading to rework</span></span>
+<span class="line"><span>- Lack design thinking, unreasonable code structure</span></span>
+<span class="line"><span>- No design document to reference later</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Must use brainstorming before any creative work</span></span>
+<span class="line"><span>- Clarify requirements, explore solutions, present design</span></span>
+<span class="line"><span>- Save design document to `docs/plans/`</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Skipping Git Worktrees</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Implementing directly on the main branch or existing branch.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- May pollute main branch</span></span>
+<span class="line"><span>- Cannot develop multiple features in parallel</span></span>
+<span class="line"><span>- Code confusion, hard to trace</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Use using-git-worktrees before each feature</span></span>
+<span class="line"><span>- Create isolated workspace</span></span>
+<span class="line"><span>- Ensure test baseline passes</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Tasks Too Large</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Tasks in implementation plan take more than 30 minutes to complete.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- Progress hard to track</span></span>
+<span class="line"><span>- Difficult to locate errors</span></span>
+<span class="line"><span>- Subagents easily get lost</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Each task takes 2-5 minutes to complete</span></span>
+<span class="line"><span>- Continue breaking down large tasks</span></span>
+<span class="line"><span>- Each task has only one action</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Skipping Code Review</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Moving directly to next task after completion without review.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- Code quality cannot be guaranteed</span></span>
+<span class="line"><span>- Issues discovered late, high fix cost</span></span>
+<span class="line"><span>- Doesn&#39;t follow best practices</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Must perform code review after each task</span></span>
+<span class="line"><span>- Two-phase review (spec compliance + code quality)</span></span>
+<span class="line"><span>- Issues found in review must be fixed</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Violating TDD</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Writing code first, then tests.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- May miss tests</span></span>
+<span class="line"><span>- Insufficient test coverage</span></span>
+<span class="line"><span>- Code quality cannot be guaranteed</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Strictly follow RED-GREEN-REFACTOR</span></span>
+<span class="line"><span>- Write failing test first, then code</span></span>
+<span class="line"><span>- Delete code written before tests</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Test Baseline Fails</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Test baseline fails after creating worktree, but implementation continues.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- May break existing functionality</span></span>
+<span class="line"><span>- Difficult to locate issues later</span></span>
+<span class="line"><span>- Doesn&#39;t follow best practices</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Test baseline failure must be fixed</span></span>
+<span class="line"><span>- Ensure existing functionality works</span></span>
+<span class="line"><span>- Cannot continue with problems</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### ❌ Worktree Not Cleaned Up</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Symptoms**: Worktree not cleaned up after feature completion.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Problems**:</span></span>
+<span class="line"><span>- Wastes disk space</span></span>
+<span class="line"><span>- Confuses branch status</span></span>
+<span class="line"><span>- Errors likely in future development</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Solutions**:</span></span>
+<span class="line"><span>- Use finishing-a-development-branch skill</span></span>
+<span class="line"><span>- Clean up worktree after completion</span></span>
+<span class="line"><span>- Choose to merge or create PR</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Red Flags - Must Avoid</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The following behaviors cause the complete development workflow to fail:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Absolutely prohibited**:</span></span>
+<span class="line"><span>- ❌ Skipping any step (Brainstorming, Git Worktrees, Writing Plans, etc.)</span></span>
+<span class="line"><span>- ❌ Starting implementation on main or master branch (unless user explicitly agrees)</span></span>
+<span class="line"><span>- ❌ Tasks too large (&gt; 5 minutes)</span></span>
+<span class="line"><span>- ❌ Skipping code review</span></span>
+<span class="line"><span>- ❌ Violating TDD (writing code first, then tests)</span></span>
+<span class="line"><span>- ❌ Continuing implementation when test baseline fails</span></span>
+<span class="line"><span>- ❌ Worktree not cleaned up</span></span>
+<span class="line"><span>- ❌ Skipping re-review (must re-review after fixes)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**If problems occur**:</span></span>
+<span class="line"><span>- Stop, go back to the step where the problem occurred</span></span>
+<span class="line"><span>- Fix the problem before continuing</span></span>
+<span class="line"><span>- Don&#39;t jump to the next step with problems</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Lesson Summary</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>The complete development workflow ensures high-quality delivery through the following mechanisms:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. **Design first** - Brainstorming ensures clear requirements, reasonable design</span></span>
+<span class="line"><span>2. **Environment isolation** - Git Worktrees protects main branch, avoids pollution</span></span>
+<span class="line"><span>3. **Detailed planning** - Writing Plans breaks down into small tasks, ensures executability</span></span>
+<span class="line"><span>4. **Flexible execution** - Subagent-Driven or Executing Plans, choose based on scenario</span></span>
+<span class="line"><span>5. **Test-driven** - TDD enforces RED-GREEN-REFACTOR, ensures test coverage</span></span>
+<span class="line"><span>6. **Code review** - Two-phase review ensures code quality and spec compliance</span></span>
+<span class="line"><span>7. **Complete and clean** - Finishing Branch verifies tests, chooses merge method, cleans environment</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Remember**: Each step is mandatory, not optional. Skipping any step leads to quality degradation or rework.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Coming Next</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&gt; In the next lesson, we&#39;ll learn **[Writing Custom Skills](../../extending/writing-skills/)**.</span></span>
+<span class="line"><span>&gt;</span></span>
+<span class="line"><span>&gt; You&#39;ll learn:</span></span>
+<span class="line"><span>&gt; - How to write your own skills following best practices</span></span>
+<span class="line"><span>&gt; - Format and structure of skill files</span></span>
+<span class="line"><span>&gt; - How to test and validate skills</span></span>
+<span class="line"><span>&gt; - How to contribute skills to the Superpowers project</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Appendix: Source Code Reference</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&lt;details&gt;</span></span>
+<span class="line"><span>&lt;summary&gt;&lt;strong&gt;Click to expand source code locations&lt;/strong&gt;&lt;/summary&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&gt; Updated: 2026-02-01</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>| Function | File Path | Line |</span></span>
+<span class="line"><span>| --- | --- | --- |</span></span>
+<span class="line"><span>| Basic workflow overview | [`README.md`](https://github.com/obra/superpowers/blob/main/README.md) | 80-96 |</span></span>
+<span class="line"><span>| Brainstorming skill | [`skills/brainstorming/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) | 1-70+ |</span></span>
+<span class="line"><span>| Writing Plans skill | [`skills/writing-plans/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md) | 1-100+ |</span></span>
+<span class="line"><span>| Subagent-Driven Development skill | [`skills/subagent-driven-development/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md) | 1-243 |</span></span>
+<span class="line"><span>| TDD skill | [`skills/test-driven-development/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) | 1-150+ |</span></span>
+<span class="line"><span>| Code Review skill | [`skills/requesting-code-review/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md) | 1-80+ |</span></span>
+<span class="line"><span>| Finishing Branch skill | [`skills/finishing-a-development-branch/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md) | 1-100+ |</span></span>
+<span class="line"><span>| Git Worktrees skill | [`skills/using-git-worktrees/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md) | 1-120+ |</span></span>
+<span class="line"><span>| Executing Plans skill | [`skills/executing-plans/SKILL.md`](https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md) | 1-150+ |</span></span>
+<span class="line"><span>| Complete user journey | [`docs/zh/obra/superpowers/prd.md`](https://github.com/obra/superpowers/blob/main/docs/zh/obra/superpowers/prd.md) | 110-146 |</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Seven Core Steps** (from README.md:80-96):</span></span>
+<span class="line"><span>1. **Brainstorming** - Activate before writing code. Refine ideas through questions, explore alternatives, present design in sections for validation. Save design document.</span></span>
+<span class="line"><span>2. **Using Git Worktrees** - Activate after design approval. Create isolated workspace in new branch, run project setup, verify clean test baseline.</span></span>
+<span class="line"><span>3. **Writing Plans** - Activate after design approval. Break work into small tasks (each 2-5 minutes). Each task has exact file paths, complete code, verification steps.</span></span>
+<span class="line"><span>4. **Subagent-Driven Development or Executing Plans** - Activate when there&#39;s a plan. Dispatch new subagent for each task, perform two-phase review (spec compliance, then code quality), or use manual checkpoints in batch execution.</span></span>
+<span class="line"><span>5. **Test-Driven Development** - Activate during implementation. Enforce RED-GREEN-REFACTOR: write failing test, watch it fail, write minimum code, watch it pass, commit. Delete code written before tests.</span></span>
+<span class="line"><span>6. **Requesting Code Review** - Activate between tasks. Review against plan, report issues by severity. Critical issues block progress.</span></span>
+<span class="line"><span>7. **Finishing a Development Branch** - Activate when tasks are complete. Verify tests, present options (merge/PR/keep/discard), clean up worktree.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Key principles**:</span></span>
+<span class="line"><span>- Agent checks relevant skills before any task</span></span>
+<span class="line"><span>- Mandatory workflow, not optional</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Trigger conditions** (from PRD:110-146):</span></span>
+<span class="line"><span>- User needs to build new feature</span></span>
+<span class="line"><span>- Fix bugs</span></span>
+<span class="line"><span>- Implement complex tasks</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Prerequisites** (from PRD:148-149):</span></span>
+<span class="line"><span>- Plugin or configuration for corresponding platform installed</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**Expected results** (from PRD:149):</span></span>
+<span class="line"><span>- Complete implementation following best practices</span></span>
+<span class="line"><span>- Systematically validated</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>&lt;/details&gt;</span></span></code></pre></div></div></div></div></div></div></div></div></div></main><footer class="VPDocFooter" data-v-39a288b8 data-v-e257564d><!--[--><!--]--><!----><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-e257564d><span class="visually-hidden" id="doc-footer-aria-label" data-v-e257564d>Pager</span><div class="pager" data-v-e257564d><a class="VPLink link pager-link prev" href="/docs/opencodedocs/obra/superpowers/advanced/branch-completion/index.html" data-v-e257564d><!--[--><span class="desc" data-v-e257564d>Previous</span><span class="title" data-v-e257564d>Graceful Development End</span><!--]--></a></div><div class="pager" data-v-e257564d><a class="VPLink link pager-link next" href="/docs/opencodedocs/obra/superpowers/extending/index.html" data-v-e257564d><!--[--><span class="desc" data-v-e257564d>Next</span><span class="title" data-v-e257564d>Extending</span><!--]--></a></div></nav></footer><!--[--><!--[--><!--[--><!--]--><div class="ad-slot-placeholder" role="complementary" aria-label="广告位预留" data-v-1603937c data-v-0967b5a2></div><!--]--><!--]--></div></div></div><!--[--><!--]--></div></div><!----><!--[--><!--]--></div></div>
+    
+    
+  <script src="https://lzw.me/x/lib/utils/h5-common.min.js"></script></body>
+</html>

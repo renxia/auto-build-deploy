@@ -1,0 +1,13 @@
+{
+  "quant-wiki": "c8fc36c22cf7c3eae6482471aaca263a27ccb953",
+  "tvm-cn": "8ae154d6289e34e5740df7e356ab8812d554046b",
+  "gemini-cli-learning": "6cbe5174d4db8e5caade20a89a8eaf57c3882c0f",
+  "elasticsearch-cn": "a55c32463dfae0e0275e33d8b15c017899d38ca6",
+  "opencodedocs": {
+    "id": "opencodedocs",
+    "desc": "OpenCode 学习文档",
+    "repo": "https://github.com/vbgate/opencodedocs.git",
+    "commitId": "b2e0a887f9150d16153ef31693275ce15dd280de",
+    "updateTime": 1772699158765
+  }
+}

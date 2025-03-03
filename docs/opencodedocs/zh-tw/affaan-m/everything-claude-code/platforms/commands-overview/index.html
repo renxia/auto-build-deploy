@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Commands: 15 個斜槓指令 | Everything Claude Code | OpenCodeDocs</title>
+    <meta name="description" content="學習 Everything Claude Code 的 15 個斜槓指令。掌握 /plan、/tdd、/code-review、/e2e、/verify 等核心指令的使用方法，提升開發效率。">
+    <meta name="generator" content="VitePress v1.6.4">
+    <link rel="preload stylesheet" href="/docs/opencodedocs/assets/style.CMD2ao8V.css" as="style">
+    <link rel="preload stylesheet" href="/docs/opencodedocs/vp-icons.css" as="style">
+    <script type="module" src="/docs/opencodedocs/assets/chunks/metadata.664e72dc.js"></script>
+    <script type="module" src="/docs/opencodedocs/assets/app.B3xzmAod.js"></script>
+    <link rel="preload" href="/docs/opencodedocs/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+                                                                                                                                    <meta name="author" content="OpenCodeDocs Team">
+    <meta name="keywords" content="开源教程, OpenCode 开发文档, 编程教程, 开发者文档">
+    <meta property="og:site_name" content="OpenCode Docs">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"auto",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+    <link rel="alternate" hreflang="en" href="https://lzw.me/docs/opencodedocs/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="x-default" href="https://lzw.me/docs/opencodedocs/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="zh" href="https://lzw.me/docs/opencodedocs/zh/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="zh-tw" href="https://lzw.me/docs/opencodedocs/zh-tw/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="ja" href="https://lzw.me/docs/opencodedocs/ja/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="ko" href="https://lzw.me/docs/opencodedocs/ko/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="es" href="https://lzw.me/docs/opencodedocs/es/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="fr" href="https://lzw.me/docs/opencodedocs/fr/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="de" href="https://lzw.me/docs/opencodedocs/de/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="pt" href="https://lzw.me/docs/opencodedocs/pt/affaan-m/everything-claude-code/platforms/commands-overview/">
+    <link rel="alternate" hreflang="ru" href="https://lzw.me/docs/opencodedocs/ru/affaan-m/everything-claude-code/platforms/commands-overview/">
+  </head>
+  <body>
+    <div id="app"><div class="Layout" data-v-1603937c><!--[--><!--]--><!--[--><span tabindex="-1" data-v-0b0ada53></span><a href="#VPContent" class="VPSkipLink visually-hidden" data-v-0b0ada53>Skip to content</a><!--]--><!----><header class="VPNav" data-v-1603937c data-v-51629c00><div class="VPNavBar" data-v-51629c00 data-v-1ceec7c8><div class="wrapper" data-v-1ceec7c8><div class="container" data-v-1ceec7c8><div class="title" data-v-1ceec7c8><div class="VPNavBarTitle" data-v-1ceec7c8 data-v-1168a8e4><a class="title" href="/docs/opencodedocs/zh-tw/" data-v-1168a8e4><!--[--><!--]--><!----><span data-v-1168a8e4>OpenCodeDocs</span><!--[--><!--]--></a></div></div><div class="content" data-v-1ceec7c8><div class="content-body" data-v-1ceec7c8><!--[--><!--]--><div class="VPNavBarSearch search" data-v-1ceec7c8><!----></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-1ceec7c8 data-v-dc692963><span id="main-nav-aria-label" class="visually-hidden" data-v-dc692963> Main Navigation </span><!--[--><!--]--></nav><div class="VPFlyout VPNavBarTranslations translations" data-v-1ceec7c8 data-v-88af2de4 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language" data-v-cf11d7a2><span class="text" data-v-cf11d7a2><span class="vpi-languages option-icon" data-v-cf11d7a2></span><!----><span class="vpi-chevron-down text-icon" data-v-cf11d7a2></span></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><!----><!--[--><!--[--><div class="items" data-v-88af2de4><p class="title" data-v-88af2de4>繁體中文</p><!--[--><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>English</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>简体中文</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ja/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>日本語</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ko/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>한국어</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/es/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Español</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/fr/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Français</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/de/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Deutsch</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/pt/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Português</span><!--]--></a></div><div class="VPMenuLink" data-v-88af2de4 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ru/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Русский</span><!--]--></a></div><!--]--></div><!--]--><!--]--></div></div></div><div class="VPNavBarAppearance appearance" data-v-1ceec7c8 data-v-6c893767><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-6c893767 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-1ceec7c8 data-v-0394ad82 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/vbgate/opencodedocs" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-1ceec7c8 data-v-bb2aa2f0 data-v-cf11d7a2><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-cf11d7a2><span class="vpi-more-horizontal icon" data-v-cf11d7a2></span></button><div class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113><!----><!--[--><!--[--><div class="group translations" data-v-bb2aa2f0><p class="trans-title" data-v-bb2aa2f0>繁體中文</p><!--[--><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>English</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/zh/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>简体中文</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ja/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>日本語</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ko/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>한국어</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/es/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Español</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/fr/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Français</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/de/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Deutsch</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/pt/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Português</span><!--]--></a></div><div class="VPMenuLink" data-v-bb2aa2f0 data-v-35975db6><a class="VPLink link" href="/docs/opencodedocs/ru/affaan-m/everything-claude-code/platforms/commands-overview/" data-v-35975db6><!--[--><span data-v-35975db6>Русский</span><!--]--></a></div><!--]--></div><div class="group" data-v-bb2aa2f0><div class="item appearance" data-v-bb2aa2f0><p class="label" data-v-bb2aa2f0>主題</p><div class="appearance-action" data-v-bb2aa2f0><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title aria-checked="false" data-v-bb2aa2f0 data-v-5337faa4 data-v-1d5665e3><span class="check" data-v-1d5665e3><span class="icon" data-v-1d5665e3><!--[--><span class="vpi-sun sun" data-v-5337faa4></span><span class="vpi-moon moon" data-v-5337faa4></span><!--]--></span></span></button></div></div></div><div class="group" data-v-bb2aa2f0><div class="item social-links" data-v-bb2aa2f0><div class="VPSocialLinks social-links-list" data-v-bb2aa2f0 data-v-7bc22406><!--[--><a class="VPSocialLink no-icon" href="https://github.com/vbgate/opencodedocs" aria-label="github" target="_blank" rel="noopener" data-v-7bc22406 data-v-bd121fe5><span class="vpi-social-github"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-1ceec7c8 data-v-e5dd9c1c><span class="container" data-v-e5dd9c1c><span class="top" data-v-e5dd9c1c></span><span class="middle" data-v-e5dd9c1c></span><span class="bottom" data-v-e5dd9c1c></span></span></button></div></div></div></div><div class="divider" data-v-1ceec7c8><div class="divider-line" data-v-1ceec7c8></div></div></div><!----></header><div class="VPLocalNav empty fixed" data-v-1603937c data-v-a6f0e41e><div class="container" data-v-a6f0e41e><!----><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-a6f0e41e data-v-8a42e2b4><button data-v-8a42e2b4>回到頂部</button><!----></div></div></div><!----><div class="VPContent" id="VPContent" data-v-1603937c data-v-1428d186><div class="VPDoc has-aside" data-v-1428d186 data-v-39a288b8><!--[--><!--]--><div class="container" data-v-39a288b8><div class="aside" data-v-39a288b8><div class="aside-curtain" data-v-39a288b8></div><div class="aside-container" data-v-39a288b8><div class="aside-content" data-v-39a288b8><div class="VPDocAside" data-v-39a288b8 data-v-3f215769><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-3f215769 data-v-a5bbad30><div class="content" data-v-a5bbad30><div class="outline-marker" data-v-a5bbad30></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-a5bbad30>頁面導航</div><ul class="VPDocOutlineItem root" data-v-a5bbad30 data-v-b933a997><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-3f215769></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-39a288b8><div class="content-container" data-v-39a288b8><!--[--><!--]--><main class="main" data-v-39a288b8><div style="position:relative;" class="vp-doc _docs_opencodedocs_zh-tw_affaan-m_everything-claude-code_platforms_commands-overview_" data-v-39a288b8><div><h1 id="核心-commands-詳解-15-個斜槓指令全攻略" tabindex="-1">核心 Commands 詳解：15 個斜槓指令全攻略 <a class="header-anchor" href="#核心-commands-詳解-15-個斜槓指令全攻略" aria-label="Permalink to &quot;核心 Commands 詳解：15 個斜槓指令全攻略&quot;">​</a></h1><h2 id="學完你能做什麼" tabindex="-1">學完你能做什麼 <a class="header-anchor" href="#學完你能做什麼" aria-label="Permalink to &quot;學完你能做什麼&quot;">​</a></h2><ul><li>快速啟動 TDD 開發流程，實現高品質程式碼</li><li>建立系統化實作計畫，避免遺漏關鍵步驟</li><li>執行全面程式碼審查和安全稽核</li><li>產生端對端測試，驗證關鍵使用者流程</li><li>自動化修復建置錯誤，節省除錯時間</li><li>安全清理死程式碼，保持程式碼庫精簡</li><li>提取和復用已解決問題的模式</li><li>管理工作狀態和檢查點</li><li>執行全面驗證，確保程式碼就緒</li></ul><h2 id="你現在的困境" tabindex="-1">你現在的困境 <a class="header-anchor" href="#你現在的困境" aria-label="Permalink to &quot;你現在的困境&quot;">​</a></h2><p>開發過程中你可能會遇到這些問題：</p><ul><li><strong>不知道從哪裡開始</strong> —— 面對新需求，如何拆解實作步驟？</li><li><strong>測試覆蓋率低</strong> —— 寫的程式碼很多，但測試不夠，品質難以保證</li><li><strong>建置錯誤堆積</strong> —— 修改程式碼後，類型錯誤一個接一個，不知道從哪裡修</li><li><strong>程式碼審查不系統</strong> —— 靠眼看容易漏掉安全問題</li><li><strong>重複解決同樣的問題</strong> —— 遇過的坑下次又掉進去了</li></ul><p>Everything Claude Code 的 15 個斜槓指令就是為了解決這些痛點設計的。</p><h2 id="核心思路" tabindex="-1">核心思路 <a class="header-anchor" href="#核心思路" aria-label="Permalink to &quot;核心思路&quot;">​</a></h2><p><strong>指令是工作流的入口點</strong>。每個指令封裝了一個完整的開發流程，呼叫相應的 agent 或技能，幫你完成特定任務。</p><div class="tip custom-block"><p class="custom-block-title">指令 vs Agent vs Skill</p><ul><li><strong>指令</strong>：你直接在 Claude Code 中輸入的快捷入口（如 <code>/tdd</code>、<code>/plan</code>）</li><li><strong>Agent</strong>：指令呼叫的專業子代理，負責具體執行</li><li><strong>Skill</strong>：Agent 可以引用的工作流定義和領域知識</li></ul><p>一個指令通常會呼叫一個或多個 agent，agent 可能會引用相關的 skill。</p></div><h2 id="指令概覽" tabindex="-1">指令概覽 <a class="header-anchor" href="#指令概覽" aria-label="Permalink to &quot;指令概覽&quot;">​</a></h2><p>15 個指令按功能分類：</p><table tabindex="0"><thead><tr><th>類別</th><th>指令</th><th>用途</th></tr></thead><tbody><tr><td><strong>開發流程</strong></td><td><code>/plan</code></td><td>建立實作計畫</td></tr><tr><td></td><td><code>/tdd</code></td><td>執行測試驅動開發</td></tr><tr><td></td><td><code>/orchestrate</code></td><td>序列執行多個 agents</td></tr><tr><td><strong>程式碼品質</strong></td><td><code>/code-review</code></td><td>程式碼審查</td></tr><tr><td></td><td><code>/build-fix</code></td><td>修復建置錯誤</td></tr><tr><td></td><td><code>/refactor-clean</code></td><td>清理死程式碼</td></tr><tr><td></td><td><code>/verify</code></td><td>全面驗證</td></tr><tr><td><strong>測試</strong></td><td><code>/e2e</code></td><td>端對端測試</td></tr><tr><td></td><td><code>/test-coverage</code></td><td>分析測試覆蓋率</td></tr><tr><td></td><td><code>/eval</code></td><td>管理 eval 驅動開發</td></tr><tr><td><strong>文件與架構</strong></td><td><code>/update-docs</code></td><td>同步文件</td></tr><tr><td></td><td><code>/update-codemaps</code></td><td>更新架構文件</td></tr><tr><td><strong>狀態管理</strong></td><td><code>/checkpoint</code></td><td>保存工作狀態</td></tr><tr><td><strong>學習與優化</strong></td><td><code>/learn</code></td><td>提取可復用模式</td></tr><tr><td><strong>組態</strong></td><td><code>/setup-pm</code></td><td>組態套件管理員</td></tr></tbody></table><h2 id="開發流程類指令" tabindex="-1">開發流程類指令 <a class="header-anchor" href="#開發流程類指令" aria-label="Permalink to &quot;開發流程類指令&quot;">​</a></h2><h3 id="plan-規劃複雜功能" tabindex="-1">/plan：規劃複雜功能 <a class="header-anchor" href="#plan-規劃複雜功能" aria-label="Permalink to &quot;/plan：規劃複雜功能&quot;">​</a></h3><p><strong>用途</strong>：在開始編碼前，建立詳細的實作計畫。</p><p><strong>適用場景</strong>：</p><ul><li>開始新功能開發</li><li>進行重大架構變更</li><li>需求不清晰或模糊時</li><li>多檔案/多元件協同修改</li></ul><p><strong>工作流程</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>1. 重述需求</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>2. 識別風險和相依性</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>3. 拆分為具體階段</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>4. 等待你確認</span></span></code></pre></div><div class="warning custom-block"><p class="custom-block-title">關鍵特性</p><p>planner agent <strong>不會寫任何程式碼</strong>，直到你明確確認計畫。</p></div><p><strong>示例</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>你：/plan 我需要添加即時通知功能</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Claude：</span></span>
+<span class="line"><span># Implementation Plan: Real-Time Market Resolution Notifications</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Requirements Restatement</span></span>
+<span class="line"><span>- Send notifications when markets resolve</span></span>
+<span class="line"><span>- Support multiple channels (in-app, email, webhook)</span></span>
+<span class="line"><span>- Ensure reliable delivery</span></span>
+<span class="line"><span>- Include market outcome and user&#39;s position result</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Implementation Phases</span></span>
+<span class="line"><span>### Phase 1: Database Schema</span></span>
+<span class="line"><span>- Add notifications table</span></span>
+<span class="line"><span>- Add user_notification_preferences table</span></span>
+<span class="line"><span>- Create indexes</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### Phase 2: Notification Service</span></span>
+<span class="line"><span>- Create notification queue using BullMQ/Redis</span></span>
+<span class="line"><span>- Implement retry logic</span></span>
+<span class="line"><span>- Create notification templates</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>WAITING FOR CONFIRMATION: Proceed with this plan? (yes/no/modify)</span></span></code></pre></div><p><strong>最佳實踐</strong>：</p><ul><li>✅ 複雜功能先規劃再實作</li><li>✅ 仔細檢查風險和相依性</li><li>✅ 按階段執行，每階段驗證</li><li>❌ 不要直接跳過規劃</li></ul><hr><h3 id="tdd-測試驅動開發" tabindex="-1">/tdd：測試驅動開發 <a class="header-anchor" href="#tdd-測試驅動開發" aria-label="Permalink to &quot;/tdd：測試驅動開發&quot;">​</a></h3><p><strong>用途</strong>：強制執行 TDD 流程，確保測試覆蓋率 ≥ 80%。</p><p><strong>適用場景</strong>：</p><ul><li>實作新功能</li><li>修復 Bug（先寫能重現 bug 的測試）</li><li>重構現有程式碼</li><li>撰寫核心業務邏輯</li></ul><p><strong>TDD 循環</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>RED → GREEN → REFACTOR → REPEAT</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>RED:      寫一個會失敗的測試</span></span>
+<span class="line"><span>GREEN:    寫最少的程式碼讓測試通過</span></span>
+<span class="line"><span>REFACTOR: 改進程式碼，保持測試通過</span></span>
+<span class="line"><span>REPEAT:   下一個功能/場景</span></span></code></pre></div><div class="warning custom-block"><p class="custom-block-title">強制要求</p><p><strong>必須先寫測試，再寫程式碼</strong>。不能跳過 RED 階段。</p></div><p><strong>示例</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>你：/tdd 我需要一個計算市場流動性分數的函式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Claude（tdd-guide agent）：</span></span>
+<span class="line"><span>## Step 1: Define Interface (SCAFFOLD)</span></span>
+<span class="line"><span>```typescript</span></span>
+<span class="line"><span>export interface MarketData {</span></span>
+<span class="line"><span>  totalVolume: number</span></span>
+<span class="line"><span>  bidAskSpread: number</span></span>
+<span class="line"><span>  activeTraders: number</span></span>
+<span class="line"><span>  lastTradeTime: Date</span></span>
+<span class="line"><span>}</span></span></code></pre></div><h2 id="step-2-write-failing-test-red" tabindex="-1">Step 2: Write Failing Test (RED) <a class="header-anchor" href="#step-2-write-failing-test-red" aria-label="Permalink to &quot;Step 2: Write Failing Test (RED)&quot;">​</a></h2><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">test</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;should return high score for liquid market&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, () </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> market</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> { </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">...</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> }</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">calculateLiquidityScore</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(market)).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">toBeGreaterThan</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">80</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">})</span></span></code></pre></div><h2 id="step-3-run-tests-verify-fail" tabindex="-1">Step 3: Run Tests - Verify FAIL <a class="header-anchor" href="#step-3-run-tests-verify-fail" aria-label="Permalink to &quot;Step 3: Run Tests - Verify FAIL&quot;">​</a></h2><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> lib/liquidity.test.ts</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">FAIL</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ✕</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> should</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> high</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> score</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> for</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> liquid</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> market</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  Error:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> Not</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> implemented</span></span></code></pre></div><h2 id="step-4-implement-minimal-code-green" tabindex="-1">Step 4: Implement Minimal Code (GREEN) <a class="header-anchor" href="#step-4-implement-minimal-code-green" aria-label="Permalink to &quot;Step 4: Implement Minimal Code (GREEN)&quot;">​</a></h2><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">export</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> function</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> calculateLiquidityScore</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">market</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> MarketData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  // 實作程式碼...</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><h2 id="step-5-run-tests-verify-pass" tabindex="-1">Step 5: Run Tests - Verify PASS <a class="header-anchor" href="#step-5-run-tests-verify-pass" aria-label="Permalink to &quot;Step 5: Run Tests - Verify PASS&quot;">​</a></h2><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> lib/liquidity.test.ts</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">PASS</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ✓</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> should</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> return</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> high</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> score</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> for</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> liquid</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> market</span></span></code></pre></div><h2 id="step-6-refactor-improve" tabindex="-1">Step 6: Refactor (IMPROVE) <a class="header-anchor" href="#step-6-refactor-improve" aria-label="Permalink to &quot;Step 6: Refactor (IMPROVE)&quot;">​</a></h2><p>// 改進程式碼結構...</p><h2 id="step-7-verify-tests-still-pass" tabindex="-1">Step 7: Verify Tests Still Pass <a class="header-anchor" href="#step-7-verify-tests-still-pass" aria-label="Permalink to &quot;Step 7: Verify Tests Still Pass&quot;">​</a></h2><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npm</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> lib/liquidity.test.ts</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">PASS</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ✓</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> all</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> tests</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> passing</span></span></code></pre></div><h2 id="step-8-check-coverage" tabindex="-1">Step 8: Check Coverage <a class="header-anchor" href="#step-8-check-coverage" aria-label="Permalink to &quot;Step 8: Check Coverage&quot;">​</a></h2><p>Coverage: 100% ✅ (Target: 80%)</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**最佳實踐**：</span></span>
+<span class="line"><span>- ✅ 先寫介面定義</span></span>
+<span class="line"><span>- ✅ 測試失敗後再實作</span></span>
+<span class="line"><span>- ✅ 每寫完一個功能立即測試</span></span>
+<span class="line"><span>- ✅ 重構前後都驗證測試通過</span></span>
+<span class="line"><span>- ✅ 覆蓋率 ≥ 80%（關鍵程式碼 100%）</span></span>
+<span class="line"><span>- ❌ 不要寫太多程式碼才測試</span></span>
+<span class="line"><span>- ❌ 不要跳過 RED 階段</span></span>
+<span class="line"><span>- ❌ 不要測試實作細節</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /orchestrate：序列執行 agents</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：自動化執行多個 agents 的序列工作流。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 完整功能開發（planner → tdd-guide → code-reviewer → security-reviewer）</span></span>
+<span class="line"><span>- Bug 修復流程（explorer → tdd-guide → code-reviewer）</span></span>
+<span class="line"><span>- 安全審查（security-reviewer → code-reviewer → architect）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流類型**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>| 工作流類型 | Agent 序列 |</span></span>
+<span class="line"><span>|--- | ---|</span></span>
+<span class="line"><span>| `feature` | planner → tdd-guide → code-reviewer → security-reviewer |</span></span>
+<span class="line"><span>| `bugfix` | explorer → tdd-guide → code-reviewer |</span></span>
+<span class="line"><span>| `refactor` | architect → code-reviewer → tdd-guide |</span></span>
+<span class="line"><span>| `security` | security-reviewer → code-reviewer → architect |</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/orchestrate feature &quot;添加使用者認證功能&quot;</p><p>Claude：</p><h3 id="orchestration-report" tabindex="-1">ORCHESTRATION REPORT <a class="header-anchor" href="#orchestration-report" aria-label="Permalink to &quot;ORCHESTRATION REPORT&quot;">​</a></h3><p>Workflow: feature Task: 添加使用者認證功能 Agents: planner → tdd-guide → code-reviewer → security-reviewer</p><h2 id="summary" tabindex="-1">SUMMARY <a class="header-anchor" href="#summary" aria-label="Permalink to &quot;SUMMARY&quot;">​</a></h2><p>成功實現使用者認證功能，包括註冊、登入、工作階段管理。</p><h2 id="agent-outputs" tabindex="-1">AGENT OUTPUTS <a class="header-anchor" href="#agent-outputs" aria-label="Permalink to &quot;AGENT OUTPUTS&quot;">​</a></h2><p>Planner: 建立了 4 階段實作計畫 TDD Guide: 實現了認證服務，覆蓋率 95% Code Reviewer: 發現 3 個高優先順序問題，已修復 Security Reviewer: 通過安全稽核，無漏洞</p><h2 id="files-changed" tabindex="-1">FILES CHANGED <a class="header-anchor" href="#files-changed" aria-label="Permalink to &quot;FILES CHANGED&quot;">​</a></h2><ul><li>src/services/auth.ts</li><li>src/api/auth/route.ts</li><li>tests/auth.test.ts</li><li>...</li></ul><h2 id="test-results" tabindex="-1">TEST RESULTS <a class="header-anchor" href="#test-results" aria-label="Permalink to &quot;TEST RESULTS&quot;">​</a></h2><p>PASS: 24/24 tests (100%)</p><h2 id="security-status" tabindex="-1">SECURITY STATUS <a class="header-anchor" href="#security-status" aria-label="Permalink to &quot;SECURITY STATUS&quot;">​</a></h2><p>✅ No vulnerabilities found</p><h2 id="recommendation" tabindex="-1">RECOMMENDATION <a class="header-anchor" href="#recommendation" aria-label="Permalink to &quot;RECOMMENDATION&quot;">​</a></h2><p>✅ SHIP - Ready for production</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**最佳實踐**：</span></span>
+<span class="line"><span>- ✅ 複雜功能使用 orchestrate</span></span>
+<span class="line"><span>- ✅ 每個 agent 之間有清晰的手持文件</span></span>
+<span class="line"><span>- ✅ 並行執行獨立的檢查（code-reviewer 和 security-reviewer）</span></span>
+<span class="line"><span>- ❌ 不要在簡單任務上使用 orchestrate</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 程式碼品質類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /code-review：程式碼審查</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：全面審查未提交的程式碼，檢查安全問題和程式碼品質。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 提交程式碼前</span></span>
+<span class="line"><span>- 合併 PR 前</span></span>
+<span class="line"><span>- 完成功能開發後</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**檢查項**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>| 類別 | 檢查內容 | 嚴重程度 |</span></span>
+<span class="line"><span>|--- | --- | ---|</span></span>
+<span class="line"><span>| **安全** | 硬編碼金鑰、SQL 注入、XSS、缺少輸入驗證 | CRITICAL |</span></span>
+<span class="line"><span>| **程式碼品質** | 函式 &gt; 50 行、檔案 &gt; 800 行、巢狀深度 &gt; 4 | HIGH |</span></span>
+<span class="line"><span>| **最佳實踐** | 變異模式、console.log、缺少測試、TODO/FIXME | MEDIUM |</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/code-review</p><p>Claude（code-reviewer agent）：</p><h1 id="code-review-report" tabindex="-1">Code Review Report <a class="header-anchor" href="#code-review-report" aria-label="Permalink to &quot;Code Review Report&quot;">​</a></h1><h2 id="security-issues-critical" tabindex="-1">Security Issues (CRITICAL) <a class="header-anchor" href="#security-issues-critical" aria-label="Permalink to &quot;Security Issues (CRITICAL)&quot;">​</a></h2><p>🔴 [HIGH] Hardcoded API key File: src/api/github.ts:15 Issue: GitHub token is hardcoded Fix: Move to environment variable</p><h2 id="code-quality-high" tabindex="-1">Code Quality (HIGH) <a class="header-anchor" href="#code-quality-high" aria-label="Permalink to &quot;Code Quality (HIGH)&quot;">​</a></h2><p>🟡 [MEDIUM] Function exceeds 50 lines File: src/utils/formatter.ts:62 Lines: 78 Issue: FormatLargeData function is too long Fix: Split into smaller functions</p><h2 id="best-practices-medium" tabindex="-1">Best Practices (MEDIUM) <a class="header-anchor" href="#best-practices-medium" aria-label="Permalink to &quot;Best Practices (MEDIUM)&quot;">​</a></h2><p>🟢 [LOW] TODO comment File: src/services/user.ts:45 Issue: TODO: Add rate limiting Fix: Implement or remove comment</p><h2 id="summary-1" tabindex="-1">SUMMARY <a class="header-anchor" href="#summary-1" aria-label="Permalink to &quot;SUMMARY&quot;">​</a></h2><p>CRITICAL: 1 (Must fix before commit) HIGH: 2 (Should fix) MEDIUM: 3 (Nice to have)</p><p>❌ BLOCKED - Critical security issues found</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: danger 阻止提交規則</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>如果發現 **CRITICAL** 或 **HIGH** 級別問題，會阻止提交。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>:::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /build-fix：修復建置錯誤</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：逐個修復 TypeScript 和建置錯誤。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 執行 `npm run build` 失敗</span></span>
+<span class="line"><span>- TypeScript 類型錯誤</span></span>
+<span class="line"><span>- 編譯錯誤</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流程**：</span></span></code></pre></div><ol><li>執行建置 ↓</li><li>解析錯誤輸出，按嚴重程度排序 ↓</li><li>逐個修復： <ul><li>顯示錯誤上下文</li><li>解釋問題</li><li>提出修復方案</li><li>應用修復</li><li>重新執行建置 ↓</li></ul></li><li>產生修復總結</li></ol><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/build-fix</p><p>Claude（build-error-resolver agent）：</p><h1 id="fixing-build-errors" tabindex="-1">Fixing Build Errors <a class="header-anchor" href="#fixing-build-errors" aria-label="Permalink to &quot;Fixing Build Errors&quot;">​</a></h1><p>Running build: npm run build Found 5 errors</p><h2 id="error-1-type-string-is-not-assignable-to-type-number" tabindex="-1">Error 1: Type &#39;string&#39; is not assignable to type &#39;number&#39; <a class="header-anchor" href="#error-1-type-string-is-not-assignable-to-type-number" aria-label="Permalink to &quot;Error 1: Type &#39;string&#39; is not assignable to type &#39;number&#39;&quot;">​</a></h2><p>File: src/calculator.ts:15</p><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> result</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> add</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;10&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;20&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// Error</span></span></code></pre></div><p>Issue: add function expects numbers, received strings Fix: Convert to numbers</p><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> result</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> add</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;10&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">), </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;20&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">))</span></span></code></pre></div><p>✅ Fixed. Re-running build...</p><h2 id="error-2-cannot-find-module-utils" tabindex="-1">Error 2: Cannot find module &#39;./utils&#39; <a class="header-anchor" href="#error-2-cannot-find-module-utils" aria-label="Permalink to &quot;Error 2: Cannot find module &#39;./utils&#39;&quot;">​</a></h2><p>File: src/index.ts:3 Issue: Import path is incorrect Fix: Change to &#39;./utils/helper&#39;</p><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> { helper } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &#39;./utils/helper&#39;</span></span></code></pre></div><p>✅ Fixed. Re-running build...</p><p>...</p><h2 id="summary-2" tabindex="-1">SUMMARY <a class="header-anchor" href="#summary-2" aria-label="Permalink to &quot;SUMMARY&quot;">​</a></h2><p>Errors Fixed: 5 Errors Remaining: 0 Build Status: ✅ PASS</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: tip 安全第一</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>一次只修復一個錯誤，防止引入新問題。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>:::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /refactor-clean：清理死程式碼</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：安全識別和移除未使用的程式碼。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 程式碼庫中有大量未使用的檔案和匯出</span></span>
+<span class="line"><span>- 減少維護負擔</span></span>
+<span class="line"><span>- 提升程式碼可讀性</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流程**：</span></span></code></pre></div><ol><li>執行死程式碼分析工具 <ul><li>knip：查找未使用的匯出和檔案</li><li>depcheck：查找未使用的相依性</li><li>ts-prune：查找未使用的 TypeScript 匯出 ↓</li></ul></li><li>產生綜合報告 ↓</li><li>按嚴重程度分類 <ul><li>SAFE：測試檔案、未使用的工具函式</li><li>CAUTION：API 路由、元件</li><li>DANGER：組態檔案、入口檔案 ↓</li></ul></li><li>逐個刪除（先測試） ↓</li><li>產生清理總結</li></ol><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/refactor-clean</p><p>Claude（refactor-cleaner agent）：</p><h1 id="dead-code-analysis" tabindex="-1">Dead Code Analysis <a class="header-anchor" href="#dead-code-analysis" aria-label="Permalink to &quot;Dead Code Analysis&quot;">​</a></h1><h2 id="tools-run" tabindex="-1">Tools Run <a class="header-anchor" href="#tools-run" aria-label="Permalink to &quot;Tools Run&quot;">​</a></h2><ul><li>✅ knip: Found 12 unused exports</li><li>✅ depcheck: Found 5 unused dependencies</li><li>✅ ts-prune: Found 8 unused TypeScript exports</li></ul><h2 id="classification" tabindex="-1">Classification <a class="header-anchor" href="#classification" aria-label="Permalink to &quot;Classification&quot;">​</a></h2><h3 id="safe-can-delete" tabindex="-1">SAFE (Can delete) <a class="header-anchor" href="#safe-can-delete" aria-label="Permalink to &quot;SAFE (Can delete)&quot;">​</a></h3><ul><li><code>src/utils/old-helper.ts</code> - Unused utility function</li><li><code>src/components/Button.tsx</code> - Not used anywhere</li><li><code>lodash</code> - Unused dependency</li></ul><h3 id="caution-review-first" tabindex="-1">CAUTION (Review first) <a class="header-anchor" href="#caution-review-first" aria-label="Permalink to &quot;CAUTION (Review first)&quot;">​</a></h3><ul><li><code>src/api/users.ts</code> - Only used in tests</li><li><code>@types/node</code> - May be used in build scripts</li></ul><h3 id="danger-do-not-delete" tabindex="-1">DANGER (Do not delete) <a class="header-anchor" href="#danger-do-not-delete" aria-label="Permalink to &quot;DANGER (Do not delete)&quot;">​</a></h3><ul><li><code>src/index.ts</code> - Main entry point</li><li><code>tsconfig.json</code> - Configuration file</li></ul><h2 id="deletion-plan" tabindex="-1">Deletion Plan <a class="header-anchor" href="#deletion-plan" aria-label="Permalink to &quot;Deletion Plan&quot;">​</a></h2><p>Run full test suite first: ✅ Tests passing (98% coverage)</p><p>Deleting SAFE items...</p><ol><li><p>Removing src/utils/old-helper.ts ✅ Tests still passing</p></li><li><p>Removing src/components/Button.tsx ✅ Tests still passing</p></li><li><p>Removing lodash from package.json ✅ Tests still passing</p></li></ol><h2 id="summary-3" tabindex="-1">SUMMARY <a class="header-anchor" href="#summary-3" aria-label="Permalink to &quot;SUMMARY&quot;">​</a></h2><p>Files deleted: 12 Dependencies removed: 5 Tests still passing: ✅</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: warning 測試優先</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**刪除程式碼前必須先執行測試**，確保沒有破壞現有功能。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>:::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /verify：全面驗證</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：執行完整的程式碼驗證檢查。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 提交程式碼前</span></span>
+<span class="line"><span>- 合併 PR 前</span></span>
+<span class="line"><span>- 準備發布時</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**檢查項**（按順序）：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. **建置檢查** - 執行建置命令</span></span>
+<span class="line"><span>2. **類型檢查** - 執行 TypeScript 檢查器</span></span>
+<span class="line"><span>3. **Lint 檢查** - 執行 linter</span></span>
+<span class="line"><span>4. **測試套件** - 執行所有測試，報告覆蓋率</span></span>
+<span class="line"><span>5. **Console.log 稽核** - 搜尋原始檔案中的 console.log</span></span>
+<span class="line"><span>6. **Git 狀態** - 顯示未提交的變更</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/verify pre-pr</p><p>Claude：</p><h1 id="verification-report" tabindex="-1">Verification Report <a class="header-anchor" href="#verification-report" aria-label="Permalink to &quot;Verification Report&quot;">​</a></h1><p>VERIFICATION: ✅ PASS</p><p>Build: ✅ OK Types: ✅ OK (0 errors) Lint: ✅ OK (0 issues) Tests: ✅ 142/145 passed, 98% coverage Secrets: ✅ OK (0 found) Logs: ⚠️ 3 console.logs found</p><p>Console.log locations:</p><ul><li>src/utils/logger.ts:15 (intentional logger)</li><li>src/api/webhook.ts:42 (debug, remove before commit)</li><li>src/services/auth.ts:89 (debug, remove before commit)</li></ul><p>Ready for PR: ⚠️ YES (remove debug logs)</p><p>Files modified since last commit:</p><ul><li>src/api/webhook.ts (new)</li><li>src/services/auth.ts (modified)</li><li>tests/auth.test.ts (modified)</li></ul><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**參數**：</span></span>
+<span class="line"><span>- `quick` - 僅建置 + 類型檢查</span></span>
+<span class="line"><span>- `full` - 所有檢查（預設）</span></span>
+<span class="line"><span>- `pre-commit` - 提交相關檢查</span></span>
+<span class="line"><span>- `pre-pr` - 完整檢查 + 安全掃描</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 測試類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /e2e：端對端測試</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：使用 Playwright 產生和執行端對端測試。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 測試關鍵使用者流程（登入、交易、支付）</span></span>
+<span class="line"><span>- 驗證多步驟流程的端對端整合</span></span>
+<span class="line"><span>- 測試 UI 互動和導覽</span></span>
+<span class="line"><span>- 準備生產部署</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流程**：</span></span></code></pre></div><ol><li>分析使用者流程，識別測試場景 ↓</li><li>產生 Playwright 測試（使用 Page Object 模式） ↓</li><li>跨多個瀏覽器執行測試（Chrome、Firefox、Safari） ↓</li><li>擷取失敗時的截圖、影片、追蹤 ↓</li><li>產生包含結果和工件的報告 ↓</li><li>識別不穩定的測試並建議修復</li></ol><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/e2e 測試市場搜尋和查看流程</p><p>Claude（e2e-runner agent）：</p><h1 id="e2e-test-generation-market-search-and-view-flow" tabindex="-1">E2E Test Generation: Market Search and View Flow <a class="header-anchor" href="#e2e-test-generation-market-search-and-view-flow" aria-label="Permalink to &quot;E2E Test Generation: Market Search and View Flow&quot;">​</a></h1><h2 id="test-scenario-identified" tabindex="-1">Test Scenario Identified <a class="header-anchor" href="#test-scenario-identified" aria-label="Permalink to &quot;Test Scenario Identified&quot;">​</a></h2><p><strong>User Journey:</strong> Market Search → View Results → Click Market → View Details</p><h2 id="generated-test-code" tabindex="-1">Generated Test Code <a class="header-anchor" href="#generated-test-code" aria-label="Permalink to &quot;Generated Test Code&quot;">​</a></h2><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> { test, expect } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &#39;@playwright/test&#39;</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> { MarketsPage } </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">from</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &#39;../../pages/MarketsPage&#39;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">test</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;user can search markets and view details&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">async</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> ({ </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">page</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> }) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=&gt;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> marketsPage</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> MarketsPage</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(page)</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> marketsPage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">goto</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  // Perform search</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> marketsPage.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">searchMarkets</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;election&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> page.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">waitForResponse</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">resp</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =&gt;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    resp.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">url</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">includes</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;/api/markets/search&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">&amp;&amp;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> resp.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">status</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">() </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">===</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 200</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  )</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  // Verify results</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> marketCards</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> marketsPage.marketCards</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(marketCards.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">first</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">toBeVisible</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  // Click on first result</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> marketCards.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">first</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">().</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">click</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  // Verify market details page loads</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(page).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">toHaveURL</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">/</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold;">\/</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF;">markets</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold;">\/</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">[a-z0-9-]</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">+</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">/</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  await</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> expect</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(page.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">locator</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;[data-testid=&quot;market-name&quot;]&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">toBeVisible</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">})</span></span></code></pre></div><h2 id="running-tests" tabindex="-1">Running Tests <a class="header-anchor" href="#running-tests" aria-label="Permalink to &quot;Running Tests&quot;">​</a></h2><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npx</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> playwright</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> test</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> tests/e2e/markets/search-and-view.spec.ts</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">✓</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [chromium] user can search markets and view details (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">4.2s</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">✓</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> [chromium] search with no results shows empty state (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">1.8s</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">2</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> passed</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> (6.0s)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">Artifacts</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> generated:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">-</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> artifacts/search-results.png</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">-</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> artifacts/market-details.png</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">-</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> playwright-report/index.html</span></span></code></pre></div><h2 id="test-report" tabindex="-1">Test Report <a class="header-anchor" href="#test-report" aria-label="Permalink to &quot;Test Report&quot;">​</a></h2><p>╔══════════════════════════════════════════════════════╗ ║ Status: ✅ ALL TESTS PASSED ║ ║ Total: 2 tests ║ ║ Passed: 2 (100%) ║ ║ Flaky: 0 ║ ╚══════════════════════════════════════════════════════╝</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**快速指令**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>```bash</span></span>
+<span class="line"><span># 執行所有 E2E 測試</span></span>
+<span class="line"><span>npx playwright test</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 執行特定測試檔案</span></span>
+<span class="line"><span>npx playwright test tests/e2e/markets/search.spec.ts</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 以 headed 模式執行（看到瀏覽器）</span></span>
+<span class="line"><span>npx playwright test --headed</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 除錯測試</span></span>
+<span class="line"><span>npx playwright test --debug</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 查看報告</span></span>
+<span class="line"><span>npx playwright show-report</span></span></code></pre></div><p><strong>最佳實踐</strong>：</p><ul><li>✅ 使用 Page Object Model 提高可維護性</li><li>✅ 使用 data-testid 屬性作為選擇器</li><li>✅ 等待 API 回應，而非任意超時</li><li>✅ 測試關鍵使用者流程</li><li>❌ 不要使用脆弱的選擇器（CSS 類會變化）</li><li>❌ 不要測試實作細節</li></ul><hr><h3 id="test-coverage-測試覆蓋率分析" tabindex="-1">/test-coverage：測試覆蓋率分析 <a class="header-anchor" href="#test-coverage-測試覆蓋率分析" aria-label="Permalink to &quot;/test-coverage：測試覆蓋率分析&quot;">​</a></h3><p><strong>用途</strong>：分析測試覆蓋率並產生缺失的測試。</p><p><strong>適用場景</strong>：</p><ul><li>覆蓋率低於 80%</li><li>需要補充測試</li></ul><p><strong>工作流程</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>1. 執行帶覆蓋率的測試</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>2. 分析覆蓋率報告（coverage/coverage-summary.json）</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>3. 識別低於 80% 覆蓋率閾值的檔案</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>4. 為每個覆蓋率不足的檔案：</span></span>
+<span class="line"><span>   - 分析未測試的程式碼路徑</span></span>
+<span class="line"><span>   - 產生函式的單元測試</span></span>
+<span class="line"><span>   - 產生 API 的整合測試</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>5. 驗證新測試通過</span></span>
+<span class="line"><span>   ↓</span></span>
+<span class="line"><span>6. 顯示前後覆蓋率指標</span></span></code></pre></div><p><strong>示例</strong>：</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>你：/test-coverage</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Claude：</span></span>
+<span class="line"><span># Test Coverage Analysis</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Running tests with coverage...</span></span>
+<span class="line"><span>npm test --coverage</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Coverage Report</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>File                      | % Stmts | % Branch | % Funcs | % Lines</span></span>
+<span class="line"><span>--------------------------|---------|----------|---------|--------</span></span>
+<span class="line"><span>src/services/auth.ts       |   92    |   88     |   100   |   91</span></span>
+<span class="line"><span>src/utils/formatter.ts     |   65    |   50     |   75    |   63  ⚠️</span></span>
+<span class="line"><span>src/api/users.ts          |   100   |   100    |   100   |   100</span></span>
+<span class="line"><span>src/components/Button.tsx  |   45    |   30     |   50    |   44  ⚠️</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Overall                   |   78    |   72     |   85    |   76  ⚠️</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Target: 80%</span></span>
+<span class="line"><span>Current: 76% ❌ Need to improve</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## Generating Missing Tests</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### File: src/utils/formatter.ts (65% coverage)</span></span>
+<span class="line"><span>Untested paths:</span></span>
+<span class="line"><span>- FormatCurrency with negative values</span></span>
+<span class="line"><span>- FormatDate with custom locale</span></span>
+<span class="line"><span>- TruncateText with long strings</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Generating tests...</span></span>
+<span class="line"><span>```typescript</span></span>
+<span class="line"><span>describe(&#39;formatter&#39;, () =&gt; {</span></span>
+<span class="line"><span>  it(&#39;should format negative currency&#39;, () =&gt; {</span></span>
+<span class="line"><span>    expect(formatCurrency(-100)).toBe(&#39;-$100.00&#39;)</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  it(&#39;should format date with custom locale&#39;, () =&gt; {</span></span>
+<span class="line"><span>    expect(formatDate(new Date(), &#39;ja-JP&#39;)).toMatch(&#39;2024年&#39;)</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  it(&#39;should truncate long text&#39;, () =&gt; {</span></span>
+<span class="line"><span>    expect(truncateText(&#39;a&#39;.repeat(100), 10)).toBe(&#39;aaaaaaaaaa...&#39;)</span></span>
+<span class="line"><span>  })</span></span>
+<span class="line"><span>})</span></span></code></pre></div><h3 id="file-src-components-button-tsx-45-coverage" tabindex="-1">File: src/components/Button.tsx (45% coverage) <a class="header-anchor" href="#file-src-components-button-tsx-45-coverage" aria-label="Permalink to &quot;File: src/components/Button.tsx (45% coverage)&quot;">​</a></h3><p>Untested paths:</p><ul><li>Disabled state</li><li>Loading state</li><li>onClick handler</li></ul><p>Generating tests...</p><h2 id="after-adding-tests" tabindex="-1">After Adding Tests <a class="header-anchor" href="#after-adding-tests" aria-label="Permalink to &quot;After Adding Tests&quot;">​</a></h2><p>Running tests again...</p><table tabindex="0"><thead><tr><th>File</th><th>% Stmts</th><th>% Branch</th><th>% Funcs</th><th>% Lines</th></tr></thead><tbody><tr><td>src/services/auth.ts</td><td>92</td><td>88</td><td>100</td><td>91</td></tr><tr><td>src/utils/formatter.ts</td><td>100</td><td>95</td><td>100</td><td>99 ✅</td></tr><tr><td>src/api/users.ts</td><td>100</td><td>100</td><td>100</td><td>100</td></tr><tr><td>src/components/Button.tsx</td><td>95</td><td>90</td><td>100</td><td>94 ✅</td></tr></tbody></table><p>Overall | 95 | 92 | 100 | 94 ✅</p><p>Target: 80% Current: 94% ✅ EXCEEDED</p><p>Summary: +12 tests added, Coverage: 76% → 94%</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /eval：評估驅動開發</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：管理 eval 驅動開發工作流。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 評估驅動開發（EDD）</span></span>
+<span class="line"><span>- 功能驗收測試</span></span>
+<span class="line"><span>- 迴歸測試</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**子指令**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- `define &lt;name&gt;` - 建立新的 eval 定義</span></span>
+<span class="line"><span>- `check &lt;name&gt;` - 執行並檢查 evals</span></span>
+<span class="line"><span>- `report &lt;name&gt;` - 產生完整報告</span></span>
+<span class="line"><span>- `list` - 顯示所有 evals</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例 - 定義 Eval**：</span></span></code></pre></div><p>你：/eval define user-auth</p><p>Claude： 建立 eval 定義...</p><p>.claude/evals/user-auth.md:</p><h2 id="eval-user-auth" tabindex="-1">EVAL: user-auth <a class="header-anchor" href="#eval-user-auth" aria-label="Permalink to &quot;EVAL: user-auth&quot;">​</a></h2><p>Created: 2026-01-25</p><h3 id="capability-evals" tabindex="-1">Capability Evals <a class="header-anchor" href="#capability-evals" aria-label="Permalink to &quot;Capability Evals&quot;">​</a></h3><ul><li>[ ] User can register with email and password</li><li>[ ] User can login with correct credentials</li><li>[ ] User cannot login with wrong password</li><li>[ ] User can reset password via email</li></ul><h3 id="regression-evals" tabindex="-1">Regression Evals <a class="header-anchor" href="#regression-evals" aria-label="Permalink to &quot;Regression Evals&quot;">​</a></h3><ul><li>[ ] Existing users can still login</li><li>[ ] Session tokens still work</li><li>[ ] OAuth login still works</li></ul><h3 id="success-criteria" tabindex="-1">Success Criteria <a class="header-anchor" href="#success-criteria" aria-label="Permalink to &quot;Success Criteria&quot;">​</a></h3><ul><li>pass@3 &gt; 90% for capability evals</li><li>pass^3 = 100% for regression evals</li></ul><p>請填寫具體的評估標準...</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例 - 檢查 Eval**：</span></span></code></pre></div><p>你：/eval check user-auth</p><p>Claude： 執行 evals...</p><h1 id="eval-check-user-auth" tabindex="-1">EVAL CHECK: user-auth <a class="header-anchor" href="#eval-check-user-auth" aria-label="Permalink to &quot;EVAL CHECK: user-auth&quot;">​</a></h1><p>Capability: 2/4 passing Regression: 2/3 passing Status: IN PROGRESS</p><p>Capability Results: ✅ User can register with email and password ✅ User can login with correct credentials ❌ User cannot login with wrong password (fails intermittently) ❌ User can reset password via email (not implemented)</p><p>Regression Results: ✅ Existing users can still login ✅ Session tokens still work ❌ OAuth login still works (test failing due to rate limit)</p><p>RECOMMENDATION: NEEDS WORK - Fix password validation and implement password reset</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例 - 報告 Eval**：</span></span></code></pre></div><p>你：/eval report user-auth</p><p>Claude： 產生綜合報告...</p><h1 id="eval-report-user-auth" tabindex="-1">EVAL REPORT: user-auth <a class="header-anchor" href="#eval-report-user-auth" aria-label="Permalink to &quot;EVAL REPORT: user-auth&quot;">​</a></h1><p>Generated: 2026-01-25</p><h2 id="capability-evals-1" tabindex="-1">CAPABILITY EVALS <a class="header-anchor" href="#capability-evals-1" aria-label="Permalink to &quot;CAPABILITY EVALS&quot;">​</a></h2><p>[login-credentials-pass]: PASS (pass@2) - required retry [login-wrong-pass-fail]: FAIL - see notes [password-reset-pass]: FAIL - not implemented</p><h2 id="regression-evals-1" tabindex="-1">REGRESSION EVALS <a class="header-anchor" href="#regression-evals-1" aria-label="Permalink to &quot;REGRESSION EVALS&quot;">​</a></h2><h2 id="metrics" tabindex="-1">METRICS <a class="header-anchor" href="#metrics" aria-label="Permalink to &quot;METRICS&quot;">​</a></h2><p>Capability pass@1: 50% Capability pass@3: 100% Regression pass^3: 100%</p><h2 id="notes" tabindex="-1">NOTES <a class="header-anchor" href="#notes" aria-label="Permalink to &quot;NOTES&quot;">​</a></h2><p>Password validation test is flaky due to timing issue. Need to implement password reset flow.</p><h2 id="recommendation-1" tabindex="-1">RECOMMENDATION <a class="header-anchor" href="#recommendation-1" aria-label="Permalink to &quot;RECOMMENDATION&quot;">​</a></h2><p>NEEDS WORK - Complete password reset implementation</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 文件與架構類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /update-docs：同步文件</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：從原始碼同步文件。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 程式碼變更後更新文件</span></span>
+<span class="line"><span>- 保持文件與程式碼同步</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流程**：</span></span></code></pre></div><ol><li>讀取 package.json scripts 部分 <ul><li>產生指令參考表</li><li>從註解中提取描述 ↓</li></ul></li><li>讀取 .env.example <ul><li>提取所有環境變數</li><li>記錄用途和格式 ↓</li></ul></li><li>產生 docs/CONTRIB.md <ul><li>開發工作流</li><li>可用指令</li><li>環境設定</li><li>測試程式 ↓</li></ul></li><li>產生 docs/RUNBOOK.md <ul><li>部署程式</li><li>監控和警示</li><li>常見問題和修復</li><li>復原程式 ↓</li></ul></li><li>識別過時文件 <ul><li>找出 90+ 天未修改的文件</li><li>列出供人工審查 ↓</li></ul></li><li>顯示 diff 總結</li></ol><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: tip 單一事實來源</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>package.json 和 .env.example 是唯一事實來源。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>:::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /update-codemaps：更新架構文件</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：分析程式碼庫結構並更新架構文件。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 程式碼結構變更後</span></span>
+<span class="line"><span>- 需要更新架構文件</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**工作流程**：</span></span></code></pre></div><ol><li>掃描所有原始檔案的匯入、匯出和相依性 ↓</li><li>產生精簡的 codemaps： <ul><li>codemaps/architecture.md - 整體架構</li><li>codemaps/backend.md - 後端結構</li><li>codemaps/frontend.md - 前端結構</li><li>codemaps/data.md - 資料模型和 schema ↓</li></ul></li><li>計算與前一版本的 diff 百分比 ↓</li><li>如果變更 &gt; 30%，請求使用者批准後再更新 ↓</li><li>為每個 codemap 添加新鮮度時間戳 ↓</li><li>將報告保存到 .reports/codemap-diff.txt</li></ol><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/update-codemaps</p><p>Claude： 分析程式碼庫結構...</p><p>Scanning 156 files... Found 89 imports and 124 exports</p><h2 id="codemap-diff" tabindex="-1">Codemap Diff <a class="header-anchor" href="#codemap-diff" aria-label="Permalink to &quot;Codemap Diff&quot;">​</a></h2><p>Previous version: 2026-01-20 Current version: 2026-01-25 Diff: 12% (under 30% threshold)</p><p>✅ Safe to update</p><h2 id="updated-codemaps" tabindex="-1">Updated Codemaps <a class="header-anchor" href="#updated-codemaps" aria-label="Permalink to &quot;Updated Codemaps&quot;">​</a></h2><p>codemaps/architecture.md</p><ul><li>Updated module dependencies</li><li>Added new services: auth, notifications</li><li>Removed deprecated modules: legacy-db</li></ul><p>codemaps/backend.md</p><ul><li>Updated API routes structure</li><li>Added middleware documentation</li></ul><p>codemaps/frontend.md</p><ul><li>Updated component hierarchy</li><li>Added new pages: profile, settings</li></ul><p>codemaps/data.md</p><ul><li>Updated database schemas</li><li>Added new tables: users, sessions</li></ul><p>Summary: 4 codemaps updated, 12% change</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 狀態管理類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /checkpoint：保存工作狀態</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：建立或驗證工作流中的檢查點。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 保存重要的開發階段</span></span>
+<span class="line"><span>- 支援回退和進度追蹤</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**子指令**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>- `create &lt;name&gt;` - 建立命名檢查點</span></span>
+<span class="line"><span>- `verify &lt;name&gt;` - 驗證檢查點</span></span>
+<span class="line"><span>- `list` - 顯示所有檢查點</span></span>
+<span class="line"><span>- `clear` - 移除舊檢查點（保留最近 5 個）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/checkpoint create feature-start</p><p>Claude：</p><h1 id="creating-checkpoint-feature-start" tabindex="-1">Creating Checkpoint: feature-start <a class="header-anchor" href="#creating-checkpoint-feature-start" aria-label="Permalink to &quot;Creating Checkpoint: feature-start&quot;">​</a></h1><p>Running /verify quick...</p><p>Build: ✅ OK Types: ✅ OK</p><p>Creating checkpoint...</p><p>✅ Checkpoint &quot;feature-start&quot; created ├─ Timestamp: 2026-01-25-14:30 ├─ Git SHA: abc1234 └─ Status: Clean (no uncommitted changes)</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span></code></pre></div><p>你：/checkpoint verify feature-start</p><h1 id="claude-checkpoint-comparison-feature-start" tabindex="-1">Claude： CHECKPOINT COMPARISON: feature-start <a class="header-anchor" href="#claude-checkpoint-comparison-feature-start" aria-label="Permalink to &quot;Claude：
+CHECKPOINT COMPARISON: feature-start&quot;">​</a></h1><p>Files changed: 5 Tests: +3 passed / -0 failed Coverage: +5% / -0% Build: PASS</p><p>Changes since checkpoint: ✅ src/services/auth.ts (modified) ✅ tests/auth.test.ts (added) ✅ src/components/Login.tsx (added)</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>**工作流**：</span></span></code></pre></div><p>[開始] → /checkpoint create &quot;feature-start&quot; | [實作] → /checkpoint create &quot;core-done&quot; | [測試] → /checkpoint verify &quot;core-done&quot; | [重構] → /checkpoint create &quot;refactor-done&quot; | [PR] → /checkpoint verify &quot;feature-start&quot;</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 學習與優化類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /learn：提取可復用模式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：分析目前工作階段並提取可保存為 skill 的模式。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 解決非平凡問題後</span></span>
+<span class="line"><span>- 發現可復用的錯誤解決模式</span></span>
+<span class="line"><span>- 記錄專案特定約定</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**提取內容**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. **錯誤解決模式**</span></span>
+<span class="line"><span>   - 發生了什麼錯誤？</span></span>
+<span class="line"><span>   - 根本原因是什麼？</span></span>
+<span class="line"><span>   - 如何修復的？</span></span>
+<span class="line"><span>   - 對類似錯誤是否可復用？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>2. **除錯技巧**</span></span>
+<span class="line"><span>   - 非顯而易見的除錯步驟</span></span>
+<span class="line"><span>   - 有效的工具組合</span></span>
+<span class="line"><span>   - 診斷模式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>3. **Workarounds**</span></span>
+<span class="line"><span>   - 庫的 quirks</span></span>
+<span class="line"><span>   - API 限制</span></span>
+<span class="line"><span>   - 版本特定修復</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>4. **專案特定模式**</span></span>
+<span class="line"><span>   - 發現的程式碼庫約定</span></span>
+<span class="line"><span>   - 做出的架構決策</span></span>
+<span class="line"><span>   - 整合模式</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span></code></pre></div><p>你：/learn</p><p>Claude：</p><h1 id="extracting-patterns-from-session" tabindex="-1">Extracting Patterns from Session <a class="header-anchor" href="#extracting-patterns-from-session" aria-label="Permalink to &quot;Extracting Patterns from Session&quot;">​</a></h1><p>Reviewing session history...</p><p>Found 3 extractable patterns:</p><h2 id="pattern-1-supabase-auth-session-recovery" tabindex="-1">Pattern 1: Supabase Auth Session Recovery <a class="header-anchor" href="#pattern-1-supabase-auth-session-recovery" aria-label="Permalink to &quot;Pattern 1: Supabase Auth Session Recovery&quot;">​</a></h2><p><strong>Type:</strong> Error Resolution <strong>Reusability:</strong> High (affects all auth endpoints)</p><h3 id="problem" tabindex="-1">Problem <a class="header-anchor" href="#problem" aria-label="Permalink to &quot;Problem&quot;">​</a></h3><p>After user logs in, subsequent API calls fail with 401 Unauthorized.</p><h3 id="root-cause" tabindex="-1">Root Cause <a class="header-anchor" href="#root-cause" aria-label="Permalink to &quot;Root Cause&quot;">​</a></h3><p>Supabase session cookie is not being sent to backend API due to CORS configuration.</p><h3 id="solution" tabindex="-1">Solution <a class="header-anchor" href="#solution" aria-label="Permalink to &quot;Solution&quot;">​</a></h3><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// Configure Supabase with correct URL</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">const</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> supabase</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> createClient</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">meta</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.env.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">VITE_SUPABASE_URL</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">meta</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.env.</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">VITE_SUPABASE_ANON_KEY</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  {</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    auth: {</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      storageKey: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;my-app-auth&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      autoRefreshToken: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">      detectSessionInUrl: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">,</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    },</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  }</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">)</span></span></code></pre></div><h3 id="when-to-use" tabindex="-1">When to Use <a class="header-anchor" href="#when-to-use" aria-label="Permalink to &quot;When to Use&quot;">​</a></h3><p>Trigger: Auth endpoints returning 401 unexpectedly</p><hr><h2 id="pattern-2-playwright-test-flakiness-fix" tabindex="-1">Pattern 2: Playwright Test Flakiness Fix <a class="header-anchor" href="#pattern-2-playwright-test-flakiness-fix" aria-label="Permalink to &quot;Pattern 2: Playwright Test Flakiness Fix&quot;">​</a></h2><p><strong>Type:</strong> Debugging Technique <strong>Reusability:</strong> Medium (affects async UI tests)</p><h3 id="problem-1" tabindex="-1">Problem <a class="header-anchor" href="#problem-1" aria-label="Permalink to &quot;Problem&quot;">​</a></h3><p>Test &quot;user can click submit button&quot; fails intermittently with timeout.</p><h3 id="root-cause-1" tabindex="-1">Root Cause <a class="header-anchor" href="#root-cause-1" aria-label="Permalink to &quot;Root Cause&quot;">​</a></h3><p>Button is disabled initially due to async validation, but test doesn&#39;t wait.</p><h3 id="solution-1" tabindex="-1">Solution <a class="header-anchor" href="#solution-1" aria-label="Permalink to &quot;Solution&quot;">​</a></h3><div class="language-typescript vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">typescript</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// Use explicit wait with predicate</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> page.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">waitForSelector</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;[data-testid=&quot;submit-btn&quot;]:not(:disabled)&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, {</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">  timeout: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">10000</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">// Then click</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">await</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> page.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">locator</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&#39;[data-testid=&quot;submit-btn&quot;]&#39;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">).</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">click</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">()</span></span></code></pre></div><h3 id="when-to-use-1" tabindex="-1">When to Use <a class="header-anchor" href="#when-to-use-1" aria-label="Permalink to &quot;When to Use&quot;">​</a></h3><p>Trigger: Test timing issues with async UI state</p><hr><p>Do you want to save these patterns? (yes/no/modify)</p><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span></span></span>
+<span class="line"><span>::: tip 聚焦原則</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>一次提取一個模式，保持技能專注。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>:::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>---</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>## 組態類指令</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>### /setup-pm：組態套件管理員</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**用途**：組態專案或全域的首選套件管理員。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**適用場景**：</span></span>
+<span class="line"><span>- 偵測目前使用的套件管理員</span></span>
+<span class="line"><span>- 設定全域或專案偏好</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**偵測優先順序**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>1. 環境變數：`CLAUDE_PACKAGE_MANAGER`</span></span>
+<span class="line"><span>2. 專案組態：`.claude/package-manager.json`</span></span>
+<span class="line"><span>3. package.json：`packageManager` 欄位</span></span>
+<span class="line"><span>4. Lock 檔案：package-lock.json、yarn.lock、pnpm-lock.yaml、bun.lockb</span></span>
+<span class="line"><span>5. 全域組態：`~/.claude/package-manager.json`</span></span>
+<span class="line"><span>6. 回退：第一個可用的套件管理員</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**支援套件管理員優先順序**：pnpm &gt; bun &gt; yarn &gt; npm</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>**示例**：</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>```bash</span></span>
+<span class="line"><span># 偵測目前套件管理員</span></span>
+<span class="line"><span>node scripts/setup-package-manager.js --detect</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 設定全域偏好</span></span>
+<span class="line"><span>node scripts/setup-package-manager.js --global pnpm</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 設定專案偏好</span></span>
+<span class="line"><span>node scripts/setup-package-manager.js --project bun</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># 列出可用的套件管理員</span></span>
+<span class="line"><span>node scripts/setup-package-manager.js --list</span></span></code></pre></div><p><strong>組態檔案</strong>：</p><p>全域組態（<code>~/.claude/package-manager.json</code>）：</p><div class="language-json vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">json</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;packageManager&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;pnpm&quot;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><p>專案組態（<code>.claude/package-manager.json</code>）：</p><div class="language-json vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">json</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">{</span></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">  &quot;packageManager&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;bun&quot;</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">}</span></span></code></pre></div><p>環境變數覆蓋所有偵測方法：</p><div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># macOS/Linux</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">export</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> CLAUDE_PACKAGE_MANAGER</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">pnpm</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Windows (PowerShell)</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">$env:CLAUDE_PACKAGE_MANAGER = </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;pnpm&quot;</span></span></code></pre></div><hr><h2 id="指令組合工作流" tabindex="-1">指令組合工作流 <a class="header-anchor" href="#指令組合工作流" aria-label="Permalink to &quot;指令組合工作流&quot;">​</a></h2><h3 id="完整功能開發流程" tabindex="-1">完整功能開發流程 <a class="header-anchor" href="#完整功能開發流程" aria-label="Permalink to &quot;完整功能開發流程&quot;">​</a></h3><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>1. /plan &quot;添加使用者認證功能&quot;</span></span>
+<span class="line"><span>   ↓ 建立實作計畫</span></span>
+<span class="line"><span>2. /tdd &quot;實現認證服務&quot;</span></span>
+<span class="line"><span>   ↓ TDD 開發</span></span>
+<span class="line"><span>3. /test-coverage</span></span>
+<span class="line"><span>   ↓ 確保覆蓋率 ≥ 80%</span></span>
+<span class="line"><span>4. /code-review</span></span>
+<span class="line"><span>   ↓ 程式碼審查</span></span>
+<span class="line"><span>5. /verify pre-pr</span></span>
+<span class="line"><span>   ↓ 全面驗證</span></span>
+<span class="line"><span>6. /checkpoint create &quot;auth-feature-done&quot;</span></span>
+<span class="line"><span>   ↓ 保存檢查點</span></span>
+<span class="line"><span>7. /update-docs</span></span>
+<span class="line"><span>   ↓ 更新文件</span></span>
+<span class="line"><span>8. /update-codemaps</span></span>
+<span class="line"><span>   ↓ 更新架構文件</span></span></code></pre></div><h3 id="bug-修復流程" tabindex="-1">Bug 修復流程 <a class="header-anchor" href="#bug-修復流程" aria-label="Permalink to &quot;Bug 修復流程&quot;">​</a></h3><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>1. /checkpoint create &quot;bug-start&quot;</span></span>
+<span class="line"><span>   ↓ 保存目前狀態</span></span>
+<span class="line"><span>2. /orchestrate bugfix &quot;修復登入錯誤&quot;</span></span>
+<span class="line"><span>   ↓ 自動化 bug 修復流程</span></span>
+<span class="line"><span>3. /test-coverage</span></span>
+<span class="line"><span>   ↓ 確保測試覆蓋</span></span>
+<span class="line"><span>4. /verify quick</span></span>
+<span class="line"><span>   ↓ 驗證修復</span></span>
+<span class="line"><span>5. /checkpoint verify &quot;bug-start&quot;</span></span>
+<span class="line"><span>   ↓ 對比檢查點</span></span></code></pre></div><h3 id="安全審查流程" tabindex="-1">安全審查流程 <a class="header-anchor" href="#安全審查流程" aria-label="Permalink to &quot;安全審查流程&quot;">​</a></h3><div class="language- vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang"></span><pre class="shiki shiki-themes github-light github-dark vp-code" tabindex="0"><code><span class="line"><span>1. /orchestrate security &quot;審查支付流程&quot;</span></span>
+<span class="line"><span>   ↓ 安全優先的審查流程</span></span>
+<span class="line"><span>2. /e2e &quot;測試支付流程&quot;</span></span>
+<span class="line"><span>   ↓ 端對端測試</span></span>
+<span class="line"><span>3. /code-review</span></span>
+<span class="line"><span>   ↓ 程式碼審查</span></span>
+<span class="line"><span>4. /verify pre-pr</span></span>
+<span class="line"><span>   ↓ 全面驗證</span></span></code></pre></div><hr><h2 id="指令對比速查表" tabindex="-1">指令對比速查表 <a class="header-anchor" href="#指令對比速查表" aria-label="Permalink to &quot;指令對比速查表&quot;">​</a></h2><table tabindex="0"><thead><tr><th>指令</th><th>主要用途</th><th>觸發 Agent</th><th>輸出</th></tr></thead><tbody><tr><td><code>/plan</code></td><td>建立實作計畫</td><td>planner</td><td>分階段計畫</td></tr><tr><td><code>/tdd</code></td><td>TDD 開發</td><td>tdd-guide</td><td>測試 + 實作 + 覆蓋率</td></tr><tr><td><code>/orchestrate</code></td><td>序列執行 agents</td><td>多個 agents</td><td>綜合報告</td></tr><tr><td><code>/code-review</code></td><td>程式碼審查</td><td>code-reviewer, security-reviewer</td><td>安全和品質報告</td></tr><tr><td><code>/build-fix</code></td><td>修復建置錯誤</td><td>build-error-resolver</td><td>修復總結</td></tr><tr><td><code>/refactor-clean</code></td><td>清理死程式碼</td><td>refactor-cleaner</td><td>清理總結</td></tr><tr><td><code>/verify</code></td><td>全面驗證</td><td>Bash</td><td>驗證報告</td></tr><tr><td><code>/e2e</code></td><td>端對端測試</td><td>e2e-runner</td><td>Playwright 測試 + 工件</td></tr><tr><td><code>/test-coverage</code></td><td>分析覆蓋率</td><td>Bash</td><td>覆蓋率報告 + 缺失測試</td></tr><tr><td><code>/eval</code></td><td>評估驅動開發</td><td>Bash</td><td>Eval 狀態報告</td></tr><tr><td><code>/checkpoint</code></td><td>保存狀態</td><td>Bash + Git</td><td>檢查點報告</td></tr><tr><td><code>/learn</code></td><td>提取模式</td><td>continuous-learning skill</td><td>Skill 檔案</td></tr><tr><td><code>/update-docs</code></td><td>同步文件</td><td>doc-updater agent</td><td>文件更新</td></tr><tr><td><code>/update-codemaps</code></td><td>更新架構</td><td>doc-updater agent</td><td>Codemap 更新</td></tr><tr><td><code>/setup-pm</code></td><td>組態套件管理員</td><td>Node.js 指令稿</td><td>套件管理員偵測</td></tr></tbody></table><hr><h2 id="踩坑提醒" tabindex="-1">踩坑提醒 <a class="header-anchor" href="#踩坑提醒" aria-label="Permalink to &quot;踩坑提醒&quot;">​</a></h2><h3 id="❌-不要跳過規劃階段" tabindex="-1">❌ 不要跳過規劃階段 <a class="header-anchor" href="#❌-不要跳過規劃階段" aria-label="Permalink to &quot;❌ 不要跳過規劃階段&quot;">​</a></h3><p>對於複雜功能，直接開始編碼會導致：</p><ul><li>遺漏重要相依性</li><li>架構不一致</li><li>需求理解偏差</li></ul><p><strong>✅ 正確做法</strong>：使用 <code>/plan</code> 建立詳細計畫，等待確認後再實作。</p><hr><h3 id="❌-不要在-tdd-中跳過-red-階段" tabindex="-1">❌ 不要在 TDD 中跳過 RED 階段 <a class="header-anchor" href="#❌-不要在-tdd-中跳過-red-階段" aria-label="Permalink to &quot;❌ 不要在 TDD 中跳過 RED 階段&quot;">​</a></h3><p>先寫程式碼再寫測試，就不是 TDD 了。</p><p><strong>✅ 正確做法</strong>：嚴格執行 RED → GREEN → REFACTOR 循環。</p><hr><h3 id="❌-不要忽略-code-review-的-critical-問題" tabindex="-1">❌ 不要忽略 /code-review 的 CRITICAL 問題 <a class="header-anchor" href="#❌-不要忽略-code-review-的-critical-問題" aria-label="Permalink to &quot;❌ 不要忽略 /code-review 的 CRITICAL 問題&quot;">​</a></h3><p>安全漏洞可能導致資料洩露、金錢損失等嚴重後果。</p><p><strong>✅ 正確做法</strong>：修復所有 CRITICAL 和 HIGH 級別問題後再提交。</p><hr><h3 id="❌-不要刪除程式碼前不測試" tabindex="-1">❌ 不要刪除程式碼前不測試 <a class="header-anchor" href="#❌-不要刪除程式碼前不測試" aria-label="Permalink to &quot;❌ 不要刪除程式碼前不測試&quot;">​</a></h3><p>死程式碼分析可能有誤報，直接刪除可能破壞功能。</p><p><strong>✅ 正確做法</strong>：每次刪除前先執行測試，確保沒有破壞現有功能。</p><hr><h3 id="❌-不要忘記使用-learn" tabindex="-1">❌ 不要忘記使用 /learn <a class="header-anchor" href="#❌-不要忘記使用-learn" aria-label="Permalink to &quot;❌ 不要忘記使用 /learn&quot;">​</a></h3><p>解決了非平凡問題後不提取模式，下次遇到相同問題又得從頭解決。</p><p><strong>✅ 正確做法</strong>：定期使用 <code>/learn</code> 提取可復用模式，累積知識。</p><hr><h2 id="本課小結" tabindex="-1">本課小結 <a class="header-anchor" href="#本課小結" aria-label="Permalink to &quot;本課小結&quot;">​</a></h2><p>Everything Claude Code 的 15 個斜槓指令提供了完整的開發工作流支援：</p><ul><li><strong>開發流程</strong>：<code>/plan</code> → <code>/tdd</code> → <code>/orchestrate</code></li><li><strong>程式碼品質</strong>：<code>/code-review</code> → <code>/build-fix</code> → <code>/refactor-clean</code> → <code>/verify</code></li><li><strong>測試</strong>：<code>/e2e</code> → <code>/test-coverage</code> → <code>/eval</code></li><li><strong>文件與架構</strong>：<code>/update-docs</code> → <code>/update-codemaps</code></li><li><strong>狀態管理</strong>：<code>/checkpoint</code></li><li><strong>學習與優化</strong>：<code>/learn</code></li><li><strong>組態</strong>：<code>/setup-pm</code></li></ul><p>掌握這些指令，你可以高效、安全、有品質地完成開發工作。</p><hr><h2 id="下一課預告" tabindex="-1">下一課預告 <a class="header-anchor" href="#下一課預告" aria-label="Permalink to &quot;下一課預告&quot;">​</a></h2><blockquote><p>下一課我們學習 <strong><a href="./../agents-overview/">核心 Agents 詳解</a></strong>。</p><p>你會學到：</p><ul><li>9 個專業化 agents 的職責和適用場景</li><li>何時呼叫哪個 agent</li><li>Agent 之間的協作方式</li><li>如何自訂 agent 組態</li></ul></blockquote><hr><h2 id="附錄-原始碼參考" tabindex="-1">附錄：原始碼參考 <a class="header-anchor" href="#附錄-原始碼參考" aria-label="Permalink to &quot;附錄：原始碼參考&quot;">​</a></h2><details><summary><strong>點擊展開查看原始碼位置</strong></summary><blockquote><p>更新時間：2026-01-25</p></blockquote><table tabindex="0"><thead><tr><th>功能</th><th>檔案路徑</th><th>行號</th></tr></thead><tbody><tr><td>TDD 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/tdd.md" target="_blank" rel="noreferrer"><code>commands/tdd.md</code></a></td><td>1-327</td></tr><tr><td>Plan 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/plan.md" target="_blank" rel="noreferrer"><code>commands/plan.md</code></a></td><td>1-114</td></tr><tr><td>Code Review 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/code-review.md" target="_blank" rel="noreferrer"><code>commands/code-review.md</code></a></td><td>1-41</td></tr><tr><td>E2E 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/e2e.md" target="_blank" rel="noreferrer"><code>commands/e2e.md</code></a></td><td>1-364</td></tr><tr><td>Build Fix 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/build-fix.md" target="_blank" rel="noreferrer"><code>commands/build-fix.md</code></a></td><td>1-30</td></tr><tr><td>Refactor Clean 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/refactor-clean.md" target="_blank" rel="noreferrer"><code>commands/refactor-clean.md</code></a></td><td>1-29</td></tr><tr><td>Learn 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/learn.md" target="_blank" rel="noreferrer"><code>commands/learn.md</code></a></td><td>1-71</td></tr><tr><td>Checkpoint 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/checkpoint.md" target="_blank" rel="noreferrer"><code>commands/checkpoint.md</code></a></td><td>1-75</td></tr><tr><td>Verify 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/verify.md" target="_blank" rel="noreferrer"><code>commands/verify.md</code></a></td><td>1-60</td></tr><tr><td>Test Coverage 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/test-coverage.md" target="_blank" rel="noreferrer"><code>commands/test-coverage.md</code></a></td><td>1-28</td></tr><tr><td>Setup PM 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/setup-pm.md" target="_blank" rel="noreferrer"><code>commands/setup-pm.md</code></a></td><td>1-81</td></tr><tr><td>Update Docs 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/update-docs.md" target="_blank" rel="noreferrer"><code>commands/update-docs.md</code></a></td><td>1-32</td></tr><tr><td>Orchestrate 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/orchestrate.md" target="_blank" rel="noreferrer"><code>commands/orchestrate.md</code></a></td><td>1-173</td></tr><tr><td>Update Codemaps 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/update-codemaps.md" target="_blank" rel="noreferrer"><code>commands/update-codemaps.md</code></a></td><td>1-18</td></tr><tr><td>Eval 指令</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/commands/eval.md" target="_blank" rel="noreferrer"><code>commands/eval.md</code></a></td><td>1-121</td></tr><tr><td>Plugin 定義</td><td><a href="https://github.com/affaan-m/everything-claude-code/blob/main/.claude-plugin/plugin.json" target="_blank" rel="noreferrer"><code>.claude-plugin/plugin.json</code></a></td><td>1-28</td></tr></tbody></table><p><strong>關鍵常數</strong>：</p><ul><li>TDD 覆蓋率目標：80%（critical 程式碼 100%） - <code>commands/tdd.md:293-300</code></li></ul><p><strong>關鍵函式</strong>：</p><ul><li>TDD 循環：RED → GREEN → REFACTOR - <code>commands/tdd.md:40-47</code></li><li>Plan 等待確認機制 - <code>commands/plan.md:96</code></li><li>Code Review 嚴重級別：CRITICAL, HIGH, MEDIUM - <code>commands/code-review.md:33</code></li></ul></details></div></div></main><footer class="VPDocFooter" data-v-39a288b8 data-v-e257564d><!--[--><!--]--><!----><!----></footer><!--[--><!--[--><!--[--><!--]--><div class="ad-slot-placeholder" role="complementary" aria-label="广告位预留" data-v-1603937c data-v-0967b5a2></div><!--]--><!--]--></div></div></div><!--[--><!--]--></div></div><!----><!--[--><!--]--></div></div>
+    
+    
+  <script src="https://lzw.me/x/lib/utils/h5-common.min.js"></script></body>
+</html>
