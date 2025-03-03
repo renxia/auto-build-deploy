@@ -10,9 +10,9 @@ node_modules
 /release/
 /debug/
 /coverage/
-/docs/
 /tmp
 /cache
+/docs
 
 # manager
 npm-debug.log

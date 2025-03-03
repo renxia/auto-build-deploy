@@ -1,6 +1,8 @@
 name: 'build'
-
 on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '10 0 * * *'
   push:
     tags:
       - "*"
@@ -16,6 +18,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -51,6 +58,7 @@ jobs:
         run: npm run build
         env:
           CI_BUILD: 1
+          GITHUB_CI: 1
 
       # - name: GitHub Pages action
       #   uses: peaceiris/actions-gh-pages@v3
