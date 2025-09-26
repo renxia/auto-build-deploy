@@ -1,6 +1,6 @@
 /*
  * 读取指定目录下的所有 .html 文件，并在 body 标签结束符前添加 script 标签
- * 用法示例： node add-commonjs-for-html.js </path/to/dir>
+ * 用法示例： tsx /srcupdate-html.ts </path/to/dir>
  */
 
 import fs from'node:fs';
@@ -10,7 +10,7 @@ import { color } from'console-log-colors';
 const config = {
   baseDir: process.argv[2] || path.resolve(__dirname, '../docs'),
   js: `<script src="https://lzw.me/x/lib/utils/h5-common.js?v=016"></script>`,
-  replacejs: /<script src="https:\/\/lzw.me\/x\/lib\/utils\/h5-common.js?v=\d+"><\/script>/,
+  replacejs: /<script src="https:\/\/lzw.me\/x\/lib\/utils\/h5-common(.min)*.js?v=\d+"><\/script>/,
   filterkey: 'lib/utils/h5-common.js',
   stats: {
     files: 0,

@@ -35,6 +35,33 @@ const config = {
         return html;
       },
     },
+    // {
+    //   id: 'numpy-cn',
+    //   repo: 'https://github.com/teadocs/numpy-cn.git',
+    //   cmds: [
+    //     'pnpm update',
+    //     'pnpm install',
+    //     'pnpm docs:build',
+    //   ],
+    // }
+    {
+      id: 'tvm-cn',
+      repo: 'https://github.com/hyperai/tvm-cn.git',
+      output: 'build',
+      cmds: [
+        'pnpm install',
+        'pnpm build',
+      ],
+    },
+    {
+      id: 'gemini-cli-learning',
+      repo: 'https://github.com/kjdui11/gemini-cli-learning-platform.git',
+      output: 'out/docs/gemini-cli-learning',
+      cmds: [
+        'npm install',
+        'npm run build',
+      ],
+    }
   ],
 };
 

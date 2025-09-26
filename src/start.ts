@@ -1,10 +1,11 @@
 import { mkdirp, execSync, color, rmrf, getHeadCommitId, assign } from '@lzwme/fe-utils';
 import { resolve, dirname } from 'node:path';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { program } from 'commander';
 
 import * as uh from './update-html.js';
 import { gitCommit, getGitRemoteUrl, logger } from './utils.js';
+import { log } from 'node:console';
 
 const config = require('../abd.config.cjs');
 
@@ -23,7 +24,12 @@ const T = {
 
     // 拉取 gh-pages 分支
     const ghPagesDir = resolve(config.cacheDir, 'abd-gh-pages');
-    execSync(`git clone --branch gh-pages ${config.repo || getGitRemoteUrl()} ${ghPagesDir}`, 'inherit', config.cacheDir);
+    logger.log('开始拉取 gh-pages 分支', color.gray(ghPagesDir));
+    if (existsSync(ghPagesDir)) {
+      execSync(`git reset --hard && git fetch && git reset remote/origin/gh-pages --hard`, 'inherit', ghPagesDir);
+    } else {
+      execSync(`git clone --branch gh-pages ${config.repo || getGitRemoteUrl()} ${ghPagesDir}`, 'inherit', config.cacheDir);
+    }
     // 更新 readme.md
     writeFileSync(resolve(ghPagesDir, 'README.md'), readFileSync(resolve(config.rootDir, 'README.md'), 'utf8'));
 
@@ -38,7 +44,7 @@ const T = {
       logger.info('开始构建：', color.cyan(item.id), color.gray(item.repo));
 
       if (existsSync(repoDir)) {
-        rmrf(repoDir);
+        // rmrf(repoDir);
         execSync(`git reset --hard && git pull -r -n -v`, 'inherit', repoDir);
       } else {
         // 拉取代码
@@ -46,15 +52,21 @@ const T = {
       }
 
       // 判断是否已编译过
-      const cid = getHeadCommitId(true, repoDir);
-      if (cid === buildCache[item.id]) {
-        logger.log(`已编译过：`, color.cyan(item.id), color.gray(cid));
+      const commitId = getHeadCommitId(true, repoDir);
+      if (!config.force && commitId === buildCache[item.id] && existsSync(resolve(ghPagesDir, 'docs', item.id))) {
+        logger.log(`已编译过：`, color.cyan(item.id), color.gray(commitId));
         continue;
+      }
+
+      const patchDir = resolve(config.rootDir, `patch/${item.id}`);
+      if (existsSync(patchDir)) {
+        cpSync(patchDir, repoDir, { force: true, recursive: true });
       }
 
       // 执行 cmds
       if (Array.isArray(item.cmds)) {
         for (const cmd of item.cmds) {
+          if (!cmd) continue;
           if (typeof cmd === 'function') {
             cmd(repoDir, item.id);
           } else {
@@ -68,25 +80,26 @@ const T = {
         }
       }
 
-      buildCache[item.id] = cid;
+      buildCache[item.id] = commitId;
       logger.log(`构建完成！`);
+
+      const distDir = resolve(config.cacheDir, item.id, item.output || 'dist');
+      if (existsSync(distDir)) {
+        const destDir = resolve(ghPagesDir, 'docs', item.id);
+        logger.log(`[${item.id}]开始移动产物至 gh-pages/docs：`, distDir);
+        if (existsSync(destDir)) execSync(`rm -rf ${destDir}`);
+        mkdirp(dirname(destDir));
+        execSync(`mv ${distDir} ${destDir}`);
+        uh.updateHtml(destDir, item.onUpdateFile);
+      } else {
+        logger.error(`[${item.id}]不存在产物：`, distDir);
+      }
     }
 
+    writeFileSync(buildCacheFile, JSON.stringify(buildCache, null, 2));
+
     if (process.env.CI_BUILD) {
-      for (const item of config.projects) {
-        const distDir = resolve(config.cacheDir, item.id, 'dist');
-        if (existsSync(distDir)) {
-          const destDir = resolve(ghPagesDir, 'docs', item.id);
-          logger.log(`[${item.id}]存在产物：`, distDir);
-          if (existsSync(destDir)) execSync(`rm -rf ${destDir}`);
-          mkdirp(dirname(destDir));
-          execSync(`mv ${distDir} ${destDir}`);
-          uh.updateHtml(destDir, item.onUpdateFile);
-        }
-      }
-
-      writeFileSync(buildCacheFile, JSON.stringify(buildCache, null, 2));
-
+      logger.info('正在推送到 gh-pages 分支...');
       // 切换至 gh-pages 分支
       let r = execSync(
         'git reset --hard && git fetch --all && git checkout -b gh-pages origin/gh-pages || git checkout gh-pages',
