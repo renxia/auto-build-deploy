@@ -153,9 +153,7 @@ const config: Config = {
   ],
   scripts: [
     {
-      src: 'https://lzw.me/x/lib/utils/h5-common.js',
-      defer: true,
-      'data-domain': 'lzw.me'
+      src: 'https://lzw.me/x/lib/utils/h5-common.min.js',
     },
   ],
 

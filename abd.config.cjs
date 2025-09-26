@@ -7,9 +7,12 @@ const config = {
   rootDir,
   cacheDir: resolve(rootDir, 'cache'),
   repo: 'https://github.com/renxia/auto-build-deploy.git', // 'git@github.com:renxia/auto-build-deploy.git',
+  /** 是否为 CI 环境 */
+  ci: process.env.CI_BUILD != null,
   projects: [
     {
       id: 'quant-wiki',
+      desc: '中文量化百科',
       repo: 'https://github.com/LLMQuant/quant-wiki.git',
       // 如果是字符串，则作为命令执行，如果是函数，则作为 node.js 脚本执行
       cmds: [
@@ -46,15 +49,27 @@ const config = {
     // }
     {
       id: 'tvm-cn',
+      desc: 'TVM中文文档',
       repo: 'https://github.com/hyperai/tvm-cn.git',
       output: 'build',
       cmds: [
-        'pnpm install',
-        'pnpm build',
+        'npm install',
+        'npm run build',
+      ],
+    },
+    {
+      id: 'elasticsearch-cn',
+      desc: 'Elasticsearch 中文文档',
+      repo: 'https://github.com/dev2007/elasticsearch-doc.git',
+      output: 'build',
+      cmds: [
+        'npm install',
+        'npm run build',
       ],
     },
     {
       id: 'gemini-cli-learning',
+      desc: 'Gemini CLI 中文教程',
       repo: 'https://github.com/kjdui11/gemini-cli-learning-platform.git',
       output: 'out/docs/gemini-cli-learning',
       cmds: [
