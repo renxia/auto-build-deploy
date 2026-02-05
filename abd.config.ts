@@ -1,9 +1,11 @@
-const fs = require('node:fs');
-const { resolve } = require('node:path');
+import { resolve } from 'node:path';
+import * as fs from 'node:fs'
 
-const rootDir = __dirname;
-const isWindows = process.platform === 'win32';
-const config = {
+const rootDir = process.cwd();
+// const isWindows = process.platform === 'win32';
+
+export const config = {
+  force: false,
   rootDir,
   cacheDir: resolve(rootDir, 'cache'),
   repo: 'https://github.com/renxia/auto-build-deploy.git', // 'git@github.com:renxia/auto-build-deploy.git',
@@ -24,7 +26,7 @@ const config = {
         'rm -rf ../docs/quant-wiki',
         'mv site dist', // 约定所有输出目录都为 dist
         // todo: 批量替换
-        (repoDir) => {
+        (repoDir: string, _id?: string) => {
           // update sitemap
           const sitemapFile = resolve(repoDir, 'dist', 'sitemap.xml');
           if (fs.existsSync(sitemapFile)) {
@@ -33,7 +35,7 @@ const config = {
           }
         },
       ],
-      onUpdateFile: html => {
+      onUpdateFile: (html: string) => {
         html = html.replaceAll('https://quant-wiki.com', 'https://lzw.me/doc/quant-wiki');
         return html;
       },
@@ -76,8 +78,20 @@ const config = {
         'npm install',
         'npm run build',
       ],
+    },
+    {
+      id: 'opencodedocs',
+      desc: 'OpenCode 学习文档',
+      repo: 'https://github.com/vbgate/opencodedocs.git',
+      output: 'out/docs/opencodedocs',
+      cmds: [
+        'npm install',
+        // 'npm run docs:build',
+        'pnpm vitepress build docs',
+        'mv docs/.vitepress/dist/ dist'
+      ],
     }
   ],
+  /** 运行时赋值 */
+  run: [] as string[]
 };
-
-module.exports = config;

@@ -11,7 +11,13 @@
 - `tvm-cn`: TVM中文文档
   - [https://lzw.me/docs/tvm-cn](https://lzw.me/docs/tvm-cn)
   - [gh-pages](https://renxia.github.io/auto-build-deploy/docs/tvm-cn/)
+- `elasticsearch-cn`: Elasticsearch 中文文档
+  - [https://lzw.me/docs/elasticsearch-cn](https://lzw.me/docs/elasticsearch-cn)
+  - [gh-pages](https://renxia.github.io/auto-build-deploy/docs/elasticsearch-cn/)
 - `gemini-cli-learning`: Gemini CLI 中文教程
   - [https://lzw.me/docs/gemini-cli-learning](https://lzw.me/docs/gemini-cli-learning)
   - [gh-pages](https://renxia.github.io/auto-build-deploy/docs/gemini-cli-learning/)
+- `opencodedocs`: OpenCode 学习文档
+  - [https://lzw.me/docs/opencodedocs](https://lzw.me/docs/opencodedocs)
+  - [gh-pages](https://renxia.github.io/auto-build-deploy/docs/opencodedocs/)
 <!--/docs-list-->

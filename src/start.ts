@@ -6,11 +6,12 @@ import { program } from 'commander';
 
 import * as uh from './update-html.js';
 import { gitCommit, getGitRemoteUrl, logger } from './utils.js';
-
-const config = require('../abd.config.cjs');
+import { config } from '../abd.config.js';
 
 const T = {
-  initConfig(cfg = config) {
+  initConfig(cfg: Partial<typeof config>) {
+    process.env.NODE_OPTIONS = '--max-old-space-size=8192';
+
     if (cfg !== config) assign(config, cfg);
   },
   updateReadme() {
@@ -54,9 +55,8 @@ const T = {
     // 读取编译缓存
     const buildCacheFile = resolve(ghPagesCacheDir, 'build-cache.json');
     const buildCache = existsSync(buildCacheFile) ? require(buildCacheFile) : {};
-
-    for (const item of config.projects) {
-      if (config.run?.length && !config.run.includes(item.id)) continue;
+    const buildProject = async (item: typeof config.projects[0]) => {
+      if (config.run?.length && !config.run.includes(item.id)) return;
 
       const repoDir = resolve(config.cacheDir, item.id);
       logger.info('开始构建：', color.cyan(item.id), color.gray(item.repo), color.gray(repoDir));
@@ -73,7 +73,7 @@ const T = {
       const commitId = getHeadCommitId(true, repoDir);
       if (!config.force && commitId === buildCache[item.id] && existsSync(resolve(ghPagesCacheDir, 'docs', item.id))) {
         logger.log(`已编译过：`, color.cyan(item.id), color.gray(commitId));
-        continue;
+        return;
       }
 
       const patchDir = resolve(config.rootDir, `patch/${item.id}`);
@@ -86,7 +86,7 @@ const T = {
         for (const cmd of item.cmds) {
           if (!cmd) continue;
           if (typeof cmd === 'function') {
-            cmd(repoDir, item.id);
+            await cmd(repoDir, item.id);
           } else {
             const { stderr } = feExecSync(cmd, 'inherit', repoDir);
 
@@ -111,6 +111,15 @@ const T = {
         uh.updateHtml(destDir, item.onUpdateFile);
       } else {
         logger.error(`[${item.id}]不存在产物：`, distDir);
+      }
+    }
+
+    for (const item of config.projects) {
+      try {
+        buildProject(item);
+      } catch (error) {
+        logger.error((error));
+
       }
     }
 

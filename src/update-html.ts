@@ -9,9 +9,9 @@ import { color } from'console-log-colors';
 
 const config = {
   baseDir: process.argv[2] || path.resolve(__dirname, '../docs'),
-  js: `<script src="https://lzw.me/x/lib/utils/h5-common.js?v=016"></script>`,
+  js: `<script src="https://lzw.me/x/lib/utils/h5-common.min.js?v=016"></script>`,
   replacejs: /<script src="https:\/\/lzw.me\/x\/lib\/utils\/h5-common(.min)*.js?v=\d+"><\/script>/,
-  filterkey: 'lib/utils/h5-common.js',
+  filterkey: 'lib/utils/h5-common.min.js',
   stats: {
     files: 0,
     updated: 0,
