@@ -7,16 +7,34 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/docs/opencodedocs/',
+  metaChunk: true,
+  outDir: '../dist/docs/opencodedocs',
+
+  transformHtml(code, id) {
+    // 移除 modulepreload 标签
+    if (code.includes(`<link rel="modulepreload"`)) {
+      return code.replaceAll(/<link rel="modulepreload".+\n/g, '')
+    }
+
+    return code
+  },
+
   title: "OpenCodeDocs",
   description: "Verified Tutorials for Every Library",
   vite: {
+    build: {
+      modulePreload: false,
+      assetsInlineLimit: 1024,
+    },
+
     plugins: [
       tailwindcss(),
       MermaidPlugin()
     ]
   },
   sitemap: {
-    hostname: 'https://lzw.me/docs/opencodedocs'
+    hostname: 'https://lzw.me/docs/opencodedocs/',
+    lastmodDateOnly: true,
   },
 
   // SEO: 为每个页面生成 hreflang 标签
@@ -89,9 +107,7 @@ export default defineConfig({
       label: 'On this page'
     },
 
-    lastUpdated: {
-      text: 'Last updated'
-    },
+    lastUpdated: false,
 
     returnToTopLabel: 'Back to top',
     sidebarMenuLabel: 'Menu',
@@ -122,9 +138,6 @@ export default defineConfig({
           next: '下一页'
         },
         outline: false,
-        lastUpdated: {
-          text: '最后更新于'
-        },
         returnToTopLabel: '回到顶部',
         sidebarMenuLabel: '菜单',
         darkModeSwitchLabel: '主题',
@@ -144,9 +157,6 @@ export default defineConfig({
         },
         outline: {
           label: '頁面導航'
-        },
-        lastUpdated: {
-          text: '最後更新於'
         },
         returnToTopLabel: '回到頂部',
         sidebarMenuLabel: '選單',
@@ -168,9 +178,6 @@ export default defineConfig({
         outline: {
           label: 'ページナビゲーション'
         },
-        lastUpdated: {
-          text: '最終更新'
-        },
         returnToTopLabel: 'トップに戻る',
         sidebarMenuLabel: 'メニュー',
         darkModeSwitchLabel: 'テーマ',
@@ -190,9 +197,6 @@ export default defineConfig({
         },
         outline: {
           label: '페이지 탐색'
-        },
-        lastUpdated: {
-          text: '마지막 업데이트'
         },
         returnToTopLabel: '맨 위로',
         sidebarMenuLabel: '메뉴',
@@ -214,9 +218,6 @@ export default defineConfig({
         outline: {
           label: 'En esta página'
         },
-        lastUpdated: {
-          text: 'Última actualización'
-        },
         returnToTopLabel: 'Volver arriba',
         sidebarMenuLabel: 'Menú',
         darkModeSwitchLabel: 'Tema',
@@ -236,9 +237,6 @@ export default defineConfig({
         },
         outline: {
           label: 'Sur cette page'
-        },
-        lastUpdated: {
-          text: 'Dernière mise à jour'
         },
         returnToTopLabel: 'Retour en haut',
         sidebarMenuLabel: 'Menu',
@@ -260,9 +258,6 @@ export default defineConfig({
         outline: {
           label: 'Auf dieser Seite'
         },
-        lastUpdated: {
-          text: 'Zuletzt aktualisiert'
-        },
         returnToTopLabel: 'Nach oben',
         sidebarMenuLabel: 'Menü',
         darkModeSwitchLabel: 'Thema',
@@ -283,9 +278,6 @@ export default defineConfig({
         outline: {
           label: 'Nesta página'
         },
-        lastUpdated: {
-          text: 'Última atualização'
-        },
         returnToTopLabel: 'Voltar ao topo',
         sidebarMenuLabel: 'Menu',
         darkModeSwitchLabel: 'Tema',
@@ -305,9 +297,6 @@ export default defineConfig({
         },
         outline: {
           label: 'Содержание'
-        },
-        lastUpdated: {
-          text: 'Последнее обновление'
         },
         returnToTopLabel: 'Вернуться наверх',
         sidebarMenuLabel: 'Меню',

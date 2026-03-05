@@ -36,7 +36,8 @@ const T = {
     logger.log('projects:', config.projects.length);
     mkdirp(config.cacheDir);
 
-    // 拉取 gh-pages 分支
+    // 1. 拉取 gh-pages 分支至临时目录
+    /** gh-pages 分支临时目录 */
     const ghPagesCacheDir = resolve(config.cacheDir, 'abd-gh-pages');
     logger.log('开始拉取 gh-pages 分支', color.gray(ghPagesCacheDir));
     if (existsSync(ghPagesCacheDir)) {
@@ -44,17 +45,28 @@ const T = {
     } else {
       feExecSync(`git clone --branch gh-pages ${config.repo || getGitRemoteUrl()} ${ghPagesCacheDir}`, 'inherit', config.cacheDir);
     }
-    // 更新 readme.md
-    writeFileSync(resolve(ghPagesCacheDir, 'README.md'), readFileSync(resolve(config.rootDir, 'README.md'), 'utf8'));
 
-    // 清理文件
+    // 2. 复制 main 分支文件到 gh-pages 分支临时目录
+    const needToCopyFiles = ['README.md', 'index.html']
+    needToCopyFiles.forEach(fileName => {
+      const srcFile = resolve(config.rootDir, fileName);
+      const destFile = resolve(ghPagesCacheDir, fileName);
+      if (existsSync(srcFile)) {
+        if (existsSync(destFile)) rmrf(destFile);
+        cpSync(srcFile, destFile, { force: true, recursive: true });
+      }
+    });
+
+    // 清理 gh-pages 分支文件
     ['docs/docs', 'README.MD'].forEach(fileName => {
       if (existsSync(resolve(ghPagesCacheDir, fileName))) rmrf(resolve(ghPagesCacheDir, fileName));
     });
 
-    // 读取编译缓存
+    // 读取 gh-pages 历史编译缓存
     const buildCacheFile = resolve(ghPagesCacheDir, 'build-cache.json');
     const buildCache = existsSync(buildCacheFile) ? require(buildCacheFile) : {};
+
+    /** 按配置在 cache/item.id 目录下执行项目构建 */
     const buildProject = async (item: typeof config.projects[0]) => {
       if (config.run?.length) {
         if (!config.run.includes(item.id)) return;
@@ -112,6 +124,7 @@ const T = {
       }
       logger.log(`构建完成！`);
 
+      // 移动产物至 gh-pages/docs/item.id 目录
       const distDir = resolve(config.cacheDir, item.id, item.output || 'dist');
       if (existsSync(distDir)) {
         const destDir = resolve(ghPagesCacheDir, 'docs', item.id);
@@ -138,7 +151,7 @@ const T = {
 
     if (config.ci) {
       logger.info('正在推送到 gh-pages 分支...');
-      // 切换至 gh-pages 分支
+      // 当前工作目录切换至 gh-pages 分支
       let r = feExecSync(
         'git reset --hard && git fetch --all && git checkout -b gh-pages origin/gh-pages || git checkout gh-pages',
         'pipe',
@@ -151,6 +164,7 @@ const T = {
 
       feExecSync('ls -la', 'inherit', resolve(ghPagesCacheDir, 'docs'));
 
+      // 将缓存临时目录下 gh-pages 分支最新内容同步过来
       ['docs', 'build-cache.json', 'README.md', 'index.html'].forEach(file => {
         const ghPagesFile = resolve(ghPagesCacheDir, file);
 

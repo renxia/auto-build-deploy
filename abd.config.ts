@@ -8,6 +8,7 @@ interface ProjectConfig {
   id: string;
   desc?: string;
   repo: string;
+  /** 构建产物输出目录，默认为 dist */
   output?: string;
   cmds: (string | ((repoDir: string, id?: string) => void)) [];
   onUpdateFile?: (html: string) => string;
@@ -93,12 +94,12 @@ export const config = {
       id: 'opencodedocs',
       desc: 'OpenCode 学习文档',
       repo: 'https://github.com/vbgate/opencodedocs.git',
-      output: 'out/docs/opencodedocs',
+      output: 'dist/docs/opencodedocs',
       cmds: [
         'npm install',
         // 'npm run docs:build',
         'pnpm vitepress build docs',
-        'mv docs/.vitepress/dist/ dist'
+        // 'mv docs/.vitepress/dist/ dist'
       ],
       // buildInCI: false, // 内存占用太高会被 kill，仅本地手动构建
     }
