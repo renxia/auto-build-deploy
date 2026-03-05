@@ -9,9 +9,9 @@ import { color } from'console-log-colors';
 
 const config = {
   baseDir: process.argv[2] || path.resolve(__dirname, '../docs'),
-  js: `<script src="https://lzw.me/x/lib/utils/h5-common.min.js?v=016"></script>`,
+  js: `<script src="https://lzw.me/x/lib/utils/h5-common.min.js"></script>`,
   replacejs: /<script src="https:\/\/lzw.me\/x\/lib\/utils\/h5-common(.min)*.js?v=\d+"><\/script>/,
-  filterkey: 'lib/utils/h5-common.min.js',
+  filterkey: ['lib/utils/h5-common.min.js'],
   stats: {
     files: 0,
     updated: 0,
@@ -45,11 +45,13 @@ function processHtmlFile(filePath: string) {
 
   config.stats.files++;
 
+  if (config.filterkey.some(k => data.includes(k))) {
+    return;
+  }
+
   if (!data.includes(config.js)) {
     if (config.replacejs.test(data)) {
       data = data.replace(config.replacejs, config.js);
-    } else if (data.includes(config.filterkey)) {
-      return;
     } else if (data.includes('</body>')) {
       data = data.replace('</body>', `${config.js}</body>`);
     } else if (data.includes('</BODY>')) {
@@ -74,7 +76,7 @@ function processHtmlFile(filePath: string) {
     // 写入更新后的内容
     fs.writeFileSync(filePath, data, 'utf8');
     config.stats.updated++;
-    console.log(`[${config.stats.updated}/${config.stats.files}] Updated ${color.green(filePath)}`);
+    // console.debug(`[${config.stats.updated}/${config.stats.files}] Updated ${color.green(filePath)}`);
   }
 }
 
@@ -84,6 +86,7 @@ export function updateHtml(dir =  config.baseDir, onUpdateFile = config.onUpdate
   config.onUpdateFile = onUpdateFile;
 
   updateDirHtml(dir);
+  console.log(`[${config.stats.updated}/${config.stats.files}] Html File Updated in ${color.green(dir)}`);
 }
 
 if ((module === require.main)) updateHtml();

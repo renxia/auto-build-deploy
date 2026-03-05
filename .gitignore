@@ -26,3 +26,4 @@ pnpm-lock.yaml
 # .flh.config.js
 .grs.config.js
 .venv
+build-cache.json

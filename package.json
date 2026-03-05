@@ -14,7 +14,7 @@
     "node"
   ],
   "scripts": {
-    "start": "tsx src/start.ts",
+    "start": "cross-env NODE_OPTIONS=--max-old-space-size=15872 tsx src/start.ts",
     "build": "npm run start",
     "clean": "flh rm -f ./docs"
   },
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@lzwme/fed-lint-helper": "^2.6.6",
     "@types/node": "^25.2.0",
+    "cross-env": "^10.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

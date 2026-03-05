@@ -10,7 +10,7 @@ import { config } from '../abd.config.js';
 
 const T = {
   initConfig(cfg: Partial<typeof config>) {
-    process.env.NODE_OPTIONS = '--max-old-space-size=8192';
+    // process.env.NODE_OPTIONS = '--max-old-space-size=15872';
 
     if (cfg !== config) assign(config, cfg);
   },
@@ -56,7 +56,11 @@ const T = {
     const buildCacheFile = resolve(ghPagesCacheDir, 'build-cache.json');
     const buildCache = existsSync(buildCacheFile) ? require(buildCacheFile) : {};
     const buildProject = async (item: typeof config.projects[0]) => {
-      if (config.run?.length && !config.run.includes(item.id)) return;
+      if (config.run?.length) {
+        if (!config.run.includes(item.id)) return;
+      } else if (config.ci) {
+        if (item.buildInCI === false) return;
+      }
 
       const repoDir = resolve(config.cacheDir, item.id);
       logger.info('开始构建：', color.cyan(item.id), color.gray(item.repo), color.gray(repoDir));
@@ -71,7 +75,8 @@ const T = {
 
       // 判断是否已编译过
       const commitId = getHeadCommitId(true, repoDir);
-      if (!config.force && commitId === buildCache[item.id] && existsSync(resolve(ghPagesCacheDir, 'docs', item.id))) {
+      const cacheCommitId = typeof buildCache[item.id] === 'string' ? buildCache[item.id]: buildCache[item.id]?.commitId || '';
+      if (!config.force && commitId === cacheCommitId && existsSync(resolve(ghPagesCacheDir, 'docs', item.id))) {
         logger.log(`已编译过：`, color.cyan(item.id), color.gray(commitId));
         return;
       }
@@ -91,14 +96,20 @@ const T = {
             const { stderr } = feExecSync(cmd, 'inherit', repoDir);
 
             if (stderr) {
-              logger.log('err:', stderr);
-              process.exit(1);
+              logger.log(`err:`, stderr);
+              // process.exit(1);
             }
           }
         }
       }
 
-      buildCache[item.id] = commitId;
+      buildCache[item.id] = {
+        id: item.id,
+        desc: item.desc,
+        repo: item.repo,
+        commitId,
+        updateTime: Date.now(),
+      }
       logger.log(`构建完成！`);
 
       const distDir = resolve(config.cacheDir, item.id, item.output || 'dist');
@@ -140,7 +151,7 @@ const T = {
 
       feExecSync('ls -la', 'inherit', resolve(ghPagesCacheDir, 'docs'));
 
-      ['docs', 'build-cache.json', 'README.md'].forEach(file => {
+      ['docs', 'build-cache.json', 'README.md', 'index.html'].forEach(file => {
         const ghPagesFile = resolve(ghPagesCacheDir, file);
 
         if (existsSync(ghPagesFile)) {

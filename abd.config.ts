@@ -4,6 +4,16 @@ import * as fs from 'node:fs'
 const rootDir = process.cwd();
 // const isWindows = process.platform === 'win32';
 
+interface ProjectConfig {
+  id: string;
+  desc?: string;
+  repo: string;
+  output?: string;
+  cmds: (string | ((repoDir: string, id?: string) => void)) [];
+  onUpdateFile?: (html: string) => string;
+  buildInCI?: boolean;
+}
+
 export const config = {
   force: false,
   rootDir,
@@ -90,8 +100,9 @@ export const config = {
         'pnpm vitepress build docs',
         'mv docs/.vitepress/dist/ dist'
       ],
+      // buildInCI: false, // 内存占用太高会被 kill，仅本地手动构建
     }
-  ],
+  ] as ProjectConfig[],
   /** 运行时赋值 */
   run: [] as string[]
 };

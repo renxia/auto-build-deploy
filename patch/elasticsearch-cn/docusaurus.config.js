@@ -22,7 +22,14 @@ const config = {
   // projectName: "elasticsearch-doc", // Usually your repo name.
 
   onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+
+  // siteConfig: {
+  //   markdown: {
+  //     hooks: {
+  //       onBrokenMarkdownLinks: 'warn',
+  //     },
+  //   },
+  // },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -50,9 +57,9 @@ const config = {
   ],
 
   scripts: [
-    {
-      src: 'https://lzw.me/x/lib/utils/h5-common.min.js',
-    },
+    // {
+    //   src: 'https://lzw.me/x/lib/utils/h5-common.min.js',
+    // },
   ],
 
   themeConfig:

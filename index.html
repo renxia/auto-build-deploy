@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文档导航 - lzw.me</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .rainbow-bg {
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #f093fb, #f5576c, #4facfe, #00f2fe);
+      background-size: 400% 400%;
+      animation: gradient-shift 15s ease infinite;
+    }
+    .rainbow-text {
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #00d2d3);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 5s ease infinite;
+    }
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 min-h-screen">
+  <!-- 顶部导航 -->
+  <nav class="glass sticky top-0 z-50 border-b border-white/10">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl rainbow-bg flex items-center justify-center shadow-lg shadow-pink-500/30">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <span class="text-2xl font-bold rainbow-text">文档导航</span>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="https://lzw.me" target="_blank" 
+             class="text-white/70 hover:text-white transition-colors font-medium flex items-center space-x-1">
+            <span>博客</span>
+          </a>
+          <a href="https://github.com/renxia/auto-build-deploy" target="_blank" 
+             class="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all hover:scale-105">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="rainbow-bg py-24 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-20 left-20 w-32 h-32 bg-yellow-400 rounded-full blur-3xl opacity-30"></div>
+      <div class="absolute bottom-20 right-20 w-40 h-40 bg-cyan-400 rounded-full blur-3xl opacity-30"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-fuchsia-500 rounded-full blur-3xl opacity-20"></div>
+    </div>
+    <div class="container mx-auto px-4 max-w-6xl relative">
+      <div class="text-center">
+        <div class="inline-block mb-8 float-animation">
+          <div class="w-24 h-24 bg-white/20 backdrop-blur-xl rounded-3xl flex items-center justify-center shadow-2xl border border-white/30">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+          </div>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+          开源文档镜像站
+        </h1>
+        <p class="text-xl text-white/90 max-w-2xl mx-auto drop-shadow">
+          自动构建部署优质开源文档，提供中文翻译和技术资料
+        </p>
+        <div class="mt-10 flex items-center justify-center flex-wrap gap-4 text-white/80">
+          <span class="flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur">
+            <svg class="w-5 h-5 mr-2 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            自动同步更新
+          </span>
+          <span class="flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur">
+            <svg class="w-5 h-5 mr-2 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            安全可靠
+          </span>
+          <span id="project-count" class="flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur">
+            <svg class="w-5 h-5 mr-2 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <span>0 个项目</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="py-16 -mt-10 relative z-10">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 p-8 md:p-10">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-2">
+              <span class="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">文档项目</span>
+            </h2>
+            <p class="text-slate-400">点击访问对应文档站点</p>
+          </div>
+          <div id="last-update" class="px-4 py-2 rounded-full bg-slate-700/50 text-sm text-slate-400"></div>
+        </div>
+
+        <div id="projects-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Loading -->
+          <div class="col-span-full text-center py-16">
+            <div class="inline-flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full rainbow-bg animate-spin"></div>
+              <span class="text-slate-400 text-lg">加载中...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-slate-800">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div class="flex flex-col md:flex-row items-center justify-between text-slate-500">
+        <p class="flex items-center">
+          <span class="text-2xl mr-2">✨</span>
+          © 2024 <a href="https://lzw.me" class="text-cyan-400 hover:text-cyan-300 ml-1">lzw.me</a> - 开源文档镜像站
+        </p>
+        <p class="mt-3 md:mt-0">
+          Powered by <a href="https://github.com/renxia/auto-build-deploy" class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-medium hover:opacity-80" target="_blank">auto-build-deploy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const cardStyles = [
+      { bg: 'from-rose-500 via-pink-500 to-fuchsia-500', shadow: 'shadow-pink-500/30', icon: '🌹' },
+      { bg: 'from-violet-500 via-purple-500 to-indigo-500', shadow: 'shadow-purple-500/30', icon: '🔮' },
+      { bg: 'from-blue-500 via-cyan-500 to-teal-500', shadow: 'shadow-cyan-500/30', icon: '💎' },
+      { bg: 'from-emerald-500 via-green-500 to-lime-500', shadow: 'shadow-emerald-500/30', icon: '🌿' },
+      { bg: 'from-amber-500 via-orange-500 to-red-500', shadow: 'shadow-orange-500/30', icon: '🔥' },
+      { bg: 'from-sky-500 via-blue-500 to-indigo-500', shadow: 'shadow-blue-500/30', icon: '🌊' },
+      { bg: 'from-fuchsia-500 via-pink-500 to-rose-500', shadow: 'shadow-fuchsia-500/30', icon: '💫' },
+      { bg: 'from-teal-500 via-cyan-500 to-sky-500', shadow: 'shadow-teal-500/30', icon: '🌈' },
+    ];
+
+    async function loadProjects() {
+      const container = document.getElementById('projects-container');
+      const lastUpdateEl = document.getElementById('last-update');
+      const projectCountEl = document.getElementById('project-count');
+      
+      try {
+        const res = await fetch('./build-cache.json?t=' + Date.now());
+        const data = await res.json();
+        const projects = Object.values(data);
+        
+        projectCountEl.innerHTML = `
+          <svg class="w-5 h-5 mr-2 text-pink-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+          <span class="font-semibold">${projects.length}</span> 个项目
+        `;
+        
+        if (projects.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-full text-center py-20">
+              <div class="w-20 h-20 bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                </svg>
+              </div>
+              <p class="text-slate-400 text-lg">暂无已构建的项目</p>
+            </div>
+          `;
+          return;
+        }
+
+        const latestUpdate = Math.max(...projects.map(p => p.updateTime || 0));
+        if (latestUpdate) {
+          lastUpdateEl.textContent = '最后更新: ' + formatDate(latestUpdate);
+        }
+
+        container.innerHTML = projects.map((project, index) => {
+          const style = cardStyles[index % cardStyles.length];
+          return `
+            <a href="./docs/${project.id}/" 
+               class="group card-hover block relative overflow-hidden rounded-2xl border border-slate-700/50 bg-slate-800/80 hover:border-slate-600">
+              <div class="absolute inset-0 bg-gradient-to-br ${style.bg} opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+              <div class="relative p-6">
+                <div class="flex items-center space-x-4 mb-4">
+                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br ${style.bg} flex items-center justify-center shadow-lg ${style.shadow} text-2xl">
+                    ${style.icon}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-lg font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:${style.bg} group-hover:bg-clip-text transition-all truncate">
+                      ${escapeHtml(project.desc || project.id)}
+                    </h3>
+                    <p class="text-sm text-slate-500 font-mono">${escapeHtml(project.id)}</p>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  ${project.updateTime ? `
+                    <span class="text-slate-500 flex items-center">
+                      <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      ${formatDate(project.updateTime)}
+                    </span>
+                  ` : '<span></span>'}
+                  <span class="px-3 py-1 rounded-full bg-gradient-to-r ${style.bg} text-white text-xs font-medium shadow-lg ${style.shadow} opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                    访问 →
+                  </span>
+                </div>
+              </div>
+            </a>
+          `;
+        }).join('');
+        
+      } catch (err) {
+        console.error('加载失败:', err);
+        container.innerHTML = `
+          <div class="col-span-full text-center py-20">
+            <div class="w-20 h-20 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <p class="text-red-400 mb-4">加载失败</p>
+            <button onclick="loadProjects()" class="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium hover:opacity-90 transition-opacity">
+              点击重试
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function formatDate(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    loadProjects();
+  </script>
+</body>
+</html>

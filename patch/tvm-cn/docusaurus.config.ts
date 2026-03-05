@@ -10,15 +10,23 @@ const config: Config = {
   url: 'https://lzw.me',
   baseUrl: '/docs/tvm-cn/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+
+  siteConfig: {
+    markdown: {
+      hooks: {
+        onBrokenMarkdownLinks: 'warn',
+      },
+    },
+  },
+
   favicon: 'img/favicon.png',
   organizationName: 'hyperai', // Usually your GitHub org/user name.
   projectName: 'tvm-cn', // Usually your repo name.
 
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
-
   future: {
+    v4: {
+      removeLegacyPostBuildHeadAttribute: true,
+    },
     experimental_faster: true,
   },
 
@@ -152,9 +160,9 @@ const config: Config = {
     './src/plugins/typekit/',
   ],
   scripts: [
-    {
-      src: 'https://lzw.me/x/lib/utils/h5-common.min.js',
-    },
+    // {
+    //   src: 'https://lzw.me/x/lib/utils/h5-common.min.js',
+    // },
   ],
 
 };
