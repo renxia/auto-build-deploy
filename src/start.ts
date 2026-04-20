@@ -85,9 +85,22 @@ const T = {
         feExecSync(`git clone --depth 1 ${item.repo} ${item.id}`, 'inherit', config.cacheDir);
       }
 
+      // 旧格式兼容
+      if (typeof buildCache[item.id] === 'string') {
+        buildCache[item.id] = {
+          id: item.id,
+          title: item.title || item.id,
+          desc: item.desc || '',
+          repo: item.repo,
+          commitId: buildCache[item.id],
+          updateTime: Date.now(),
+        }
+      }
+
       // 判断是否已编译过
       const commitId = getHeadCommitId(true, repoDir);
-      const cacheCommitId = typeof buildCache[item.id] === 'string' ? buildCache[item.id]: buildCache[item.id]?.commitId || '';
+      const cacheCommitId = buildCache[item.id]?.commitId || '';
+
       if (!config.force && commitId === cacheCommitId && existsSync(resolve(ghPagesCacheDir, 'docs', item.id))) {
         logger.log(`已编译过：`, color.cyan(item.id), color.gray(commitId));
         return;
@@ -117,7 +130,8 @@ const T = {
 
       buildCache[item.id] = {
         id: item.id,
-        desc: item.desc,
+        title: item.title || item.id,
+        desc: item.desc || '',
         repo: item.repo,
         commitId,
         updateTime: Date.now(),

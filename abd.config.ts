@@ -6,6 +6,9 @@ const rootDir = process.cwd();
 
 interface ProjectConfig {
   id: string;
+  /** 项目名 */
+  title?: string;
+  /** 项目描述 */
   desc?: string;
   repo: string;
   /** 构建产物输出目录，默认为 dist */
@@ -15,17 +18,19 @@ interface ProjectConfig {
   buildInCI?: boolean;
 }
 
+const isCI = process.env.CI_BUILD != null,
+
 export const config = {
   force: false,
   rootDir,
   cacheDir: resolve(rootDir, 'cache'),
   repo: 'https://github.com/renxia/auto-build-deploy.git', // 'git@github.com:renxia/auto-build-deploy.git',
   /** 是否为 CI 环境 */
-  ci: process.env.CI_BUILD != null,
+  ci: isCI,
   projects: [
     {
       id: 'quant-wiki',
-      desc: '中文量化百科',
+      title: '中文量化百科',
       repo: 'https://github.com/LLMQuant/quant-wiki.git',
       // 如果是字符串，则作为命令执行，如果是函数，则作为 node.js 脚本执行
       cmds: [
@@ -62,7 +67,7 @@ export const config = {
     // }
     {
       id: 'tvm-cn',
-      desc: 'TVM中文文档',
+      title: 'TVM中文文档',
       repo: 'https://github.com/hyperai/tvm-cn.git',
       output: 'build',
       cmds: [
@@ -72,7 +77,7 @@ export const config = {
     },
     {
       id: 'elasticsearch-cn',
-      desc: 'Elasticsearch 中文文档',
+      title: 'Elasticsearch 中文文档',
       repo: 'https://github.com/dev2007/elasticsearch-doc.git',
       output: 'build',
       cmds: [
@@ -82,7 +87,7 @@ export const config = {
     },
     {
       id: 'gemini-cli-learning',
-      desc: 'Gemini CLI 中文教程',
+      title: 'Gemini CLI 中文教程',
       repo: 'https://github.com/kjdui11/gemini-cli-learning-platform.git',
       output: 'out/docs/gemini-cli-learning',
       cmds: [
@@ -91,17 +96,19 @@ export const config = {
       ],
     },
     {
-      id: 'opencodedocs',
-      desc: 'OpenCode 学习文档',
-      repo: 'https://github.com/vbgate/opencodedocs.git',
-      output: 'dist/docs/opencodedocs',
+      id: 'pi-book',
+      title: 'PI Agent Book',
+      repo: ' https://github.com/ZhangHanDong/pi-book.git',
+      output: 'dist/pi-book',
       cmds: [
-        'npm install',
-        // 'npm run docs:build',
-        'pnpm vitepress build docs',
-        // 'mv docs/.vitepress/dist/ dist'
+        'mdbook build',
+        'rm -rf dist',
+        'mkdir -p dist',
+        'mv book dist/pi-book',
+        isCI ? '' : 'cd dist',
+        isCI ? '' : 'zip -r pi-book.zip pi-book',
+        isCI ? '' : 'cd ..',
       ],
-      // buildInCI: false, // 内存占用太高会被 kill，仅本地手动构建
     }
   ] as ProjectConfig[],
   /** 运行时赋值 */

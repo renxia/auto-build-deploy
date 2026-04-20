@@ -26,6 +26,6 @@
     "typeRoots": ["./node_modules/@types"]
   },
   "exclude": ["node_modules/**"],
-  "include": ["src/*.ts"],
+  "include": ["src/*.ts", "*.ts"],
   "compileOnSave": false
 }
